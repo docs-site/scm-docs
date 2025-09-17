@@ -1,0 +1,13 @@
+/**
+ * @brief 应用程序主容器的字体栈配置
+ * @details 设置Vue应用主容器的字体家族，提供跨平台兼容性和优雅降级
+ *
+ * 字体栈采用分层回退策略：
+ * 1. 首选自定义字体 'Quotes'（需在其他地方定义或导入）
+ * 2. 备用系统字体：macOS/iOS (-apple-system), Blink引擎macOS字体, Windows (Segoe UI)
+ * 3. 通用无衬线字体作为最终备用
+ * 4. 表情符号支持：Apple和Windows平台的表情符号字体
+ */
+#app {
+  font-family: 'Quotes', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}

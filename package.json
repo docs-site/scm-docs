@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "docs:dev": "vitepress dev src",
+    "docs:build": "vitepress build src",
+    "docs:preview": "vitepress preview src",
+    "docs:map": "tdoc m:m -d ./src/sdoc",
+    "docs:img": "tdoc img -d ./src/sdoc -a && git add .",
+    "copy:sdoc": "node .scripts/copy-sdoc.js",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "husky": "^8.0.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "sass-embedded": "^1.92.1",
+    "vitepress": "^1.6.4",
+    "vitepress-theme-mist": "^1.2.3"
+  }
+}

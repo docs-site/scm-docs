@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Checking if sdoc directory files were modified in this commit..."
+
+# 检查本次提交中是否修改了 src/sdoc 目录下的文件
+# 使用更健壮的方法，处理第一次提交等特殊情况
+if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
+    # 正常情况：有上一个提交
+    if git diff --name-only HEAD^ HEAD | grep -q "^src/sdoc/"; then
+        echo "✅ sdoc directory files were modified. Running copy script..."
+        npm run copy:sdoc
+    else
+        echo "⏭️  No sdoc directory files modified in this commit. Skipping copy."
+    fi
+else
+    # 第一次提交或其他特殊情况：检查当前工作树中所有 sdoc 文件
+    if git ls-files --modified --others --exclude-standard | grep -q "^src/sdoc/"; then
+        echo "✅ sdoc directory files detected. Running copy script..."
+        npm run copy:sdoc
+    else
+        echo "⏭️  No sdoc directory files detected. Skipping copy."
+    fi
+fi

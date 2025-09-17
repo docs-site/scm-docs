@@ -1,0 +1,101 @@
+
+name: 部署文档
+
+on:
+  push:
+    branches:
+      - master # 或者 main，根据默认分支名称决定
+  repository_dispatch: # 事件触发
+    types: [trigger_deployment_scm_docs]
+  # 允许从 Actions 选项卡手动运行此工作流程
+  workflow_dispatch:
+
+permissions:   # 设置权限, 允许 GitHub Actions 写入仓库内容
+  contents: write
+
+# 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy-gh-pages:          # 定义一个名为 deploy-gh-pages 的作业
+    runs-on: ubuntu-latest  # 在最新的 Ubuntu 环境中运行
+    # push时，只有提交信息包含 [deploy] 或 [update] 标签时触发
+    # repository_dispatch时，只有 event-type 为 trigger_site_deployment 时触发
+    if: |
+      github.event_name == 'repository_dispatch' && github.event.action == 'trigger_deployment_scm_docs' ||
+      (github.event_name == 'push' && (
+        contains(github.event.head_commit.message, '[deploy]') || contains(github.event.head_commit.message, '[update]')))
+    steps:
+      - name: Checkout      # 检出仓库代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # 这一行只能检出本仓库中记录的子模块的版本，也就是停留在父仓库记录的旧提交，无法更到远程最新，需要后面单独处理
+          submodules: true
+
+      # 打印触发信息
+      - name: Log trigger source
+        run: |
+          echo "Triggered by: ${{ github.event_name }}"
+          if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            echo "This deployment was triggered by docs repository"
+            echo "Dispatch SHA       : ${{ github.event.client_payload.sha }}"
+            echo "Dispatch Repository: ${{ github.event.client_payload.repository }}"
+            echo "Triggered at       : ${{ github.event.client_payload.timestamp }}"
+          else
+            echo "Repo Own Push SHA  : ${{ github.sha }}"
+          fi
+
+      - name: 打印相关路径
+        run: | # | 为 yaml 的特定符号，其下可以使用多行文字。
+          echo "当前路径为 $(pwd)"
+          echo "工作路径为 ${{ github.workspace }}"
+          echo "HOME路径为 $HOME"
+
+      - name: 获取相关提交信息
+        id: get_commit_info
+        run: |
+          # 获取主仓库提交信息
+          cd ${{ github.workspace }}
+          echo "当前路径为 $(pwd)"
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c 1-7)
+          echo "MAIN_SHORT_SHA=$SHORT_SHA" >> $GITHUB_OUTPUT
+          echo "MAIN_COMMIT_MESSAGE=$(git log -1 --pretty=%B | head -n1)" >> $GITHUB_OUTPUT
+      
+      - name: 打印提交信息
+        run: |
+          # GitHub Actions的表达式语法不支持动态变量名，不能直接使用`${var_name}`这种变量插值
+          # 打印主仓库信息
+          echo "main Repository: ${{ github.repository }}"
+          echo "main Commit ID : ${{ github.sha }}"
+          echo "main Short SHA : ${{ steps.get_commit_info.outputs.MAIN_SHORT_SHA }}"
+          echo "main Commit Message: ${{ steps.get_commit_info.outputs.MAIN_COMMIT_MESSAGE }}"
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 安装依赖
+        run: |
+          corepack enable
+          npm ci
+
+      - name: 构建文档
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: |-
+          npm run docs:build
+          > src/.vitepress/dist/.nojekyll
+
+      - name: 部署文档
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          # 部署文档
+          single-commit: true # 使用单个提交进行部署
+          branch: gh-pages
+          folder: src/.vitepress/dist
