@@ -8,6 +8,7 @@ export default {
   "01-keil": "keil", // 01-开发工具/01-keil
   "02-STM32Cube": "stm32cube", // 01-开发工具/02-STM32Cube
   "10-下载与调试": "burn-and-debug", // 01-开发工具/10-下载与调试
-  "10-STM32": "stm32", // 10-STM32
-  "20-通信专题": "communication", // 20-通信专题
+  "10-基础篇": "basic", // 10-基础篇
+  "01-概述": "overview", // 10-基础篇/01-概述
+  "20-基本外设篇": "default", // 20-基本外设篇
 };
