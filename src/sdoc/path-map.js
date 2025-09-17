@@ -4,9 +4,10 @@
  */
 
 export default {
-  "01-开发": "develop", // 01-开发
-  "02-组件": "component", // 02-组件
-  "01-公共组件": "common-omponent", // 02-组件/01-公共组件
-  "02-主题组件": "theme-component", // 02-组件/02-主题组件
-  "03-插件": "plugin", // 03-插件
+  "01-开发工具": "dev-tool", // 01-开发工具
+  "01-keil": "keil", // 01-开发工具/01-keil
+  "02-STM32Cube": "stm32cube", // 01-开发工具/02-STM32Cube
+  "10-下载与调试": "burn-and-debug", // 01-开发工具/10-下载与调试
+  "10-STM32": "stm32", // 10-STM32
+  "20-通信专题": "communication", // 20-通信专题
 };
