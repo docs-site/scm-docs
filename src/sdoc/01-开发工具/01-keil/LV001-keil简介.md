@@ -60,6 +60,17 @@ Software Packs（包安装器）又分为： Device（芯片支持）， CMSIS�
 
 要是进行STM32开发的话下MDK-ARM，要是进行51单片机开发可以下载第二个C51，这两个算是两个软件，但是有一些方法可以让两个软件共存，也就是一个软件可以实现STM32和51单片机的开发。
 
+需要下载其他版本可以点击这里：[ARM Product Updates](https://www.keil.com/update/rvmdk.asp)，但是吧，这里好像下载还要什么PSN，算了网上直接找吧，看到有一些可以直接找规律从下载链接下，例如：
+
+```txt
+https://armkeil.blob.core.windows.net/eval/MDK536.EXE
+https://armkeil.blob.core.windows.net/eval/MDK518.EXE
+```
+
+需要注意的是从5.37版本开始不在默认安装arm compiler v5编译器，而使用最新V6版本编译器可能会出现一些编译不过的问题，所以保险起见，还是安装自带v5的吧，省心！！！建议安装5.36及以下版本，或者最新版本加arm compiler v5编译器。
+
+>网速太慢的话可以点这里 链接: [MDK536](https://pan.baidu.com/s/1LxmTiYM8Qb1yUz75ocHbOw?pwd=cxgy) 提取码: cxgy 
+
 ### 2. 安装
 
 这里就不再赘述了，网上的教程太多了，例如：[Keil5 的下载、安装](https://blog.csdn.net/2402_86633703/article/details/149467222)
@@ -119,6 +130,12 @@ Software Packs（包安装器）又分为： Device（芯片支持）， CMSIS�
 也可以去 [Arm Keil | Devices](https://www.keil.arm.com/devices/) 下载（其实上面的也会直接跳转到这个地址）。后面要用STM32F103ZET6开发，这里安装完后，我们再新建工程就可以找到对应的芯片了：
 
 <img src="./LV001-keil简介/img/image-20250916175919649.png" alt="image-20250916175919649" style="zoom:50%;" />
+
+### 4. keil版本
+
+因为后面安装最新版本踩坑，为了省事，安装了最后一个默认安装arm compiler v5编译器的MDK536版本，版本信息如下：
+
+
 
 ## 三、基本配置
 
