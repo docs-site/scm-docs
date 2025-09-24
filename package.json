@@ -14,6 +14,6 @@
     "markdown-it-mathjax3": "^4.3.2",
     "sass-embedded": "^1.92.1",
     "vitepress": "^1.6.4",
-    "vitepress-theme-mist": "^1.2.3"
+    "vitepress-theme-mist": "^1.2.5"
   }
 }
