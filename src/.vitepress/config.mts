@@ -13,7 +13,7 @@ const myThemeConfig = defineMistConfig({
       path: "sdoc",
       debugInfo: false,
       navOption: {
-        maxLevel: 3,
+        maxLevel: 2,
         debugPrint: false,
         saveToFile: false
       },

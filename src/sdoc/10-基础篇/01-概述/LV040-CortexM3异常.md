@@ -19,10 +19,7 @@ tdoc:
   useduuid: 28ed9ee4c
 ---
 
-
 <!-- more -->
-
-
 
 ## 一、常见缩略语含义
 
