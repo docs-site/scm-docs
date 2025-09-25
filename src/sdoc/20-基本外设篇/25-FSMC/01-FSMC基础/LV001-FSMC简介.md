@@ -21,7 +21,7 @@ tdoc:
 
 <!-- more -->
 
-这一部分我们可以参考 [STM32中文参考手册](https://www.stmcu.com.cn/Designresource/detail/localization_document /710001)的 19 灵活的静态存储器控制器(FSMC) 一节。
+这一部分我们可以参考 [STM32中文参考手册](https://www.stmcu.com.cn/Designresource/detail/localization_document%20/710001)的 19 灵活的静态存储器控制器(FSMC) 一节。
 
 ## 一、FSMC简介
 
@@ -51,7 +51,7 @@ STM32F103系列中， 100脚及以上的MCU，都有一个FSMC（ Flexible Stati
 
 ### 1. FSMC框图
 
-在[STM32中文参考手册](https://www.stmcu.com.cn/Designresource/detail/localization_document /710001)的 19.2 框图一节，我们可以看到FSMC结构框图如下：
+在[STM32中文参考手册](https://www.stmcu.com.cn/Designresource/detail/localization_document%20/710001)的 19.2 框图一节，我们可以看到FSMC结构框图如下：
 
 <img src="./LV001-FSMC简介/img/image-20230503121218218.png" alt="image-20230503121218218" style="zoom: 80%;" />
 
@@ -59,7 +59,7 @@ STM32F103系列中， 100脚及以上的MCU，都有一个FSMC（ Flexible Stati
 
 ### 2. 接口信号
 
-这一部分我们可以查看[STM32中文参考手册](https://www.stmcu.com.cn/Designresource/detail/localization_document /710001)的 19.5.1 外部存储器接口信号。下边我们一起来看一下与NOR闪存和PSRAM接口的典型信号。**注意**：具有前缀 “ N ” 的信号表示低有效信号。这里说一下下边的复用和非复用是什么意思：
+这一部分我们可以查看[STM32中文参考手册](https://www.stmcu.com.cn/Designresource/detail/localization_document%20/710001)的 19.5.1 外部存储器接口信号。下边我们一起来看一下与NOR闪存和PSRAM接口的典型信号。**注意**：具有前缀 “ N ” 的信号表示低有效信号。这里说一下下边的复用和非复用是什么意思：
 
 - 非复用模式：16位数据线及26位地址线分开始用。推荐在144脚及以上的STM32产品上使用该模式。
 
