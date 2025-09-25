@@ -27,7 +27,7 @@ tdoc:
 
 ## 一、自定义SCT文件
 
-注意这里我们要根据上一节笔记，取消SDK使用默认的SCT文件。
+注意这里我们要根据上一节笔记，取消MDK使用默认的SCT文件。
 
 <img src="./LV025-SCT文件应用/img/image-20230529215228408.png" alt="image-20230529215228408" style="zoom: 50%;" />
 
@@ -83,7 +83,7 @@ int main(void)
 }
 ```
 
-完整工程可以查看[feat:配置MDK工程使用自定义SCT文件](https://gitee.com/sumumm/stm32f103-prj/tree/4c01661be41184ecd093c2f19f2c31bc3f78a96a)。
+完整工程可以查看:[90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/default-divides.sct](https://gitee.com/embedded-devs/scm-dev/blob/master/90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/default-divides.sct)
 
 #### 1.2 sct文件修改
 
@@ -186,7 +186,7 @@ int main(void)
 }
 ```
 
-完整工程可以查看[feat:配置MDK工程使用自定义SCT文件](https://gitee.com/sumumm/stm32f103-prj/tree/4c01661be41184ecd093c2f19f2c31bc3f78a96a)。
+完整工程可以查看[90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/stack.sct · embedded-devs/scm-dev](https://gitee.com/embedded-devs/scm-dev/blob/master/90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/stack.sct)。
 
 #### 2.2 sct文件修改
 
@@ -237,7 +237,7 @@ inerTestValue:0x200003F8 20
 p:0x20005188 50
 ```
 
-可以看到，局部变量被分配到了0x20000000起始的RW_IRAM1区域了。
+可以看到，局部变量inerTestValue被分配到了0x20000000起始的RW_IRAM1区域了。
 
 #### 2.4 map文件分析
 
@@ -289,7 +289,7 @@ int main(void)
 }
 ```
 
-完整工程可以查看[feat:内部SRAM分配测试实验](https://gitee.com/sumumm/stm32f103-prj/commit/ca746832cb7a61ad17b2ebd2126378736881637b) 。
+完整工程可以查看[90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/heap.sct · embedded-devs/scm-dev](https://gitee.com/embedded-devs/scm-dev/blob/master/90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/heap.sct)。
 
 #### 3.2 sct文件修改
 
@@ -398,7 +398,7 @@ int main(void)
 }
 ```
 
-完整工程可以查看[STM32F103-Prj: STM32学习使用（STM32CubeMX+Makefile+VScode+J-Flash） (gitee.com)](https://gitee.com/sumumm/stm32f103-prj)。
+完整工程可以查看[90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/add_section.sct](https://gitee.com/embedded-devs/scm-dev/blob/master/90-MDK编译过程及文件全解/01-SCT-demo/05-own-divided-internal-SRAM/MDK-ARM/sct/add_section.sct)。
 
 #### 4.2 sct文件修改
 
@@ -459,8 +459,6 @@ EXtestGrup:0x20000000 44
 ```
 
 可以看到，自定义节区生效了，我们的数组定义到了较小的RW_IRAM1中。
-
-
 
 ## 三、选择性使用外部SRAM
 
