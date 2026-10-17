@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ota-topic-map-title ota-topic-map-desc" id="ota-topic-map-root">
+        <title id="ota-topic-map-title">OTA 专题的四层结构</title>
+        <desc id="ota-topic-map-desc">层叠图：十一篇文档按原理层、机制层、平台层、工程实践层四带自上而下排列，每带标出所属篇目与该层回答的问题；机制层为焦点层。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #ota-topic-map-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-soft:    #5a6580;
+      --color-accent:  #bf4520;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #ota-topic-map-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #ota-topic-map-root .diagram-container { width: 100%; overflow-x: auto; }
+      #ota-topic-map-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="ota-topic-map-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Left margin direction indicator -->
+        <line x1="100" y1="86" x2="100" y2="466" stroke="#4f5d75" stroke-width="1" marker-end="url(#ota-topic-map-arrow)"/>
+        <text x="76" y="276" fill="#5a6580" font-size="11" font-weight="500" letter-spacing="0.12em" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" transform="rotate(-90 76 276)">抽象原理 → 具体落地</text>
+
+        <!-- Band 1: 原理层 -->
+        <rect x="140" y="76" width="760" height="92" rx="8" fill="#2d3142" fill-opacity="0.03" stroke="#2d3142" stroke-opacity="0.30" stroke-width="1"/>
+        <text x="164" y="106" fill="#5a6580" font-size="9" font-weight="500" letter-spacing="0.18em" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">L1 · PRINCIPLE</text>
+        <text x="164" y="132" fill="#2d3142" font-size="15" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">原理层</text>
+        <text x="876" y="106" fill="#5a6580" font-size="11" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="end">回答：OTA 是什么、四个维度怎么选</text>
+        <text x="164" y="156" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">LV001 技术概览 · LV004 升级方式详解</text>
+
+        <!-- Band 2: 机制层 (focal) -->
+        <rect x="140" y="180" width="760" height="92" rx="8" fill="#bf4520" fill-opacity="0.08" stroke="#bf4520" stroke-width="1"/>
+        <text x="164" y="210" fill="#bf4520" font-size="9" font-weight="500" letter-spacing="0.18em" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">L2 · MECHANISM</text>
+        <text x="164" y="236" fill="#2d3142" font-size="15" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">机制层</text>
+        <text x="876" y="210" fill="#5a6580" font-size="11" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="end">回答：包、通道、槽位、签名各自怎么实现</text>
+        <text x="164" y="260" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">LV007 升级包与传输 · LV010 差分进阶 · LV013 通道协议 · LV016 选槽与回滚 · LV019 安全机制</text>
+
+        <!-- Band 3: 平台层 -->
+        <rect x="140" y="284" width="760" height="92" rx="8" fill="#2d3142" fill-opacity="0.03" stroke="#2d3142" stroke-opacity="0.30" stroke-width="1"/>
+        <text x="164" y="314" fill="#5a6580" font-size="9" font-weight="500" letter-spacing="0.18em" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">L3 · PLATFORM</text>
+        <text x="164" y="340" fill="#2d3142" font-size="15" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">平台层</text>
+        <text x="876" y="314" fill="#5a6580" font-size="11" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="end">回答：这块芯片该怎么分区、怎么切换</text>
+        <text x="164" y="364" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">LV022 MCU 无 Bank Swap · LV025 MCU 有 Bank Swap · LV028 Linux 平台</text>
+
+        <!-- Band 4: 工程层 -->
+        <rect x="140" y="388" width="760" height="92" rx="8" fill="#2d3142" fill-opacity="0.03" stroke="#2d3142" stroke-opacity="0.30" stroke-width="1"/>
+        <text x="164" y="418" fill="#5a6580" font-size="9" font-weight="500" letter-spacing="0.18em" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">L4 · PRACTICE</text>
+        <text x="164" y="444" fill="#2d3142" font-size="15" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">工程实践层</text>
+        <text x="876" y="418" fill="#5a6580" font-size="11" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="end">回答：怎么发布、怎么测、坏了怎么办</text>
+        <text x="164" y="468" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">LV031 服务器端与工程实践</text>
+
+        <!-- Bottom callout -->
+        <line x1="140" y1="512" x2="180" y2="512" stroke="#bf4520" stroke-width="2"/>
+        <text x="196" y="517" fill="#bf4520" font-size="15" font-style="italic" font-family="'Instrument Serif', 'Noto Serif SC', serif">机制层是心脏：平台层的三个方案只是同一套机制在不同硬件上的落地形态。</text>
+      </svg>

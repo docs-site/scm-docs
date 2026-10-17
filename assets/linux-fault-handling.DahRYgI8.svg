@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="linux-fault-handling-title linux-fault-handling-desc" id="linux-fault-handling-root">
+        <title id="linux-fault-handling-title">Linux 处理一次非法内存访问的完整链路</title>
+        <desc id="linux-fault-handling-desc">时序图：CPU 访问未映射地址由 MMU 触发缺页异常，内核检查 VMA 后判定非法并向该进程投递 SIGSEGV，进程终结并生成 core dump，内核通知 systemd，systemd 按 Restart 策略把进程重新拉起，其余进程全程不受影响。</desc>
+        <defs>
+      <style>#linux-fault-handling-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-accent:  #bf4520;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif SC', 'Source Han Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #linux-fault-handling-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #linux-fault-handling-root .diagram-container { width: 100%; overflow-x: auto; }
+      #linux-fault-handling-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="linux-fault-handling-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="linux-fault-handling-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="linux-fault-handling-arrow-open" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polyline points="0 0, 8 3, 0 6" fill="none" stroke="#4f5d75" stroke-width="1.2"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- ===== lifelines (behind everything) ===== -->
+        <line x1="144" y1="104" x2="144" y2="476" stroke="#2d3142" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.20"/>
+        <line x1="312" y1="104" x2="312" y2="476" stroke="#2d3142" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.20"/>
+        <line x1="480" y1="104" x2="480" y2="476" stroke="#2d3142" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.20"/>
+        <line x1="648" y1="104" x2="648" y2="476" stroke="#2d3142" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.20"/>
+        <line x1="816" y1="104" x2="816" y2="476" stroke="#2d3142" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.20"/>
+
+        <!-- ===== messages (arrows before boxes) ===== -->
+        <!-- m1 CPU -> MMU -->
+        <line x1="148" y1="144" x2="304" y2="144" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow)"/>
+        <!-- m2 MMU -> CPU (return: dashed, filled marker) -->
+        <line x1="308" y1="184" x2="152" y2="184" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#linux-fault-handling-arrow)"/>
+        <!-- m3 CPU -> 内核 -->
+        <line x1="148" y1="224" x2="472" y2="224" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow)"/>
+        <!-- m4 内核 self -->
+        <path d="M484,262 H512 V274 H488" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow)"/>
+        <!-- m5 内核 -> 进程 -->
+        <line x1="484" y1="312" x2="640" y2="312" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow)"/>
+        <!-- m6 进程 self -->
+        <path d="M652,350 H680 V362 H656" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow)"/>
+        <!-- m7 内核 -> systemd (async: dashed + open marker) -->
+        <line x1="484" y1="396" x2="808" y2="396" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#linux-fault-handling-arrow-open)"/>
+        <!-- m8 systemd -> 进程 (headline recovery, accent) -->
+        <line x1="812" y1="440" x2="656" y2="440" stroke="#bf4520" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow-accent)"/>
+
+        <!-- ===== message labels (opaque mask + 8px gap above stroke) ===== -->
+        <rect x="182" y="118" width="92" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="228" y="132" fill="#5a6580" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">访问虚拟地址 0</text>
+
+        <rect x="168" y="158" width="120" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="228" y="172" fill="#5a6580" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">无映射，触发 fault</text>
+
+        <rect x="198" y="198" width="60" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="228" y="212" fill="#5a6580" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">陷入内核态</text>
+
+        <rect x="520" y="242" width="54" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="524" y="256" fill="#5a6580" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">检查 VMA</text>
+
+        <rect x="520" y="286" width="88" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="564" y="300" fill="#5a6580" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">投递 SIGSEGV</text>
+
+        <rect x="688" y="326" width="52" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="692" y="340" fill="#5a6580" font-size="12" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">终结进程</text>
+
+        <rect x="534" y="370" width="52" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="560" y="384" fill="#5a6580" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">SIGCHLD</text>
+
+        <rect x="708" y="414" width="48" height="18" rx="2" fill="#f5f5f5"/>
+        <text x="732" y="428" fill="#bf4520" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">重新拉起</text>
+
+        <!-- ===== activation bars ===== -->
+        <rect x="140" y="136" width="8" height="96" fill="#2d3142" stroke="#4f5d75" stroke-width="0.8" fill-opacity="0.06"/>
+        <rect x="308" y="140" width="8" height="48" fill="#2d3142" stroke="#4f5d75" stroke-width="0.8" fill-opacity="0.06"/>
+        <rect x="476" y="220" width="8" height="180" fill="#2d3142" stroke="#4f5d75" stroke-width="0.8" fill-opacity="0.06"/>
+        <rect x="644" y="308" width="8" height="56" fill="#2d3142" stroke="#4f5d75" stroke-width="0.8" fill-opacity="0.06"/>
+        <rect x="812" y="392" width="8" height="52" fill="#2d3142" stroke="#4f5d75" stroke-width="0.8" fill-opacity="0.06"/>
+
+        <!-- ===== actor boxes ===== -->
+        <rect x="84" y="56" width="120" height="48" rx="6" fill="#f5f5f5"/>
+        <rect x="252" y="56" width="120" height="48" rx="6" fill="#f5f5f5"/>
+        <rect x="420" y="56" width="120" height="48" rx="6" fill="#f5f5f5"/>
+        <rect x="588" y="56" width="120" height="48" rx="6" fill="#f5f5f5"/>
+        <rect x="756" y="56" width="120" height="48" rx="6" fill="#f5f5f5"/>
+
+        <rect x="84" y="56" width="120" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="252" y="56" width="120" height="48" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <rect x="420" y="56" width="120" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="588" y="56" width="120" height="48" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <rect x="756" y="56" width="120" height="48" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+
+        <!-- type tags -->
+        <rect x="92" y="62" width="28" height="12" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+        <text x="106" y="71" fill="#2d3142" font-size="7" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle" letter-spacing="0.08em" fill-opacity="0.80">HW</text>
+        <rect x="260" y="62" width="28" height="12" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+        <text x="274" y="71" fill="#2d3142" font-size="7" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle" letter-spacing="0.08em" fill-opacity="0.80">HW</text>
+        <rect x="428" y="62" width="28" height="12" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+        <text x="442" y="71" fill="#2d3142" font-size="7" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle" letter-spacing="0.08em" fill-opacity="0.80">RING0</text>
+        <rect x="596" y="62" width="28" height="12" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+        <text x="610" y="71" fill="#2d3142" font-size="7" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle" letter-spacing="0.08em" fill-opacity="0.80">RING3</text>
+        <rect x="764" y="62" width="28" height="12" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+        <text x="778" y="71" fill="#2d3142" font-size="7" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle" letter-spacing="0.08em" fill-opacity="0.80">RING3</text>
+
+        <text x="144" y="100" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">CPU</text>
+        <text x="312" y="100" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">MMU</text>
+        <text x="480" y="100" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">内核</text>
+        <text x="648" y="100" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">出错进程</text>
+        <text x="816" y="100" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">systemd</text>
+
+        <!-- ===== caption ===== -->
+        <text x="84" y="512" fill="#4f5d75" font-size="14" font-style="italic" font-family="'Instrument Serif', 'Noto Serif', 'Noto Serif SC', 'Source Han Serif SC', serif">崩溃止步于进程边界：内核与其余四个参与者都继续正常工作。</text>
+
+        <!-- ===== legend strip ===== -->
+        <line x1="40" y1="540" x2="920" y2="540" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+        <text x="40" y="562" fill="#4f5d75" font-size="8" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">LEGEND</text>
+
+        <line x1="120" y1="557" x2="152" y2="557" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow)"/>
+        <text x="160" y="562" fill="#4f5d75" font-size="12" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">调用</text>
+
+        <line x1="264" y1="557" x2="296" y2="557" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="304" y="562" fill="#4f5d75" font-size="12" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">返回 / 异步</text>
+
+        <line x1="432" y1="548" x2="432" y2="566" stroke="#2d3142" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.20"/>
+        <text x="440" y="562" fill="#4f5d75" font-size="12" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">生命线</text>
+
+        <rect x="536" y="548" width="8" height="18" fill="#2d3142" stroke="#4f5d75" stroke-width="0.8" fill-opacity="0.06"/>
+        <text x="552" y="562" fill="#4f5d75" font-size="12" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">激活期</text>
+
+        <line x1="664" y1="557" x2="696" y2="557" stroke="#bf4520" stroke-width="1.2" marker-end="url(#linux-fault-handling-arrow-accent)"/>
+        <text x="704" y="562" fill="#4f5d75" font-size="12" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">恢复动作</text>
+      </svg>

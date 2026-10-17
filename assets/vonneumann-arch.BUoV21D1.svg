@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vonneumann-arch-title vonneumann-arch-desc" id="vonneumann-arch-root">
+        <title id="vonneumann-arch-title">现代计算机组成框图（以存储器为中心）</title>
+        <desc id="vonneumann-arch-desc">冯·诺依曼计算机的五大部件：输入设备与输出设备经主存储器交换程序、数据和结果，运算器与主存储器双向传送数据，控制器用虚线控制线指挥全部部件。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #vonneumann-arch-root { --color-paper:   #f5f5f5;   
+      --color-ink:     #2d3142;   
+      --color-muted:   #4f5d75;   
+      --color-soft:    #5a6580;
+      --color-accent:  #bf4520;   
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace; }
+      #vonneumann-arch-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #vonneumann-arch-root .diagram-container { width: 100%; overflow-x: auto; }
+      #vonneumann-arch-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="vonneumann-arch-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="vonneumann-arch-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="vonneumann-arch-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+          <marker id="vonneumann-arch-arrow-start" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto-start-reverse"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- ============ arrows first ============ -->
+        <!-- 输入设备 → 主存储器：程序与数据 -->
+        <line x1="240" y1="248" x2="392" y2="248" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#vonneumann-arch-arrow)"/>
+        <!-- 主存储器 → 输出设备：计算结果 -->
+        <line x1="568" y1="248" x2="720" y2="248" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#vonneumann-arch-arrow)"/>
+        <!-- 主存储器 ↔ 运算器 -->
+        <line x1="480" y1="344" x2="480" y2="280" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#vonneumann-arch-arrow-start)" marker-end="url(#vonneumann-arch-arrow)"/>
+        <!-- 控制器 → 主存储器（控制线） -->
+        <line x1="480" y1="152" x2="480" y2="216" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#vonneumann-arch-arrow)"/>
+        <!-- 控制器 → 输入设备（控制线，直角绕行） -->
+        <path d="M 392,104 H 160 Q 152,104 152,112 V 216" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#vonneumann-arch-arrow)"/>
+        <!-- 控制器 → 输出设备（控制线，直角绕行） -->
+        <path d="M 568,104 H 800 Q 808,104 808,112 V 216" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#vonneumann-arch-arrow)"/>
+        <!-- 控制器 → 运算器（控制线，绕过主存储器，在数据线上方跨越） -->
+        <path d="M 392,120 H 352 Q 344,120 344,128 V 240 a 8,8 0 0,0 0,16 V 368 Q 344,376 352,376 H 392" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#vonneumann-arch-arrow)"/>
+
+        <!-- ============ arrow labels（中文 16px，纸面遮罩） ============ -->
+        <rect x="252" y="219" width="88" height="20" rx="2" fill="#f5f5f5"/>
+        <text x="296" y="233" fill="#5a6580" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">程序与数据</text>
+        <rect x="598" y="219" width="92" height="20" rx="2" fill="#f5f5f5"/>
+        <text x="644" y="233" fill="#5a6580" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">计算结果</text>
+
+        <!-- ============ nodes ============ -->
+        <!-- 输入设备（外部设备处理） -->
+        <rect x="64" y="216" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="64" y="216" width="176" height="64" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="152" y="244" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">输入设备</text>
+        <text x="152" y="263" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">KEYBOARD / MOUSE</text>
+
+        <!-- 主存储器（焦点节点） -->
+        <rect x="392" y="216" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="392" y="216" width="176" height="64" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="480" y="244" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">主存储器</text>
+        <text x="480" y="263" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">MAIN MEMORY</text>
+
+        <!-- 输出设备（外部设备处理） -->
+        <rect x="720" y="216" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="720" y="216" width="176" height="64" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="808" y="244" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">输出设备</text>
+        <text x="808" y="263" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">DISPLAY / PRINTER</text>
+
+        <!-- 控制器（CPU 标签） -->
+        <rect x="392" y="88" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="392" y="88" width="176" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="400" y="94" width="36" height="15" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+        <text x="418" y="105" fill="#2d3142" font-size="10" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.08em" fill-opacity="0.80">CPU</text>
+        <text x="480" y="128" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">控制器</text>
+        <text x="480" y="146" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">CU · CONTROL UNIT</text>
+
+        <!-- 运算器（CPU 标签） -->
+        <rect x="392" y="344" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="392" y="344" width="176" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="400" y="350" width="36" height="15" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+        <text x="418" y="361" fill="#2d3142" font-size="10" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.08em" fill-opacity="0.80">CPU</text>
+        <text x="480" y="384" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">运算器</text>
+        <text x="480" y="402" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">ALU · ARITHMETIC</text>
+
+        <!-- ============ legend（底部横条） ============ -->
+        <line x1="64" y1="548" x2="896" y2="548" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+        <line x1="64" y1="570" x2="104" y2="570" stroke="#4f5d75" stroke-width="1.2"/>
+        <text x="112" y="575" fill="#4f5d75" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif">数据线</text>
+        <line x1="200" y1="570" x2="240" y2="570" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="248" y="575" fill="#4f5d75" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif">控制线</text>
+        <rect x="336" y="563" width="16" height="14" rx="2" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="360" y="575" fill="#4f5d75" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif">以存储器为中心</text>
+      </svg>

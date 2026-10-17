@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="excmap-title excmap-desc" id="excmap-nested-root">
+      <title id="excmap-title">异常与中断的包含关系</title>
+      <desc id="excmap-desc">包含关系图：异常是统称，内部按编号分为 1 到 15 的系统异常与 16 及以上的外部中断 IRQ，中断是异常的子集。</desc>
+
+      <!-- Outer ring: Exception -->
+  <defs>
+      
+  </defs>
+      <rect x="40" y="56" width="920" height="440" rx="8"
+            fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.015" stroke-opacity="0.30"/>
+
+      <!-- Ring label on paper mask -->
+      <rect x="56" y="48" width="320" height="16" fill="#f5f5f5"/>
+      <text x="64" y="60" fill="#4f5d75" font-size="12" font-weight="500"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+        <tspan font-family="'Geist Mono', ui-monospace, monospace" font-size="8" letter-spacing="0.14em">EXCEPTION · </tspan>异常（统称，向量编号 0~255）</text>
+
+      <!-- Left box: system exceptions 1~15 -->
+      <rect x="72" y="104" width="424" height="356" rx="8"
+            fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.025" stroke-opacity="0.45"/>
+      <rect x="88" y="96" width="244" height="16" fill="#f5f5f5"/>
+      <text x="96" y="108" fill="#2d3142" font-size="12" font-weight="500"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+        <tspan font-family="'Geist Mono', ui-monospace, monospace" font-size="8" letter-spacing="0.14em">SYSTEM · </tspan>系统异常（编号 1~15，内核事件）</text>
+
+      <!-- Left members -->
+      <text x="96" y="148" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">1  </tspan><tspan fill="#2d3142">Reset 复位</tspan><tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">   -3</tspan></text>
+      <text x="96" y="184" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">2  </tspan><tspan fill="#2d3142">NMI 不可屏蔽中断</tspan><tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">   -2</tspan></text>
+      <text x="96" y="220" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">3  </tspan><tspan fill="#2d3142">HardFault 硬错误</tspan><tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">   -1</tspan></text>
+      <text x="96" y="256" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">4~6  </tspan><tspan fill="#2d3142">MemManage / BusFault / UsageFault</tspan></text>
+      <text x="96" y="292" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">11 </tspan><tspan fill="#2d3142">SVCall 系统服务调用</tspan></text>
+      <text x="96" y="328" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">12 </tspan><tspan fill="#2d3142">DebugMon 调试监视</tspan></text>
+      <text x="96" y="364" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">14 </tspan><tspan fill="#2d3142">PendSV 可挂起服务（RTOS 切换）</tspan></text>
+      <text x="96" y="400" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">15 </tspan><tspan fill="#2d3142">SysTick 滴答定时器（RTOS 心跳）</tspan></text>
+      <text x="96" y="440" fill="#4f5d75" font-size="9"
+            font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.06em">handler: *_Handler（无 _IRQ 后缀）</text>
+
+      <!-- Right box: IRQ 16+ (focal) -->
+      <rect x="536" y="104" width="392" height="356" rx="8"
+            fill="#bf4520" stroke="#bf4520" stroke-width="1.2" fill-opacity="0.08"/>
+      <rect x="552" y="96" width="284" height="16" fill="#f5f5f5"/>
+      <text x="560" y="108" fill="#bf4520" font-size="12" font-weight="500"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+        <tspan font-family="'Geist Mono', ui-monospace, monospace" font-size="8" letter-spacing="0.14em">IRQ · </tspan>中断（编号 16+，即 IRQn 0+）</text>
+
+      <!-- Right members -->
+      <text x="560" y="148" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">37 </tspan><tspan fill="#2d3142">USART1 串口接收</tspan></text>
+      <text x="560" y="184" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">28 </tspan><tspan fill="#2d3142">TIM2 定时器更新</tspan></text>
+      <text x="560" y="220" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">18 </tspan><tspan fill="#2d3142">ADC1_2 转换完成</tspan></text>
+      <text x="560" y="256" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">11 </tspan><tspan fill="#2d3142">DMA1_Channel1 搬运完成</tspan></text>
+      <text x="560" y="292" font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">
+        <tspan fill="#4f5d75" font-family="'Geist Mono', ui-monospace, monospace" font-size="9">6  </tspan><tspan fill="#2d3142">EXTI0 外部引脚电平变化</tspan></text>
+      <text x="560" y="328" fill="#4f5d75" font-size="12"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">来自片上外设 / GPIO 引脚，异步到达</text>
+      <text x="560" y="440" fill="#4f5d75" font-size="9"
+            font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.06em">handler: *_IRQHandler（带 _IRQ 后缀）</text>
+
+      <!-- Callout: subset relation -->
+      <text x="952" y="40" fill="#2d3142" font-size="14" text-anchor="end"
+            font-family="'Instrument Serif', 'Noto Serif SC', serif">中断只是异常的一个子集</text>
+      <path d="M 836 44 Q 740 68 664 96" fill="none" stroke="#2d3142" stroke-width="1" stroke-dasharray="4,3" stroke-opacity="0.40"/>
+      <circle cx="664" cy="96" r="2" fill="#2d3142"/>
+
+      <!-- Callout: bottom -->
+      <text x="500" y="484" fill="#4f5d75" font-size="13" text-anchor="middle"
+            font-family="'Instrument Serif', 'Noto Serif SC', serif">日常说“进中断”，往往把 HardFault 这类系统异常也包含在内</text>
+    </svg>

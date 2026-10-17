@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="1000" height="580" role="img" aria-labelledby="layers-title layers-desc">
+<title id="layers-title">TCP/IP 分层与数据封装</title>
+<desc id="layers-desc">TCP/IP 分层与数据封装</desc>
+<rect width="1000" height="580" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">TCP/IP 分层与数据封装</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">左边是四层各自负责什么，右边是发送时逐层加头的过程</text>
+<rect x="40" y="120" width="340" height="60" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="210.0" y="142.9368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">应用层</text>
+<text x="210.0" y="166.5832" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">面向具体业务：HTTP、DNS、TFTP、DHCP</text>
+<rect x="40" y="196" width="340" height="60" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="210.0" y="218.9368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">传输层</text>
+<text x="210.0" y="242.5832" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">进程到进程：TCP、UDP（靠端口区分）</text>
+<rect x="40" y="272" width="340" height="60" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="210.0" y="294.9368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">网络层</text>
+<text x="210.0" y="318.5832" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">主机到主机：IP、ICMP，负责跨网段寻址</text>
+<rect x="40" y="348" width="340" height="60" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="210.0" y="370.9368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">网络接口层</text>
+<text x="210.0" y="394.5832" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">一跳之内：以太网、MAC、PHY</text>
+<path d="M470 112 L470 412" fill="none" stroke="#8a94a6" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="470" y="102" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#4f5d75" text-anchor="middle" xml:space="preserve">逐层加头</text>
+<rect x="520" y="120" width="440" height="36" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="740.0" y="142.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">应用数据</text>
+<rect x="520" y="174" width="90" height="36" rx="6" fill="#fdf1ec" stroke="#c9ced8" stroke-width="1"/>
+<text x="565.0" y="196.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">TCP 头</text>
+<rect x="610" y="174" width="350" height="36" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="785.0" y="196.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">应用数据</text>
+<rect x="520" y="228" width="80" height="36" rx="6" fill="#fdf1ec" stroke="#c9ced8" stroke-width="1"/>
+<text x="560.0" y="250.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">IP 头</text>
+<rect x="600" y="228" width="90" height="36" rx="6" fill="#fdf1ec" stroke="#c9ced8" stroke-width="1"/>
+<text x="645.0" y="250.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">TCP 头</text>
+<rect x="690" y="228" width="270" height="36" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="825.0" y="250.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">应用数据</text>
+<rect x="520" y="282" width="110" height="36" rx="6" fill="#fdf1ec" stroke="#c9ced8" stroke-width="1"/>
+<text x="575.0" y="304.24319999999994" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">以太网头</text>
+<rect x="630" y="282" width="80" height="36" rx="6" fill="#fdf1ec" stroke="#c9ced8" stroke-width="1"/>
+<text x="670.0" y="304.24319999999994" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">IP 头</text>
+<rect x="710" y="282" width="90" height="36" rx="6" fill="#fdf1ec" stroke="#c9ced8" stroke-width="1"/>
+<text x="755.0" y="304.24319999999994" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">TCP 头</text>
+<rect x="800" y="282" width="100" height="36" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="850.0" y="304.24319999999994" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">数据</text>
+<rect x="900" y="282" width="60" height="36" rx="6" fill="#fdf1ec" stroke="#c9ced8" stroke-width="1"/>
+<text x="930.0" y="304.24319999999994" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">FCS</text>
+<rect x="520" y="340" width="440" height="60" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="740.0" y="374.24319999999994" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#4f5d75" text-anchor="middle" xml:space="preserve">收到的报文按相反顺序脱头（解封装）</text>
+<rect x="40" y="460" width="920" height="76" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="500.0" y="490.9368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">地址的作用范围</text>
+<text x="500.0" y="514.5832" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">MAC：一跳之内    →    IP：端到端，全程不变    →    端口：区分同一台主机上的程序</text>
+</svg>

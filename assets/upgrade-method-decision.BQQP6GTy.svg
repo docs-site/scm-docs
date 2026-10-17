@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="upgrade-method-decision-title upgrade-method-decision-desc" id="upgrade-method-decision-root">
+        <title id="upgrade-method-decision-title">OTA 存储布局选型决策</title>
+        <desc id="upgrade-method-decision-desc">决策流程图：按是否运行 Linux、是否支持硬件 Bank Swap、App 体积占比与 RAM 容量依次判断，收敛到五种存储布局方案。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #upgrade-method-decision-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #upgrade-method-decision-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #upgrade-method-decision-root .diagram-container { width: 100%; overflow-x: auto; }
+      #upgrade-method-decision-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="upgrade-method-decision-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="upgrade-method-decision-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="upgrade-method-decision-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Arrows -->
+        <line x1="420" y1="126" x2="420" y2="172" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+        <line x1="540" y1="90" x2="772" y2="90" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+        <line x1="420" y1="246" x2="420" y2="292" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+        <line x1="540" y1="210" x2="772" y2="210" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+        <line x1="420" y1="366" x2="420" y2="412" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+        <line x1="540" y1="330" x2="772" y2="330" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+        <line x1="540" y1="450" x2="772" y2="450" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+        <path d="M 420,486 V 552 Q 420,560 428,560 H 772" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#upgrade-method-decision-arrow)"/>
+
+        <!-- Arrow labels -->
+        <rect x="428" y="140" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="152" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <rect x="614" y="58" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="630" y="70" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+
+        <rect x="428" y="260" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="272" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <rect x="614" y="178" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="630" y="190" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+
+        <rect x="428" y="380" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="392" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+
+        <rect x="614" y="298" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="630" y="310" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <rect x="614" y="418" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="630" y="430" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+
+        <rect x="436" y="508" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="452" y="520" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <!-- Diamond: 运行 Linux -->
+        <polygon points="300,90 420,54 540,90 420,126" fill="#f5f5f5"/>
+        <polygon points="300,90 420,54 540,90 420,126" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="95" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">运行 Linux？</text>
+
+        <!-- Terminal: A/B + 框架 (focal) -->
+        <rect x="780" y="60" width="380" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="780" y="60" width="380" height="60" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="970" y="86" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">A/B 双分区 + 升级框架</text>
+        <text x="970" y="106" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">SWUpdate / RAUC / Mender</text>
+
+        <!-- Diamond: 硬件 Bank Swap -->
+        <polygon points="300,210 420,174 540,210 420,246" fill="#f5f5f5"/>
+        <polygon points="300,210 420,174 540,210 420,246" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="215" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">支持硬件 Bank Swap？</text>
+
+        <!-- Terminal: 双 Bank -->
+        <rect x="780" y="180" width="380" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="780" y="180" width="380" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="970" y="206" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">双 Bank 真 A/B</text>
+        <text x="970" y="226" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">单地址编译，硬件映射切换</text>
+
+        <!-- Diamond: App 体积 -->
+        <polygon points="300,330 420,294 540,330 420,366" fill="#f5f5f5"/>
+        <polygon points="300,330 420,294 540,330 420,366" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="335" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">App 体积 &lt; Flash 的 40%？</text>
+
+        <!-- Terminal: 单 App 区 + 暂存 -->
+        <rect x="780" y="300" width="380" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="780" y="300" width="380" height="60" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <text x="970" y="326" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">单 App 区 + 暂存复制</text>
+        <text x="970" y="346" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">可外挂 SPI Flash 兼顾回滚</text>
+
+        <!-- Diamond: RAM 装得下 -->
+        <polygon points="300,450 420,414 540,450 420,486" fill="#f5f5f5"/>
+        <polygon points="300,450 420,414 540,450 420,486" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="455" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">RAM 装得下整个 App？</text>
+
+        <!-- Terminal: 双槽 + RAM 运行 (focal) -->
+        <rect x="780" y="420" width="380" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="780" y="420" width="380" height="60" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="970" y="446" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">双槽 + 拷贝到 RAM 运行</text>
+        <text x="970" y="466" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">单份镜像，天然可回滚</text>
+
+        <!-- Terminal: 双槽 + 两个变体 -->
+        <rect x="780" y="530" width="380" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="780" y="530" width="380" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="970" y="556" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">双槽 + 编译两个地址变体</text>
+        <text x="970" y="576" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">构建复杂度换常规 Flash 空间</text>
+      </svg>

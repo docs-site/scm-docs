@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="560" viewBox="0 0 940 560" role="img" aria-labelledby="mapTitle mapDesc" id="flash-sram-map-root">
+  <title id="mapTitle">内部 FLASH 与 SRAM 地址分区</title>
+  <desc id="mapDesc">左图为 512KB 内部 FLASH 的四块分区，右图为 64KB 内部 SRAM 的三段分区，下方箭头表示 go sram 命令把 Flash 暂存区的 24KB 镜像拷贝到 SRAM 运行区。</desc>
+
+  <rect x="0" y="0" width="940" height="560" fill="#f5f5f5"/>
+
+  <text x="40" y="40" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">ADDRESS MAP</text>
+
+  <!-- 左：内部 FLASH -->
+  <text x="40" y="88" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">内部 FLASH · 512 KB</text>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="40" y="106" width="380" height="84" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="58" y="134" font-size="13" font-weight="600" fill="#2d3142">Bootloader</text>
+    <text x="58" y="156" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x08000000 – 0x08020000</text>
+    <text x="58" y="176" font-size="12" fill="#4f5d75">128 KB · 上电第一个运行</text>
+
+    <rect x="40" y="198" width="380" height="84" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="58" y="226" font-size="13" font-weight="600" fill="#2d3142">FLASH APP</text>
+    <text x="58" y="248" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x08020000 – 0x08040000</text>
+    <text x="58" y="268" font-size="12" fill="#4f5d75">128 KB · 落盘位置即运行位置</text>
+
+    <rect x="40" y="290" width="380" height="84" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="58" y="318" font-size="13" font-weight="600" fill="#2d3142">SRAM APP 暂存区</text>
+    <text x="58" y="340" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x08040000 – 0x08060000</text>
+    <text x="58" y="360" font-size="12" fill="#4f5d75">128 KB · 容量 24 KB 的镜像落脚处</text>
+
+    <rect x="40" y="382" width="380" height="84" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5 4"/>
+    <text x="58" y="410" font-size="13" font-weight="600" fill="#4f5d75">未分配</text>
+    <text x="58" y="432" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x08060000 – 0x08080000</text>
+    <text x="58" y="452" font-size="12" fill="#4f5d75">128 KB</text>
+  </g>
+
+  <!-- 右：内部 SRAM -->
+  <text x="560" y="88" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">内部 SRAM · 64 KB</text>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="560" y="106" width="340" height="84" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="578" y="134" font-size="13" font-weight="600" fill="#2d3142">Bootloader 运行区</text>
+    <text x="578" y="156" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x20000000 – 0x20007000</text>
+    <text x="578" y="176" font-size="12" fill="#4f5d75">28 KB · RW/ZI 实际到 0x20005E18</text>
+
+    <rect x="560" y="198" width="340" height="84" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="578" y="226" font-size="13" font-weight="600" fill="#2d3142">SRAM APP 代码</text>
+    <text x="578" y="248" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x20007000 – 0x2000D000</text>
+    <text x="578" y="268" font-size="12" fill="#4f5d75">24 KB · 镜像运行的容器</text>
+
+    <rect x="560" y="290" width="340" height="84" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="578" y="318" font-size="13" font-weight="600" fill="#2d3142">SRAM APP 的 RW/ZI 与栈</text>
+    <text x="578" y="340" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x2000D000 – 0x20010000</text>
+    <text x="578" y="360" font-size="12" fill="#4f5d75">11 KB RW/ZI + 1 KB NOINIT（0x2000FC00 起）</text>
+
+    <rect x="560" y="382" width="340" height="84" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5 4"/>
+    <text x="578" y="410" font-size="13" font-weight="600" fill="#4f5d75">不参与本次流程</text>
+    <text x="578" y="432" font-size="12" fill="#4f5d75">外部 SRAM 0x68000000 起 1 MB</text>
+    <text x="578" y="452" font-size="12" fill="#4f5d75">只作 128 KB 收帧缓冲</text>
+  </g>
+
+  <!-- go sram 拷贝路径 -->
+  <path d="M 420 332 L 486 332 L 486 240 L 560 240" fill="none" stroke="#bf4520" stroke-width="1.6" marker-end="url(#flash-sram-map-arrowAccent)"/>
+  <defs>
+    <marker id="flash-sram-map-arrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+  <text x="523" y="228" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#bf4520">go sram</text>
+
+  <text x="40" y="500" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">go sram：从暂存区整块 memcpy 24 KB 到 0x20007000，回读 CRC32 校验通过后再跳转。</text>
+  <text x="40" y="528" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">四个 Flash 边界与三个 SRAM 边界必须与 iap.h 的宏、IROM1、pack_iap.py 的常量三处一致。</text>
+</svg>

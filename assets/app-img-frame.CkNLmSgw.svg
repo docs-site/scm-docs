@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="360" viewBox="0 0 940 360" role="img" aria-labelledby="frameTitle frameDesc" id="app-img-frame-root">
+  <title id="frameTitle">app.img 帧结构</title>
+  <desc id="frameDesc">app.img 由 20 字节头部、N 字节载荷和 8 字节尾部组成，头部依次为 8 字节魔数、4 字节长度、4 字节 CRC32 和 4 字节目标地址。</desc>
+
+  <rect x="0" y="0" width="940" height="360" fill="#f5f5f5"/>
+
+  <text x="60" y="40" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">FRAME LAYOUT</text>
+  <text x="60" y="66" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">app.img = 20 字节头部 + 原始 bin + 8 字节尾部</text>
+
+  <!-- 头部标注 -->
+  <line x1="60" y1="96" x2="365" y2="96" stroke="#4f5d75" stroke-width="1"/>
+  <line x1="60" y1="90" x2="60" y2="102" stroke="#4f5d75" stroke-width="1"/>
+  <line x1="365" y1="90" x2="365" y2="102" stroke="#4f5d75" stroke-width="1"/>
+  <text x="212" y="86" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#4f5d75">头部 20 字节</text>
+
+  <!-- 帧体 -->
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="60" y="110" width="110" height="90" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="115" y="146" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">魔数</text>
+    <text x="115" y="168" text-anchor="middle" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">IAPBIN02</text>
+    <text x="115" y="188" text-anchor="middle" font-size="12" fill="#4f5d75">8 字节</text>
+
+    <rect x="170" y="110" width="65" height="90" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="202" y="146" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">长度</text>
+    <text x="202" y="168" text-anchor="middle" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">N</text>
+    <text x="202" y="188" text-anchor="middle" font-size="12" fill="#4f5d75">4 字节</text>
+
+    <rect x="235" y="110" width="65" height="90" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="267" y="146" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">CRC32</text>
+    <text x="267" y="168" text-anchor="middle" font-size="12" fill="#4f5d75">载荷校验</text>
+    <text x="267" y="188" text-anchor="middle" font-size="12" fill="#4f5d75">4 字节</text>
+
+    <rect x="300" y="110" width="65" height="90" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="332" y="146" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">地址</text>
+    <text x="332" y="168" text-anchor="middle" font-size="12" fill="#4f5d75">目标加载</text>
+    <text x="332" y="188" text-anchor="middle" font-size="12" fill="#4f5d75">4 字节</text>
+
+    <rect x="365" y="110" width="425" height="90" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="577" y="148" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">载荷：原始 bin 字节</text>
+    <text x="577" y="172" text-anchor="middle" font-size="12" fill="#4f5d75">偏移 20 起，长度 N，上限 131072 字节</text>
+
+    <rect x="790" y="110" width="90" height="90" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="835" y="146" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">尾部</text>
+    <text x="835" y="168" text-anchor="middle" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">IAPEOF02</text>
+    <text x="835" y="188" text-anchor="middle" font-size="12" fill="#4f5d75">8 字节</text>
+  </g>
+
+  <!-- 偏移标尺 -->
+  <g font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">
+    <text x="60" y="222">0</text>
+    <text x="164" y="222">8</text>
+    <text x="229" y="222">12</text>
+    <text x="294" y="222">16</text>
+    <text x="359" y="222">20</text>
+    <text x="786" y="222">20+N</text>
+  </g>
+  <text x="60" y="240" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">偏移（字节，小端）</text>
+
+  <!-- 目标地址分支 -->
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12">
+    <text x="60" y="286" font-weight="600" fill="#2d3142">地址字段只有两个合法取值：</text>
+    <text x="60" y="310" fill="#4f5d75">0x08020000 → FLASH APP 就地编程，运行位置即落盘位置</text>
+    <text x="60" y="332" fill="#4f5d75">0x20007000 → 落到 0x08040000 暂存区，等待 go sram 搬运</text>
+  </g>
+</svg>

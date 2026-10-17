@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" role="img" aria-labelledby="dt-title dt-desc">
+<title id="dt-title">排查层级与工具的对应关系</title>
+<desc id="dt-desc">每一层网络问题对应哪件工具，排查方向从下往上</desc>
+<rect width="1000" height="640" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">排查层级与工具的对应关系</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">每一层都有自己的验证工具，顺序永远从下往上，一层通了才轮到上一层</text>
+
+<rect x="60" y="108" width="220" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="170.0" y="134" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">应用层</text>
+<text x="170.0" y="156" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">帧协议、命令</text>
+
+<rect x="320" y="108" width="560" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="340" y="134" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">Wireshark 过滤表达式</text>
+<text x="340" y="156" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">按端口过滤、直接搜帧魔数 IAPBIN 验证帧头</text>
+
+<rect x="60" y="200" width="220" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="170.0" y="226" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">传输层</text>
+<text x="170.0" y="248" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">TCP / UDP、端口</text>
+
+<rect x="320" y="200" width="560" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="340" y="226" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">nc -v 测握手</text>
+<text x="340" y="248" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">refused 说明 IP 通了但端口没开；timeout 说明端口或链路问题</text>
+
+<rect x="60" y="292" width="220" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="170.0" y="318" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">网络层</text>
+<text x="170.0" y="340" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">IP / ICMP、同网段判断</text>
+
+<rect x="320" y="292" width="560" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="340" y="318" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">ping</text>
+<text x="340" y="340" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">看时延、TTL 与丢包率；第一包慢是 ARP 一问一答</text>
+
+<rect x="60" y="384" width="220" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="170.0" y="410" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">数据链路层</text>
+<text x="170.0" y="432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">ARP、MAC 地址</text>
+
+<rect x="320" y="384" width="560" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="340" y="410" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">arp -a / ip neigh、抓包看 ARP</text>
+<text x="340" y="432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">表里没有板子的 IP 说明 ARP 没通；MAC 不对说明学到了错误映射</text>
+
+<rect x="60" y="476" width="220" height="64" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="170.0" y="502" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">物理层</text>
+<text x="170.0" y="524" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">网线、PHY、网口灯</text>
+
+<rect x="320" y="476" width="560" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="340" y="502" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">肉眼 + ipconfig / ip addr</text>
+<text x="340" y="524" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">网口灯亮不亮；PC 上是不是把地址配到了别的网卡上</text>
+
+<line x1="924" y1="520" x2="924" y2="120" stroke="#bf4520" stroke-width="2" marker-end="url(#arrowAccent)"/>
+<text x="938" y="330" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve" transform="rotate(-90 938 330)">排查方向：从下往上</text>
+
+<line x1="40" y1="576" x2="960" y2="576" stroke="#d5d9e0" stroke-width="1"/>
+<text x="40" y="604" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">日志与抓包要配合用：日志只覆盖一个观测点，抓包才能看到"线上真实发生了什么"</text>
+</svg>

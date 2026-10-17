@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="delta-device-flow-title delta-device-flow-desc" id="delta-device-flow-root">
+        <title id="delta-device-flow-title">设备端差分升级的决策流程</title>
+        <desc id="delta-device-flow-desc">流程图：收到差分包后依次检查源版本匹配、本地旧镜像 CRC 一致、重建结果哈希正确；任一环节不满足都降级为请求整包，全部通过后写入目标槽并整体验签。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #delta-device-flow-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #delta-device-flow-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #delta-device-flow-root .diagram-container { width: 100%; overflow-x: auto; }
+      #delta-device-flow-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="delta-device-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="delta-device-flow-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="delta-device-flow-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Arrows: main spine -->
+        <line x1="420" y1="142" x2="420" y2="194" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#delta-device-flow-arrow)"/>
+        <line x1="420" y1="262" x2="420" y2="316" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#delta-device-flow-arrow)"/>
+        <line x1="420" y1="384" x2="420" y2="424" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#delta-device-flow-arrow)"/>
+        <line x1="420" y1="492" x2="420" y2="536" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#delta-device-flow-arrow)"/>
+
+        <!-- Arrows: three no-branches into fallback -->
+        <path d="M 530,110 H 820 Q 828,110 828,118 V 252 Q 828,260 836,260 H 756" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#delta-device-flow-arrow)"/>
+        <path d="M 530,230 H 720 Q 728,230 728,238 V 272 Q 728,280 736,280 H 756" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#delta-device-flow-arrow)"/>
+        <path d="M 530,460 H 830 Q 838,460 838,452 V 308 Q 838,300 846,300 H 756" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#delta-device-flow-arrow)"/>
+
+        <!-- Arrow labels -->
+        <rect x="560" y="88" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="576" y="100" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <rect x="560" y="208" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="576" y="220" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <rect x="560" y="438" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="576" y="450" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <!-- Diamond: src_version 匹配? -->
+        <polygon points="310,110 420,78 530,110 420,142" fill="#f5f5f5"/>
+        <polygon points="310,110 420,78 530,110 420,142" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="115" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">源版本匹配本机？</text>
+
+        <!-- Diamond: 旧镜像 CRC 一致? -->
+        <polygon points="310,230 420,198 530,230 420,262" fill="#f5f5f5"/>
+        <polygon points="310,230 420,198 530,230 420,262" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="235" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">本地旧镜像一致？</text>
+
+        <!-- Step: 应用补丁 -->
+        <rect x="310" y="316" width="220" height="68" rx="6" fill="#f5f5f5"/>
+        <rect x="310" y="316" width="220" height="68" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="420" y="344" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">应用补丁重建镜像</text>
+        <text x="420" y="366" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">bspatch · 旧镜像 + 差分包</text>
+
+        <!-- Diamond: 重建哈希匹配? -->
+        <polygon points="310,460 420,428 530,460 420,492" fill="#f5f5f5"/>
+        <polygon points="310,460 420,428 530,460 420,492" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="465" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">重建结果正确？</text>
+
+        <!-- Step: 写入并验签 -->
+        <rect x="310" y="536" width="220" height="68" rx="6" fill="#f5f5f5"/>
+        <rect x="310" y="536" width="220" height="68" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="420" y="564" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">写入目标槽</text>
+        <text x="420" y="586" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">整体验签后走常规流程</text>
+
+        <!-- Terminal: 整包兜底 (focal) -->
+        <rect x="760" y="240" width="420" height="80" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="240" width="420" height="80" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="970" y="272" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">降级为请求整包</text>
+        <text x="970" y="294" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">放弃差分包，按整包流程重新升级</text>
+      </svg>

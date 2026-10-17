@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="adc-quant-title adc-quant-desc" id="adc-quantization-root">
+        <title id="adc-quant-title">量化传递函数与量化误差</title>
+        <desc id="adc-quant-desc">坐标图：横轴为输入电压，纵轴为输出数字码。实际传递函数是台阶状阶梯，理想传递函数是一条直线；每个台阶高度为一个 LSB，阶梯与直线的偏差即量化误差，在正负二分之一个 LSB 之间呈锯齿分布。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #adc-quantization-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #adc-quantization-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #adc-quantization-root .diagram-container { width: 100%; overflow-x: auto; }
+      #adc-quantization-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="adc-quantization-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="adc-quantization-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- axes -->
+        <line x1="140" y1="440" x2="800" y2="440" stroke="#2d3142" stroke-width="1.2" marker-end="url(#adc-quantization-arrow)"/>
+        <line x1="140" y1="440" x2="140" y2="100" stroke="#2d3142" stroke-width="1.2" marker-end="url(#adc-quantization-arrow)"/>
+        <text x="470" y="472" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">输入电压 V_in</text>
+        <text x="112" y="112" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">输出码</text>
+        <text x="140" y="458" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75">0</text>
+        <text x="780" y="458" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75">V_REF</text>
+
+        <!-- code ticks (3-bit illustration) -->
+        <g font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75" text-anchor="end">
+          <text x="130" y="423">000</text>
+          <text x="130" y="383">001</text>
+          <text x="130" y="343">010</text>
+          <text x="130" y="303">011</text>
+          <text x="130" y="263">100</text>
+          <text x="130" y="223">101</text>
+          <text x="130" y="183">110</text>
+          <text x="130" y="143">111</text>
+        </g>
+
+        <!-- highlighted step band: +/- 0.5 LSB -->
+        <rect x="380" y="280" width="80" height="40" fill="#bf4520" fill-opacity="0.14" stroke="#bf4520" stroke-width="1.2"/>
+
+        <!-- ideal line -->
+        <line x1="140" y1="440" x2="780" y2="120" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="6 4"/>
+        <text x="780" y="132" text-anchor="end" font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75">理想传递函数（虚线）</text>
+
+        <!-- staircase -->
+        <path d="M140,420 H220 V380 H300 V340 H380 V300 H460 V260 H540 V220 H620 V180 H700 V140 H780" fill="none" stroke="#2d3142" stroke-width="1.8"/>
+        <!-- the two step levels the 1 LSB arrow spans, recolored to tie band + arrow + steps together -->
+        <line x1="380" y1="300" x2="460" y2="300" stroke="#bf4520" stroke-width="2.6"/>
+        <line x1="460" y1="260" x2="540" y2="260" stroke="#bf4520" stroke-width="2.6"/>
+        <text x="300" y="222" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#2d3142">实际传递函数（实线台阶）</text>
+        <line x1="300" y1="230" x2="300" y2="332" stroke="#2d3142" stroke-width="1" marker-end="url(#adc-quantization-arrow)"/>
+
+        <!-- 1 LSB annotation: extension ticks pin the arrow to two adjacent step levels -->
+        <line x1="460" y1="260" x2="524" y2="260" stroke="#bf4520" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="460" y1="300" x2="524" y2="300" stroke="#bf4520" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="500" y1="280" x2="500" y2="263" stroke="#bf4520" stroke-width="1.3" marker-end="url(#adc-quantization-arrow-accent)"/>
+        <line x1="500" y1="280" x2="500" y2="297" stroke="#bf4520" stroke-width="1.3" marker-end="url(#adc-quantization-arrow-accent)"/>
+        <text x="512" y="276" font-family="'Geist Mono', monospace" font-size="13" font-weight="600" fill="#bf4520">1 LSB</text>
+        <text x="512" y="294" font-family="'Geist Mono', monospace" font-size="11" fill="#bf4520">相邻两级台阶之差</text>
+        <text x="372" y="270" text-anchor="end" font-family="'Geist Mono', monospace" font-size="13" font-weight="600" fill="#bf4520">±1/2 LSB</text>
+        <line x1="376" y1="274" x2="392" y2="288" stroke="#bf4520" stroke-width="1.2"/>
+        <text x="180" y="120" font-family="'Geist Mono', monospace" font-size="13" font-weight="600" fill="#2d3142">1 LSB = V_REF / 2^N</text>
+        <text x="180" y="138" font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75">N = 分辨率位数（图中按 3 位画台阶）</text>
+
+        <!-- error inset -->
+        <rect x="790" y="150" width="190" height="160" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="885" y="140" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="14" font-weight="600" fill="#2d3142">量化误差</text>
+        <line x1="800" y1="232" x2="970" y2="232" stroke="#4f5d75" stroke-width="1" stroke-dasharray="3 3"/>
+        <path d="M800,272 L842,192 M842,272 L885,192 M885,272 L927,192 M927,272 L970,192" fill="none" stroke="#bf4520" stroke-width="1.4"/>
+        <text x="885" y="180" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#bf4520">+1/2 LSB</text>
+        <text x="885" y="292" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#bf4520">-1/2 LSB</text>
+        <text x="885" y="332" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75">误差 = 实际码 - 理想值</text>
+        <text x="885" y="350" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75">与输入信号无关，只与位数有关</text>
+
+        <!-- callout -->
+        <line x1="60" y1="506" x2="940" y2="506" stroke="#bf4520" stroke-width="1"/>
+        <text x="60" y="528" font-family="'Instrument Serif', 'Noto Serif SC', serif" font-style="italic" font-size="17" fill="#2d3142">量化误差是原理性误差，躲不掉只能摊薄：位数每加 1，LSB 减半，误差带跟着减半。</text>
+      </svg>

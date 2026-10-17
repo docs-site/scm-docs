@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bootloader-decision-flow-title bootloader-decision-flow-desc" id="bootloader-decision-flow-root">
+        <title id="bootloader-decision-flow-title">Bootloader 上电选槽决策</title>
+        <desc id="bootloader-decision-flow-desc">流程图：Bootloader 读取参数区双副本，判断参数区有效性、是否处于待试用状态、试用次数是否超限，据此决定启动槽位并校验镜像后跳转。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #bootloader-decision-flow-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #bootloader-decision-flow-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #bootloader-decision-flow-root .diagram-container { width: 100%; overflow-x: auto; }
+      #bootloader-decision-flow-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="bootloader-decision-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="bootloader-decision-flow-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="bootloader-decision-flow-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Arrows -->
+        <line x1="420" y1="108" x2="420" y2="142" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+        <line x1="530" y1="180" x2="752" y2="180" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+        <line x1="420" y1="214" x2="420" y2="252" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+        <line x1="530" y1="290" x2="752" y2="290" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+        <line x1="420" y1="324" x2="420" y2="362" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+        <line x1="530" y1="400" x2="752" y2="400" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+        <line x1="420" y1="434" x2="420" y2="478" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+        <line x1="420" y1="538" x2="420" y2="578" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#bootloader-decision-flow-arrow)"/>
+
+        <!-- Arrow labels -->
+        <rect x="428" y="227" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="239" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+
+        <rect x="629" y="156" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="645" y="168" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <rect x="629" y="266" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="645" y="278" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <rect x="428" y="337" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="349" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+
+        <rect x="629" y="376" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="645" y="388" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+
+        <rect x="428" y="447" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="459" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+
+        <!-- Step: 读参数区 -->
+        <rect x="310" y="52" width="220" height="56" rx="6" fill="#f5f5f5"/>
+        <rect x="310" y="52" width="220" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="420" y="76" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">读参数区双副本</text>
+        <text x="420" y="96" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">取有效且 seq 新者</text>
+
+        <!-- Diamond: 参数区有效? -->
+        <polygon points="310,180 420,146 530,180 420,214" fill="#f5f5f5"/>
+        <polygon points="310,180 420,146 530,180 420,214" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="185" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">参数区有效？</text>
+
+        <!-- Terminal: 使用默认值 -->
+        <rect x="760" y="148" width="420" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="148" width="420" height="64" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <text x="970" y="174" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">使用出厂默认值（槽 A）</text>
+        <text x="970" y="194" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">并重建双副本参数区</text>
+
+        <!-- Diamond: 待试用? -->
+        <polygon points="310,290 420,256 530,290 420,324" fill="#f5f5f5"/>
+        <polygon points="310,290 420,256 530,290 420,324" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="295" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">处于待试用状态？</text>
+
+        <!-- Terminal: 目标槽 = active_slot -->
+        <rect x="760" y="258" width="420" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="258" width="420" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="970" y="284" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">目标槽 = active_slot</text>
+        <text x="970" y="304" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">正常启动已确认固件</text>
+
+        <!-- Diamond: 试用超限? -->
+        <polygon points="310,400 420,366 530,400 420,434" fill="#f5f5f5"/>
+        <polygon points="310,400 420,366 530,400 420,434" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="405" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">试用次数超限？</text>
+
+        <!-- Terminal: 回滚 -->
+        <rect x="760" y="368" width="420" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="368" width="420" height="64" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="970" y="394" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">回滚：目标槽 = active_slot</text>
+        <text x="970" y="414" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">清除 pending 标志与计数</text>
+
+        <!-- Step: 试用 pending_slot -->
+        <rect x="310" y="478" width="220" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="310" y="478" width="220" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="420" y="504" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">目标槽 = pending_slot</text>
+        <text x="420" y="524" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">跳转前先递增 boot_count</text>
+
+        <!-- Step: 校验并跳转 -->
+        <rect x="310" y="578" width="220" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="310" y="578" width="220" height="60" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="420" y="604" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">校验镜像并跳转</text>
+        <text x="420" y="624" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">两槽均无效进恢复模式</text>
+      </svg>

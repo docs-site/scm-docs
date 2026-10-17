@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg id="rx-state-machine-root" xmlns="http://www.w3.org/2000/svg" width="940" height="440" viewBox="0 0 940 440" role="img" aria-labelledby="rx-state-machine-smTitle rx-state-machine-smDesc">
+  <title id="rx-state-machine-smTitle">IAP 收帧状态机</title>
+  <desc id="rx-state-machine-smDesc">接收分五个状态：扫描魔数、读头部、收载荷、比对尾部、主循环校验并落盘，任一环节出错或超时都回到扫描状态。</desc>
+
+  <rect x="0" y="0" width="940" height="440" fill="#f5f5f5"/>
+  <defs>
+    <marker id="rx-state-machine-arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d3142"/>
+    </marker>
+    <marker id="rx-state-machine-arwAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+    <marker id="rx-state-machine-arwMuted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4f5d75"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="34" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">RX STATE MACHINE</text>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="60" y="58" width="180" height="66" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="150" y="86" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">SCAN</text>
+    <text x="150" y="108" text-anchor="middle" font-size="12" fill="#4f5d75">8 字节滑窗匹配魔数</text>
+
+    <rect x="300" y="58" width="200" height="66" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="400" y="86" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">HEADER</text>
+    <text x="400" y="108" text-anchor="middle" font-size="12" fill="#4f5d75">收 12 字节：长度 / CRC / 地址</text>
+
+    <rect x="360" y="220" width="200" height="66" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="460" y="248" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">PAYLOAD</text>
+    <text x="460" y="270" text-anchor="middle" font-size="12" fill="#4f5d75">逐字节写外部 SRAM 缓冲</text>
+
+    <rect x="620" y="220" width="180" height="66" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="710" y="248" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">TRAILER</text>
+    <text x="710" y="270" text-anchor="middle" font-size="12" fill="#4f5d75">比对 IAPEOF02</text>
+
+    <rect x="620" y="58" width="180" height="66" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="710" y="86" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">VERIFY（主循环）</text>
+    <text x="710" y="108" text-anchor="middle" font-size="12" fill="#4f5d75">算 CRC32 并落盘</text>
+  </g>
+
+  <!-- 正常迁移 -->
+  <path d="M 240 91 L 300 91" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#rx-state-machine-arw)"/>
+  <text x="270" y="80" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">命中</text>
+
+  <path d="M 400 124 L 400 220" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#rx-state-machine-arw)"/>
+  <text x="412" y="176" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">地址与长度合法</text>
+
+  <path d="M 560 253 L 620 253" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#rx-state-machine-arw)"/>
+  <text x="590" y="242" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">收满 N</text>
+
+  <path d="M 710 220 L 710 124" fill="none" stroke="#bf4520" stroke-width="1.6" marker-end="url(#rx-state-machine-arwAccent)"/>
+  <text x="722" y="176" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#bf4520">尾部正确</text>
+
+  <path d="M 620 91 L 540 91 L 540 14 L 215 14 L 215 58" fill="none" stroke="#bf4520" stroke-width="1.6" marker-end="url(#rx-state-machine-arwAccent)"/>
+  <text x="377" y="30" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#bf4520">上报 FRAME_OK，恢复命令识别，回到扫描</text>
+
+  <!-- 错误汇流 -->
+  <path d="M 320 124 L 320 380" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <path d="M 460 286 L 460 380" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <path d="M 710 286 L 710 380" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <path d="M 150 380 L 710 380" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <path d="M 150 380 L 150 124" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#rx-state-machine-arwMuted)"/>
+  <text x="560" y="402" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">地址/长度非法、尾部不符、帧内超时 3000 ms → 丢弃整帧</text>
+
+  <text x="60" y="428" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">SCAN / HEADER / PAYLOAD / TRAILER 运行在中断上下文，VERIFY 与落盘运行在主循环，两者只通过 iap_rx_poll() 的事件交接。</text>
+</svg>
