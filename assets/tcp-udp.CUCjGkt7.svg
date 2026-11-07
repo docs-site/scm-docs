@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" role="img" aria-labelledby="tu-title tu-desc">
+<title id="tu-title">UDP 与 TCP 的交互形态对比</title>
+<desc id="tu-desc">左边是 UDP 的一问一答，右边是 TCP 的三次握手、数据与挥手</desc>
+<rect width="1000" height="640" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">UDP 与 TCP 的交互形态对比</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">左边是无连接的"一问一答"，右边是先握手再传数据的"字节流"</text>
+
+<text x="250" y="116" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">UDP：无连接，一问一答</text>
+<text x="750" y="116" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">TCP：先握手，再传字节流</text>
+
+<rect x="80" y="132" width="140" height="44" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="150.0" y="159" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">客户端</text>
+
+<rect x="300" y="132" width="140" height="44" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="370.0" y="159" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">服务器</text>
+
+<line x1="150" y1="180" x2="150" y2="472" stroke="#c9ced8" stroke-width="1.5"/>
+<line x1="370" y1="180" x2="370" y2="472" stroke="#c9ced8" stroke-width="1.5"/>
+
+<line x1="158" y1="220" x2="362" y2="220" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="260.0" y="212" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">请求（一个完整报文）</text>
+
+<line x1="362" y1="268" x2="158" y2="268" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="260.0" y="260" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">应答（一个完整报文）</text>
+
+<line x1="158" y1="332" x2="362" y2="332" stroke="#bf4520" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrowAccent)"/>
+<text x="260.0" y="324" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">丢了就丢了，不重传</text>
+
+<rect x="80" y="380" width="360" height="92" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="100" y="408" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">头只有 8 字节：源端口、目的端口、长度、校验和</text>
+<text x="100" y="432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">不保证送达、不保证顺序，可靠性靠应用自己补</text>
+<text x="100" y="456" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">保留报文边界：发两包，收到的一定是两包</text>
+
+<rect x="560" y="132" width="140" height="44" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="630.0" y="159" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">客户端</text>
+
+<rect x="780" y="132" width="140" height="44" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="850.0" y="159" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">服务端</text>
+
+<line x1="630" y1="180" x2="630" y2="536" stroke="#c9ced8" stroke-width="1.5"/>
+<line x1="850" y1="180" x2="850" y2="536" stroke="#c9ced8" stroke-width="1.5"/>
+
+<line x1="638" y1="212" x2="842" y2="212" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="740.0" y="204" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">SYN（我的起始序号是 X）</text>
+
+<line x1="842" y1="248" x2="638" y2="248" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="740.0" y="240" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">SYN + ACK（我的是 Y，收到你的 X）</text>
+
+<line x1="638" y1="284" x2="842" y2="284" stroke="#bf4520" stroke-width="1.5" marker-end="url(#arrowAccent)"/>
+<text x="740.0" y="276" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">ACK（收到你的 Y，连接建立）</text>
+
+<line x1="638" y1="336" x2="842" y2="336" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="740.0" y="328" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">数据段（带序号，窗口内可连发）</text>
+
+<line x1="842" y1="372" x2="638" y2="372" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="740.0" y="364" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">ACK（第 N 号之前都收到了）</text>
+
+<line x1="638" y1="424" x2="842" y2="424" stroke="#4f5d75" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<text x="740.0" y="416" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">超时没收到 ACK → 重发同一段</text>
+
+<line x1="638" y1="484" x2="842" y2="484" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="740.0" y="476" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">FIN / ACK / FIN / ACK（挥手四次）</text>
+
+<rect x="560" y="508" width="400" height="92" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="580" y="536" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">头 20 字节起，带序号、ACK、窗口与标志位</text>
+<text x="580" y="560" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">不丢、不乱、不重复，代价是连接状态与内存</text>
+<text x="580" y="584" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">字节流没有边界，消息边界要应用自己定</text>
+
+<line x1="40" y1="500" x2="460" y2="500" stroke="#d5d9e0" stroke-width="1"/>
+<text x="250" y="530" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">本工程：TFTP / DHCP / DNS</text>
+<text x="750" y="628" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">本工程：TCP 升级通道（8888）</text>
+<text x="250" y="628" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve"> </text>
+</svg>

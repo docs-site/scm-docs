@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 980 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rf-title rf-desc" id="record-frame-root">
+        <title id="rf-title">记录信封与镜像帧</title>
+        <desc id="rf-desc">升级记录是 16 字节信封加 48 字节载荷，共 64 字节；镜像帧是 20 字节头、N 字节载荷、64 字节 Ed25519 签名与 8 字节尾标，总长 N 加 92，签名覆盖头部与载荷。</desc>
+  <defs>
+      <style>#record-frame-root { --color-paper: #f5f5f5; --color-ink: #2d3142; --color-muted: #4f5d75; }
+      #record-frame-root { font-family: 'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; color: var(--color-ink); }
+      #record-frame-root .diagram-container { width: 100%; overflow-x: auto; }
+      #record-frame-root .n { font-family: 'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; font-size: 13px; font-weight: 600; fill: #2d3142; }
+      #record-frame-root .s { font-family: 'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; font-size: 12px; font-weight: 500; fill: #4f5d75; }
+      #record-frame-root .m { font-family: 'Geist Mono',ui-monospace,monospace; font-size: 11px; font-weight: 400; fill: #2d3142; }
+      #record-frame-root .k { font-family: 'Geist Mono',ui-monospace,monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.12em; fill: #4f5d75; }
+      #record-frame-root .nt { font-family: 'Instrument Serif','Noto Serif',serif; font-size: 13px; font-style: italic; fill: #4f5d75; }</style>
+  </defs>
+
+        <style>
+          .n  { font-family: 'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; font-size: 13px; font-weight: 600; fill: #2d3142; }
+          .s  { font-family: 'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; font-size: 12px; font-weight: 500; fill: #4f5d75; }
+          .m  { font-family: 'Geist Mono',ui-monospace,monospace; font-size: 11px; font-weight: 400; fill: #2d3142; }
+          .k  { font-family: 'Geist Mono',ui-monospace,monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.12em; fill: #4f5d75; }
+          .nt { font-family: 'Instrument Serif','Noto Serif',serif; font-size: 13px; font-style: italic; fill: #4f5d75; }
+        </style>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- ============ 升级记录 ============ -->
+        <text class="k" x="80" y="86">RECORD · 64 BYTES</text>
+        <text class="n" x="80" y="110">升级记录信封（sector 2 / 3 各一份，乒乓写）</text>
+
+        <rect x="80" y="126" width="88" height="52" rx="2" fill="#fbf1ed" stroke="#bf4520" stroke-width="1.4"/>
+        <text class="m" x="124" y="157" text-anchor="middle">UPDT</text>
+
+        <rect x="172" y="126" width="44" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="194" y="157" text-anchor="middle">1</text>
+
+        <rect x="220" y="126" width="40" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="240" y="157" text-anchor="middle">FF</text>
+
+        <rect x="264" y="126" width="60" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="294" y="157" text-anchor="middle">48</text>
+
+        <rect x="328" y="126" width="84" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="370" y="157" text-anchor="middle">seq</text>
+
+        <rect x="416" y="126" width="88" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="460" y="157" text-anchor="middle">CRC32</text>
+
+        <rect x="508" y="126" width="392" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.75"/>
+        <text class="m" x="704" y="150" text-anchor="middle">upd_data_t · 48 B</text>
+        <text class="s" x="704" y="168" text-anchor="middle">active / confirmed / pending / pending_slot</text>
+
+        <text class="m" x="124" y="200" text-anchor="middle">0-3</text>
+        <text class="m" x="194" y="200" text-anchor="middle">4</text>
+        <text class="m" x="240" y="200" text-anchor="middle">5</text>
+        <text class="m" x="294" y="200" text-anchor="middle">6-7</text>
+        <text class="m" x="370" y="200" text-anchor="middle">8-11</text>
+        <text class="m" x="460" y="200" text-anchor="middle">12-15</text>
+        <text class="m" x="704" y="200" text-anchor="middle">16-63</text>
+
+        <text class="s" x="80" y="226">魔数 · 版本 · 保留 · 载荷长度 · 写入序号 · 载荷 CRC32 · 48 字节载荷</text>
+
+        <!-- ============ 镜像帧 ============ -->
+        <text class="k" x="80" y="286">FRAME · N + 92 BYTES</text>
+        <text class="n" x="80" y="310">镜像帧 IAPBIN03（app.img 的整帧）</text>
+
+        <rect x="80" y="326" width="140" height="52" rx="2" fill="#fbf1ed" stroke="#bf4520" stroke-width="1.4"/>
+        <text class="m" x="150" y="357" text-anchor="middle">IAPBIN03</text>
+
+        <rect x="220" y="326" width="64" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="252" y="357" text-anchor="middle">N</text>
+
+        <rect x="284" y="326" width="72" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="320" y="357" text-anchor="middle">CRC32</text>
+
+        <rect x="356" y="326" width="76" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="394" y="357" text-anchor="middle">target</text>
+
+        <rect x="432" y="326" width="252" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.75"/>
+        <text class="m" x="558" y="357" text-anchor="middle">payload · N</text>
+
+        <rect x="684" y="326" width="128" height="52" rx="2" fill="#fbf1ed" stroke="#bf4520" stroke-width="1.4"/>
+        <text class="m" x="748" y="357" text-anchor="middle">signature</text>
+
+        <rect x="812" y="326" width="88" height="52" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.6"/>
+        <text class="m" x="856" y="357" text-anchor="middle">IAPEOF03</text>
+
+        <text class="m" x="150" y="400" text-anchor="middle">0-7</text>
+        <text class="m" x="252" y="400" text-anchor="middle">8-11</text>
+        <text class="m" x="320" y="400" text-anchor="middle">12-15</text>
+        <text class="m" x="394" y="400" text-anchor="middle">16-19</text>
+        <text class="m" x="558" y="400" text-anchor="middle">20 ~ 20+N-1</text>
+        <text class="m" x="748" y="400" text-anchor="middle">20+N ~ 63+N</text>
+        <text class="m" x="856" y="400" text-anchor="middle">64+N ~ 91+N</text>
+
+        <text class="s" x="80" y="426">魔数 · 长度 · 载荷 CRC32 · 目标地址 · 裸 bin · Ed25519 签名 · 尾标；签名覆盖头部与载荷</text>
+
+        <!-- ============ 注释 ============ -->
+        <text class="nt" x="80" y="472">两个 CRC32 分工不同：帧内那个校验"载荷有没有传坏"，</text>
+        <text class="nt" x="80" y="494">记录里的 img_crc32 校验"整帧有没有被搬错"；</text>
+        <text class="nt" x="80" y="516">签名则回答"帧是谁给的"——头部被一起签掉，改地址也过不了关。</text>
+
+        <text class="s" x="80" y="548">记录写在扇区 2/3 的哪一份，取决于两槽里谁的序号小 —— 序号大的那份是掉电备份。</text>
+      </svg>

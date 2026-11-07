@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" width="1000" height="720" role="img" aria-labelledby="tftpseq-title tftpseq-desc">
+<title id="tftpseq-title">TFTP 停等传输与 IAP 帧状态机的衔接</title>
+<desc id="tftpseq-desc">TFTP 停等传输与 IAP 帧状态机的衔接</desc>
+<rect width="1000" height="720" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">TFTP 停等传输与 IAP 帧状态机的衔接</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">板侧只做 RRQ；收齐后把字节流交给同一个帧状态机，校验与写 Flash 全部复用 iap.c</text>
+<rect x="50" y="98" width="220" height="46" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="160.0" y="125.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">板子（TFTP 客户端）</text>
+<path d="M160 144 L160 616" stroke="#c9ced8" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+<rect x="330" y="98" width="220" height="46" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="440.0" y="125.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">PC（TFTP 服务器 :69）</text>
+<path d="M440 144 L440 616" stroke="#c9ced8" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+<rect x="650" y="98" width="220" height="46" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="760.0" y="125.2432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">IAP 帧状态机</text>
+<path d="M760 144 L760 616" stroke="#c9ced8" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+<path d="M160 190 L440 190" fill="none" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300.0" y="180" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">RRQ  app.img  octet</text>
+<text x="300.0" y="208" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">发往 69 端口</text>
+<path d="M440 258 L160 258" fill="none" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300.0" y="248" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">DATA #1</text>
+<text x="300.0" y="276" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">服务器换端口(TID)发数据</text>
+<path d="M160 326 L440 326" fill="none" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300.0" y="316" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">ACK #1</text>
+<text x="300.0" y="344" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">此后锁定 TID</text>
+<path d="M440 394 L160 394" fill="none" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300.0" y="384" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">DATA #2</text>
+<text x="300" y="456" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#8a94a6" text-anchor="middle" xml:space="preserve">…… 停等继续 ……</text>
+<text x="300" y="480" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#8a94a6" text-anchor="middle" xml:space="preserve">超时 1000ms 重传，最多 5 次</text>
+<path d="M440 518 L160 518" fill="none" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300.0" y="508" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">DATA #n  (&lt; 512 字节)</text>
+<text x="300.0" y="536" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">最后一块</text>
+<path d="M160 586 L440 586" fill="none" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300.0" y="576" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">ACK #n</text>
+<path d="M160 616 L758 616" fill="none" stroke="#bf4520" stroke-width="1.6" marker-end="url(#arrowAccent)"/>
+<text x="600" y="604" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#2d3142" text-anchor="middle" xml:space="preserve">sink 回调逐字节喂 iap_rx_byte()</text>
+<rect x="40" y="648" width="920" height="62" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="500.0" y="683.2432000000001" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#4f5d75" text-anchor="middle" xml:space="preserve">CRC32 校验 → 写 APP 区 → 回读比对 → 提示 send 'go' + Enter 才跳转</text>
+</svg>

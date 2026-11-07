@@ -1,0 +1,83 @@
+<svg id="exti-pr-dispatch-root" viewBox="0 0 1280 712" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="exti-pr-dispatch-title exti-pr-dispatch-desc">
+        <title id="exti-pr-dispatch-title">共享向量 EXTI15_10 的判源流程</title>
+        <desc id="exti-pr-dispatch-desc">流程图：进入共享入口 EXTI15_10_IRQHandler 后读取 EXTI_PR 挂起寄存器，逐位判断第 10、11 位是否置位，谁置位就处理谁并向对应位写 1 清除，处理完继续查后续位。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap');
+      #exti-pr-dispatch-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #exti-pr-dispatch-root { font-family: var(--font-sans); color: var(--color-ink); }</style>
+
+          <marker id="exti-pr-dispatch-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="exti-pr-dispatch-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Arrows -->
+        <line x1="420" y1="124" x2="420" y2="168" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#exti-pr-dispatch-arrow)"/>
+        <line x1="420" y1="232" x2="420" y2="258" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#exti-pr-dispatch-arrow)"/>
+        <line x1="530" y1="300" x2="760" y2="300" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#exti-pr-dispatch-arrow)"/>
+        <line x1="420" y1="342" x2="420" y2="408" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#exti-pr-dispatch-arrow)"/>
+        <line x1="530" y1="450" x2="760" y2="450" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#exti-pr-dispatch-arrow)"/>
+        <line x1="420" y1="492" x2="420" y2="560" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#exti-pr-dispatch-arrow)"/>
+        <path d="M1180 300 H1216 V608 H588" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#exti-pr-dispatch-arrow)"/>
+        <path d="M1180 450 H1216" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- Arrow labels -->
+        <rect x="608" y="276" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="624" y="288" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+        <rect x="428" y="360" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="372" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+        <rect x="608" y="426" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="624" y="438" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">是</text>
+        <rect x="428" y="514" width="32" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="526" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">否</text>
+        <rect x="692" y="600" width="158" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="771" y="612" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">处理完继续查后续位</text>
+
+        <!-- Step: 入口 -->
+        <rect x="260" y="60" width="320" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="260" y="60" width="320" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="420" y="88" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" text-anchor="middle">EXTI15_10_IRQHandler</text>
+        <text x="420" y="110" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">线 10 ~ 15 六条线共享一个向量</text>
+
+        <!-- Step: 读 PR -->
+        <rect x="260" y="168" width="320" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="260" y="168" width="320" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="420" y="196" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">读 EXTI_PR 挂起寄存器</text>
+        <text x="420" y="218" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">哪条线触发，对应位被硬件置 1</text>
+
+        <!-- Diamond 10 -->
+        <polygon points="310,300 420,258 530,300 420,342" fill="#f5f5f5"/>
+        <polygon points="310,300 420,258 530,300 420,342" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="305" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">第 10 位 = 1？</text>
+
+        <!-- 处理 line10 -->
+        <rect x="760" y="268" width="420" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="268" width="420" height="64" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="970" y="294" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">处理 line10 事件</text>
+        <text x="970" y="316" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" text-anchor="middle">EXTI->PR = (1 &lt;&lt; 10);   写 1 清除，写 0 无效</text>
+
+        <!-- Diamond 11 -->
+        <polygon points="310,450 420,408 530,450 420,492" fill="#f5f5f5"/>
+        <polygon points="310,450 420,408 530,450 420,492" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.03"/>
+        <text x="420" y="455" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">第 11 位 = 1？</text>
+
+        <!-- 处理 line11 -->
+        <rect x="760" y="418" width="420" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="418" width="420" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="970" y="444" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">处理 line11 事件</text>
+        <text x="970" y="466" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" text-anchor="middle">EXTI->PR = (1 &lt;&lt; 11);   同样写 1 清除</text>
+
+        <!-- 末步 -->
+        <rect x="260" y="560" width="320" height="68" rx="6" fill="#f5f5f5"/>
+        <rect x="260" y="560" width="320" height="68" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="420" y="588" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">第 12 ~ 15 位同样逐位检查</text>
+        <text x="420" y="610" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">全部查完 · 返回主循环</text>
+
+        <text x="88" y="688" fill="#5a6580" font-size="12" font-weight="400" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">EXTI_PR 为写 1 清除（rc_w1）寄存器：谁置位处理谁、处理完写 1 清掉；漏清会反复进中断，一次全清会丢掉其余线的挂起。</text>
+      </svg>

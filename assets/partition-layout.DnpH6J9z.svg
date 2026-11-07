@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="partition-layout-title partition-layout-desc" id="partition-layout-root">
+        <title id="partition-layout-title">Linux 平台的分区分槽布局</title>
+        <desc id="partition-layout-desc">分区示意图：bootloader 之后是 boot_a、boot_b 与 rootfs_a、rootfs_b 两套可切换的启动与根文件系统分区，最后是 userdata；A 组标注为当前运行组。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap');
+      #partition-layout-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #partition-layout-root { font-family: var(--font-sans); color: var(--color-ink); }</style>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <text x="64" y="64" fill="#5a6580" font-size="13" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">存储分区 · A 组为当前运行组</text>
+
+        <rect x="64" y="88" width="96" height="64" rx="4" fill="#2d3142" fill-opacity="0.05" stroke="#2d3142" stroke-opacity="0.24" stroke-width="1"/>
+        <text x="112" y="120" fill="#2d3142" font-size="13" font-weight="600" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">bootloader</text>
+        <text x="112" y="140" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">16 MB</text>
+
+        <rect x="160" y="88" width="168" height="64" rx="4" fill="#bf4520" fill-opacity="0.07" stroke="#bf4520" stroke-width="1"/>
+        <text x="244" y="120" fill="#2d3142" font-size="13" font-weight="600" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">boot_a</text>
+        <text x="244" y="140" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">64 MB</text>
+
+        <rect x="328" y="88" width="168" height="64" rx="4" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.24" stroke-width="1"/>
+        <text x="412" y="120" fill="#2d3142" font-size="13" font-weight="600" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">boot_b</text>
+        <text x="412" y="140" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">64 MB</text>
+
+        <rect x="496" y="88" width="248" height="64" rx="4" fill="#bf4520" fill-opacity="0.07" stroke="#bf4520" stroke-width="1"/>
+        <text x="620" y="120" fill="#2d3142" font-size="13" font-weight="600" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">rootfs_a</text>
+        <text x="620" y="140" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">2 GB · 只读</text>
+
+        <rect x="744" y="88" width="248" height="64" rx="4" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.24" stroke-width="1"/>
+        <text x="868" y="120" fill="#2d3142" font-size="13" font-weight="600" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">rootfs_b</text>
+        <text x="868" y="140" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">2 GB · 只读</text>
+
+        <rect x="992" y="88" width="144" height="64" rx="4" fill="#2d3142" fill-opacity="0.05" stroke="#2d3142" stroke-opacity="0.24" stroke-width="1"/>
+        <text x="1064" y="120" fill="#2d3142" font-size="13" font-weight="600" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">userdata</text>
+        <text x="1064" y="140" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">剩余 · 可写</text>
+
+        <text x="64" y="196" fill="#5a6580" font-size="12" font-weight="400" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">示意，非等比例（16 MB ~ 2 GB）；两套 boot 与 rootfs 换来的是整机回滚能力，代价是空间翻倍。</text>
+</svg>

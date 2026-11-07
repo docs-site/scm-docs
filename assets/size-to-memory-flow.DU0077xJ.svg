@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="440" viewBox="0 0 940 440" role="img" aria-labelledby="sizeTitle sizeDesc" id="size-to-memory-flow-root">
+  <title id="sizeTitle">Program Size 四个字段最终落在哪</title>
+  <desc id="sizeDesc">四个字段分成两份账：Code、RO-data、RW-data 的初值进镜像占 Flash；RW-data 的副本与 ZI-data 占 RAM。RW-data 是唯一同时出现在两边的字段，靠启动代码从 Flash 拷一份到 RAM。</desc>
+
+  <rect x="0" y="0" width="940" height="440" fill="#f5f5f5"/>
+  <defs>
+    <marker id="size-to-memory-flow-sa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="34" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">PROGRAM SIZE · TWO LEDGERS</text>
+
+  <!-- 左：链接期 -->
+  <text x="40" y="66" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#4f5d75">链接期：写进镜像的东西</text>
+  <rect x="40" y="80" width="380" height="300" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="64" y="104" width="332" height="52" rx="6" fill="#f5f5f5" stroke="#2d3142" stroke-width="1"/>
+    <text x="80" y="126" font-size="13" font-weight="600" fill="#2d3142">Code · 指令</text>
+    <text x="80" y="144" font-size="12" fill="#4f5d75">占满 Flash，不可省</text>
+
+    <rect x="64" y="168" width="332" height="52" rx="6" fill="#f5f5f5" stroke="#2d3142" stroke-width="1"/>
+    <text x="80" y="190" font-size="13" font-weight="600" fill="#2d3142">RO-data · 只读常量</text>
+    <text x="80" y="208" font-size="12" fill="#4f5d75">const 数组、字符串字面量</text>
+
+    <rect x="64" y="232" width="332" height="60" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="80" y="256" font-size="13" font-weight="600" fill="#2d3142">RW-data · 初值</text>
+    <text x="80" y="276" font-size="12" fill="#4f5d75">镜像里只存一份初值，等启动时搬走</text>
+
+    <text x="64" y="322" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">Flash = Code + RO-data + RW-data</text>
+    <text x="64" y="348" font-size="12" fill="#4f5d75">镜像大小，等于 map 里的 LR_IROM1.Size</text>
+  </g>
+
+  <!-- 右：运行期 -->
+  <text x="520" y="66" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#4f5d75">运行期：内存里的东西</text>
+  <rect x="520" y="80" width="380" height="300" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="544" y="104" width="332" height="60" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="560" y="128" font-size="13" font-weight="600" fill="#2d3142">RW-data · 副本</text>
+    <text x="560" y="148" font-size="12" fill="#4f5d75">同一个变量的第二份，可读可写</text>
+
+    <rect x="544" y="176" width="332" height="60" rx="6" fill="#f5f5f5" stroke="#2d3142" stroke-width="1"/>
+    <text x="560" y="200" font-size="13" font-weight="600" fill="#2d3142">ZI-data · 零初始化</text>
+    <text x="560" y="220" font-size="12" fill="#4f5d75">不进镜像：启动时统一清零即可</text>
+
+    <text x="544" y="268" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">ZI-data 若含外部段的绝对定位段，</text>
+    <text x="544" y="288" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">这一项会虚高，不能直接和 RAM 容量比</text>
+
+    <text x="544" y="322" font-size="12" fill="#4f5d75">RAM 占用 = RW-data + 片上 ZI</text>
+    <text x="544" y="348" font-size="12" fill="#4f5d75">等于 map 里的 ER_RW_IRAM1.Size</text>
+  </g>
+
+  <!-- 搬运箭头 -->
+  <g>
+    <path d="M 396 262 L 464 262 L 464 134 L 520 134" fill="none" stroke="#bf4520" stroke-width="1.8" marker-end="url(#size-to-memory-flow-sa)"/>
+    <rect x="424" y="188" width="32" height="22" fill="#f5f5f5"/>
+    <text x="454" y="204" text-anchor="end" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#bf4520">拷贝</text>
+  </g>
+
+  <text x="40" y="412" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">四个字段里只有 RW-data 两边都有：所以它既算进 Flash，又算进 RAM，直接相加就会重复计算。</text>
+</svg>

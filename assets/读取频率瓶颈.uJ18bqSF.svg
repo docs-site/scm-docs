@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="i2c-read-freq-title i2c-read-freq-desc" id="i2c-read-freq-root">
+        <title id="i2c-read-freq-title">读取频率的瓶颈判断</title>
+        <desc id="i2c-read-freq-desc">I2C 新数据读取能力的瓶颈判断流程：依次评估传感器数据更新率与总线单次事务率，比较两者判断总线是否为瓶颈，并给出提速率或使用 FIFO 的对策。事务时间公式以文中的随机读为例。</desc>
+        <defs>
+      <style>#i2c-read-freq-root { --color-paper:   #fbfaf8;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-soft:    #5a6580;
+      --color-accent:  #3451b2;
+      --font-sans:     'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Songti SC', serif;
+      --font-mono:     ui-monospace, 'SFMono-Regular', Consolas, monospace; }
+      #i2c-read-freq-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #i2c-read-freq-root .diagram-container { width: 100%; overflow-x: auto; }
+      @media print {
+#i2c-read-freq-root .diagram-container { overflow-x: visible; }
+}</style>
+          <marker id="i2c-read-freq-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="i2c-read-freq-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#3451b2"/></marker>
+          <marker id="i2c-read-freq-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#fbfaf8"/>
+
+        <!-- ===== 箭头（先画，位于节点之下；全部为直线，无拐角） ===== -->
+
+        <path d="M 400 84 L 400 104" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#i2c-read-freq-arrow)"/>
+        <path d="M 400 164 L 400 184" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#i2c-read-freq-arrow)"/>
+        <path d="M 400 244 L 400 268" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#i2c-read-freq-arrow)"/>
+        <path d="M 520 316 L 650 316" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#i2c-read-freq-arrow)"/>
+        <path d="M 400 360 L 400 378" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#i2c-read-freq-arrow)"/>
+        <path d="M 400 440 L 400 458" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#i2c-read-freq-arrow)"/>
+
+        <!-- 箭头标签（不透明底，与连线留出间隙） -->
+        <rect x="576" y="294" width="24" height="16" rx="2" fill="#fbfaf8"/>
+        <text x="588" y="306" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">是</text>
+        <rect x="410" y="360" width="24" height="16" rx="2" fill="#fbfaf8"/>
+        <text x="422" y="372" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">否</text>
+
+        <!-- ===== 节点 ===== -->
+
+        <!-- 开始（椭圆） -->
+        <rect x="312" y="44" width="176" height="40" rx="20" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="400" y="69" fill="#2d3142" font-size="12" font-weight="600" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">确定读取需求</text>
+
+        <!-- 传感器：数据更新率 -->
+        <rect x="280" y="108" width="240" height="56" rx="6" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="400" y="132" fill="#2d3142" font-size="12" font-weight="600" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">传感器：数据更新率 ODR</text>
+        <text x="400" y="150" fill="#4f5d75" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">生产速率 · 如 1 kHz</text>
+
+        <!-- 总线：单次事务率 -->
+        <rect x="280" y="188" width="240" height="56" rx="6" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="400" y="212" fill="#2d3142" font-size="12" font-weight="600" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">总线：单次事务率 1/t</text>
+        <text x="400" y="230" fill="#4f5d75" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">随机读示例：t ≈ (30 + 9N) / f_SCL</text>
+
+        <!-- 判断（菱形） -->
+        <polygon points="400,272 520,316 400,360 280,316" fill="#ffffff" stroke="#3451b2" stroke-width="1.2"/>
+        <text x="400" y="320" fill="#2d3142" font-size="12" font-weight="600" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">ODR ≤ 事务率 ?</text>
+
+        <!-- 是：总线不是瓶颈 -->
+        <rect x="656" y="284" width="224" height="64" rx="6" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="768" y="308" fill="#2d3142" font-size="12" font-weight="600" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">总线不是瓶颈</text>
+        <text x="768" y="330" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">新数据率上限 = ODR</text>
+
+        <!-- 否：总线是瓶颈 -->
+        <rect x="280" y="384" width="240" height="56" rx="6" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="400" y="408" fill="#2d3142" font-size="12" font-weight="600" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">总线是瓶颈：可能无法逐样本读取</text>
+        <text x="400" y="426" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">搬运能力跟不上生产能力</text>
+
+        <!-- 对策 -->
+        <rect x="280" y="464" width="240" height="56" rx="6" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="400" y="488" fill="#2d3142" font-size="12" font-weight="600" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">对策：提高速率或 FIFO 突发读</text>
+        <text x="400" y="506" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">平均带宽 ≥ ODR × 每样本字节数</text>
+
+        <!-- 结论标注 -->
+        <rect x="64" y="428" width="3" height="48" fill="#3451b2"/>
+        <text x="80" y="444" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', Georgia, 'Songti SC', serif">实际读取频率</text>
+        <text x="80" y="468" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', Georgia, 'Songti SC', serif">上限 ≈ min（ODR，总线事务率）</text>
+
+        <!-- ===== 图例 ===== -->
+        <line x1="40" y1="548" x2="920" y2="548" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+        <text x="40" y="572" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" letter-spacing="0.14em">图例</text>
+        <ellipse cx="150" cy="566" rx="14" ry="8" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="172" y="570" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif">开始</text>
+        <rect x="250" y="558" width="28" height="16" rx="3" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="288" y="570" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif">步骤 / 状态</text>
+        <polygon points="424,566 438,558 452,566 438,574" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/>
+        <text x="460" y="570" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif">判断</text>
+      </svg>

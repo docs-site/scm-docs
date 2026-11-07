@@ -1,0 +1,110 @@
+<svg viewBox="0 0 960 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cortex-m-exception-map-title cortex-m-exception-map-desc" id="cortex-m-exception-map-root">
+  <title id="cortex-m-exception-map-title">Cortex-M 异常全景：中断与 fault 的分类及共同的硬件路径</title>
+  <desc id="cortex-m-exception-map-desc">异常分为系统异常与外部中断 IRQ；三类可配置 fault 默认禁用，触发即升级为 HardFault；中断与 fault 进入 handler 前的硬件路径完全相同。</desc>
+  <defs>
+    <style>
+      #cortex-m-exception-map-root {
+        --color-ink: #2d3142;
+        --color-muted: #4f5d75;
+        --color-accent: #bf4520;
+        --color-link: #2e5aa8;
+        --font-sans: 'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+        --font-serif: 'Instrument Serif', 'Noto Serif', 'Noto Serif SC', 'Source Han Serif SC', serif;
+        --font-mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+        font-family: var(--font-sans);
+        color: var(--color-ink);
+      }
+      #cortex-m-exception-map-root .box { fill: none; stroke: #4f5d75; stroke-width: 1; }
+      #cortex-m-exception-map-root .t-title { font-size: 16px; font-weight: 600; fill: var(--color-ink); }
+      #cortex-m-exception-map-root .t-head { font-size: 12px; font-weight: 600; fill: var(--color-ink); }
+      #cortex-m-exception-map-root .t-body { font-size: 12px; fill: var(--color-ink); }
+      #cortex-m-exception-map-root .t-sub { font-size: 10.5px; fill: var(--color-muted); }
+      #cortex-m-exception-map-root .t-mono { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em; fill: var(--color-muted); }
+      #cortex-m-exception-map-root .t-note { font-family: var(--font-mono); font-size: 9px; fill: var(--color-muted); }
+      #cortex-m-exception-map-root .t-link { fill: var(--color-link); }
+      #cortex-m-exception-map-root .t-accent { fill: var(--color-accent); }
+      #cortex-m-exception-map-root .t-bold { font-weight: 700; }
+      #cortex-m-exception-map-root .t-summary { font-family: var(--font-serif); font-size: 14px; font-style: italic; fill: var(--color-muted); }
+    </style>
+    <marker id="cortex-m-exception-map-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+    <marker id="cortex-m-exception-map-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+  </defs>
+
+  <rect width="960" height="620" fill="#f5f5f5"/>
+
+  <text class="t-mono" x="40" y="40">CORTEX-M · EXCEPTION MODEL</text>
+  <text class="t-title" x="40" y="68">异常与中断：一个向量表，两种语义</text>
+
+  <!-- 左侧：异常全景 -->
+  <rect class="box" x="40" y="96" width="480" height="372"/>
+  <text class="t-head" x="56" y="124">异常 Exception</text>
+  <text class="t-sub" x="56" y="142">打断正常执行流的所有事件：系统异常（编号 1~15）与外部中断 IRQ（16 起）</text>
+
+  <text class="t-mono" x="56" y="172">SYSTEM EXCEPTIONS · 1~15</text>
+  <text class="t-body" x="56" y="196">Reset (1)</text>
+  <text class="t-body" x="56" y="216">NMI (2)</text>
+  <rect x="56" y="224" width="200" height="24" fill="#bf4520" fill-opacity="0.10" stroke="#bf4520" stroke-width="1"/>
+  <text class="t-body t-accent t-bold" x="68" y="240">HardFault (3)</text>
+  <text class="t-note t-accent" x="248" y="240" text-anchor="end">升级入口 · 永远使能</text>
+  <text class="t-sub" x="56" y="266" font-size="9.5">任何 fault 升级的统一出口，无法关闭</text>
+
+  <text class="t-mono t-accent" x="56" y="292">CONFIGURABLE FAULTS · 默认禁用</text>
+  <rect x="56" y="300" width="200" height="72" fill="#bf4520" fill-opacity="0.04" stroke="#bf4520" stroke-width="1" stroke-dasharray="4 3"/>
+  <text class="t-body" x="68" y="318">MemManage (4)</text>
+  <text class="t-body" x="68" y="340">BusFault (5)</text>
+  <text class="t-body" x="68" y="362">UsageFault (6)</text>
+  <text class="t-sub" x="56" y="400" font-size="10">SVCall (11) · PendSV (14) · SysTick (15)</text>
+
+  <!-- 升级路径：三类可配置 fault 触发即升级 -->
+  <path d="M 256,318 Q 276,318 276,272 Q 276,236 260,236" fill="none" stroke="#bf4520" stroke-width="1" stroke-opacity="0.75" marker-end="url(#cortex-m-exception-map-arrow-accent)"/>
+  <path d="M 256,340 Q 285,340 285,270 Q 285,236 260,236" fill="none" stroke="#bf4520" stroke-width="1" stroke-opacity="0.75" marker-end="url(#cortex-m-exception-map-arrow-accent)"/>
+  <path d="M 256,362 Q 294,362 294,268 Q 294,236 260,236" fill="none" stroke="#bf4520" stroke-width="1" stroke-opacity="0.75" marker-end="url(#cortex-m-exception-map-arrow-accent)"/>
+
+  <!-- 右列：外部中断 -->
+  <text class="t-mono t-link" x="300" y="172">EXTERNAL IRQ · 16+</text>
+  <rect x="300" y="180" width="196" height="96" fill="#2e5aa8" fill-opacity="0.08" stroke="#2e5aa8" stroke-width="1"/>
+  <text class="t-body" x="312" y="204">USART1 (37)</text>
+  <text class="t-body" x="312" y="224">EXTI0 (6)</text>
+  <text class="t-body" x="312" y="244">TIM2 更新 (28)</text>
+  <text class="t-body" x="312" y="264">……</text>
+  <text class="t-sub" x="300" y="300">狭义的「中断」：外设或软件</text>
+  <text class="t-sub" x="300" y="318">正常的服务请求</text>
+
+  <!-- 右侧：共同的硬件路径 -->
+  <rect class="box" x="560" y="96" width="360" height="372"/>
+  <text class="t-head" x="576" y="124">共同的硬件路径</text>
+  <text class="t-sub" x="576" y="142">中断与 fault 进入 handler 的方式完全相同</text>
+
+  <rect x="576" y="162" width="328" height="60" fill="#4f5d75" fill-opacity="0.05" stroke="#4f5d75" stroke-width="1"/>
+  <text class="t-body t-bold" x="592" y="186">① 硬件自动压栈</text>
+  <text class="t-sub" x="592" y="208">R0~R3 · R12 · LR · PC · xPSR 压入当前栈</text>
+
+  <line x1="740" y1="224" x2="740" y2="242" stroke="#4f5d75" stroke-width="1" marker-end="url(#cortex-m-exception-map-arrow)"/>
+
+  <rect x="576" y="244" width="328" height="60" fill="#4f5d75" fill-opacity="0.05" stroke="#4f5d75" stroke-width="1"/>
+  <text class="t-body t-bold" x="592" y="268">② 按异常编号查向量表</text>
+  <text class="t-sub" x="592" y="290">取出对应 handler 的入口地址</text>
+
+  <line x1="740" y1="306" x2="740" y2="324" stroke="#4f5d75" stroke-width="1" marker-end="url(#cortex-m-exception-map-arrow)"/>
+
+  <rect x="576" y="326" width="328" height="60" fill="#4f5d75" fill-opacity="0.05" stroke="#4f5d75" stroke-width="1"/>
+  <text class="t-body t-bold" x="592" y="350">③ 跳转执行 handler</text>
+  <text class="t-sub" x="592" y="372">IRQ → USART1_IRQHandler；fault → HardFault_Handler</text>
+
+  <text class="t-sub" x="576" y="412">这套自动压栈，正是崩溃现场</text>
+  <text class="t-sub" x="576" y="428">能被保存下来的硬件依据（见第三章 3.1）</text>
+
+  <!-- 底部 -->
+  <line x1="40" y1="508" x2="920" y2="508" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+  <text class="t-mono" x="40" y="534">LEGEND</text>
+  <rect x="120" y="524" width="16" height="12" fill="#2e5aa8" fill-opacity="0.12" stroke="#2e5aa8" stroke-width="1"/>
+  <text x="144" y="534" font-size="12" font-weight="500" fill="#4f5d75">外部中断（正常请求）</text>
+  <rect x="320" y="524" width="16" height="12" fill="#bf4520" fill-opacity="0.06" stroke="#bf4520" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="344" y="534" font-size="12" font-weight="500" fill="#4f5d75">可配置 fault（默认禁用）</text>
+  <rect x="530" y="524" width="16" height="12" fill="#bf4520" fill-opacity="0.10" stroke="#bf4520" stroke-width="1"/>
+  <text x="554" y="534" font-size="12" font-weight="500" fill="#4f5d75">HardFault（兜底，永远使能）</text>
+  <rect x="770" y="524" width="16" height="12" fill="#4f5d75" fill-opacity="0.08" stroke="#4f5d75" stroke-width="1"/>
+  <text x="794" y="534" font-size="12" font-weight="500" fill="#4f5d75">其他系统异常</text>
+
+  <text class="t-summary" x="40" y="576">中断是「正常的服务请求」，fault 是「出了错的硬件上报」——同一张向量表，同一条硬件路径。</text>
+</svg>

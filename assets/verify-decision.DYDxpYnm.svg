@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="470" viewBox="0 0 940 470" role="img" aria-labelledby="vdTitle vdDesc" id="verify-decision-root">
+  <title id="vdTitle">一帧数据的四道判定</title>
+  <desc id="vdDesc">长度范围、目标地址、尾部魔数、载荷 CRC32 四道判定依次进行，任一失败即上报 FRAME_ERR 并回到扫描态；四项全过才上报 FRAME_OK 并落盘。</desc>
+
+  <rect x="0" y="0" width="940" height="470" fill="#f5f5f5"/>
+  <defs>
+    <marker id="verify-decision-vda" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d3142"/>
+    </marker>
+    <marker id="verify-decision-vdac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="34" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">FRAME DECISION</text>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="60" y="54" width="440" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="80" y="80" font-size="13" font-weight="600" fill="#2d3142">① 长度范围</text>
+    <text x="80" y="100" font-size="12" fill="#4f5d75">HEADER 阶段：1 ≤ N ≤ 131072，否则不进载荷阶段</text>
+
+    <rect x="60" y="130" width="440" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="80" y="156" font-size="13" font-weight="600" fill="#2d3142">② 目标地址</text>
+    <text x="80" y="176" font-size="12" fill="#4f5d75">只接受 0x08020000 / 0x20007000，且载荷放得下容器</text>
+
+    <rect x="60" y="206" width="440" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="80" y="232" font-size="13" font-weight="600" fill="#2d3142">③ 尾部魔数</text>
+    <text x="80" y="252" font-size="12" fill="#4f5d75">IAPEOF02 逐字节比对：长度对但尾部错 = 被截断</text>
+
+    <rect x="60" y="282" width="440" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="80" y="308" font-size="13" font-weight="600" fill="#2d3142">④ 载荷 CRC32</text>
+    <text x="80" y="328" font-size="12" fill="#4f5d75">主循环算一次，与头部期望值比对；128KB 约一百多毫秒</text>
+
+    <rect x="60" y="378" width="440" height="56" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="80" y="404" font-size="13" font-weight="600" fill="#2d3142">四项全过 → FRAME_OK</text>
+    <text x="80" y="424" font-size="12" fill="#4f5d75">载荷仍留在外部 SRAM，由业务层按地址落盘</text>
+  </g>
+
+  <path d="M 280 114 L 280 130" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#verify-decision-vda)"/>
+  <path d="M 280 190 L 280 206" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#verify-decision-vda)"/>
+  <path d="M 280 266 L 280 282" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#verify-decision-vda)"/>
+  <path d="M 280 342 L 280 378" fill="none" stroke="#bf4520" stroke-width="1.6" marker-end="url(#verify-decision-vdac)"/>
+
+  <!-- 失败汇流 -->
+  <path d="M 500 84 L 560 84 L 560 180" fill="none" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#verify-decision-vdac)"/>
+  <path d="M 500 160 L 560 160" fill="none" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <path d="M 500 236 L 560 236 L 560 220" fill="none" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <path d="M 500 312 L 560 312 L 560 260" fill="none" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+  <rect x="580" y="150" width="300" height="190" rx="6" fill="#ffffff" stroke="#bf4520" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <text x="600" y="176" font-size="13" font-weight="600" fill="#bf4520">FRAME_ERR：整帧丢弃</text>
+    <text x="600" y="202" font-size="12" fill="#4f5d75">① 长度非法 → TOO_LARGE</text>
+    <text x="600" y="226" font-size="12" fill="#4f5d75">② 地址非法 → ADDR</text>
+    <text x="600" y="250" font-size="12" fill="#4f5d75">③ 尾部不符 → TRAILER</text>
+    <text x="600" y="274" font-size="12" fill="#4f5d75">④ 校验不符 → CRC</text>
+    <text x="600" y="298" font-size="12" fill="#4f5d75">帧内超 3000 ms → TIMEOUT</text>
+    <text x="600" y="324" font-size="12" fill="#2d3142">回到 SCAN 并恢复命令识别</text>
+  </g>
+
+  <text x="60" y="458" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">顺序不能乱：先挡长度才能安全写缓冲，先挡地址才知道往哪写，尾部与 CRC 放在落盘之前。</text>
+</svg>

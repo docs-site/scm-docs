@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="dual-variant-build-root" viewBox="0 0 1280 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dual-variant-build-title dual-variant-build-desc">
+        <title id="dual-variant-build-title">双槽 + 两个地址变体：构建与下发</title>
+        <desc id="dual-variant-build-desc">流程图：一份源码分别按 A 槽地址和 B 槽地址编译出两个 bin，各自只能写入对应地址的槽；下发时按设备当前运行的槽挑另一个槽的变体，两份镜像不可互换。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap');
+      #dual-variant-build-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #dual-variant-build-root { font-family: var(--font-sans); color: var(--color-ink); }</style>
+
+          <marker id="dual-variant-build-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- 分叉：一份源码，两次编译 -->
+        <path d="M248 184 H272 Q280 184 280 176 V120 Q280 112 288 112 H312" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dual-variant-build-arrow)"/>
+        <path d="M248 184 H272 Q280 184 280 192 V248 Q280 256 288 256 H312" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dual-variant-build-arrow)"/>
+        <line x1="560" y1="112" x2="608" y2="112" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dual-variant-build-arrow)"/>
+        <line x1="560" y1="256" x2="608" y2="256" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dual-variant-build-arrow)"/>
+        <line x1="808" y1="112" x2="872" y2="112" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dual-variant-build-arrow)"/>
+        <line x1="808" y1="256" x2="872" y2="256" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#dual-variant-build-arrow)"/>
+
+        <!-- 源码 -->
+        <rect x="72" y="140" width="176" height="88" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="92" y="178" fill="#2d3142" font-size="15" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">一份源码</text>
+        <text x="92" y="200" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">app/*.c 不改</text>
+
+        <!-- 编译：两个链接地址 -->
+        <rect x="312" y="68" width="248" height="88" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="332" y="106" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">编译 · 链接 <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" font-size="13">0x08004000</tspan></text>
+        <text x="332" y="128" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">IROM1 指向 A 槽</text>
+
+        <rect x="312" y="212" width="248" height="88" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="332" y="250" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">编译 · 链接 <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" font-size="13">0x08040000</tspan></text>
+        <text x="332" y="272" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">IROM1 指向 B 槽</text>
+
+        <!-- 两个产物 -->
+        <rect x="608" y="68" width="200" height="88" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="628" y="106" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">app_slotA.bin</text>
+        <text x="628" y="128" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">向量表落在低地址</text>
+
+        <rect x="608" y="212" width="200" height="88" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="628" y="250" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">app_slotB.bin</text>
+        <text x="628" y="272" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">向量表落在高地址</text>
+
+        <!-- 两个槽 -->
+        <rect x="872" y="68" width="248" height="88" rx="6" fill="#2d3142" fill-opacity="0.02" stroke="#2d3142" stroke-opacity="0.20" stroke-width="1"/>
+        <text x="892" y="106" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">A 槽 <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" font-size="13">0x08004000</tspan></text>
+        <text x="892" y="128" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">只认 A 变体</text>
+
+        <rect x="872" y="212" width="248" height="88" rx="6" fill="#2d3142" fill-opacity="0.02" stroke="#2d3142" stroke-opacity="0.20" stroke-width="1"/>
+        <text x="892" y="250" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">B 槽 <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" font-size="13">0x08040000</tspan></text>
+        <text x="892" y="272" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">只认 B 变体</text>
+
+        <!-- 脚注 -->
+        <rect x="72" y="328" width="3" height="44" fill="#bf4520"/>
+        <text x="88" y="344" fill="#4f5d75" font-size="13" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">下发规则：设备当前跑在哪个槽，服务器就下发另一个槽的变体</text>
+        <text x="88" y="366" fill="#5a6580" font-size="12" font-weight="400" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">两份 bin 不可互换：向量表与绝对寻址都写死在本变体的链接地址上</text>
+      </svg>

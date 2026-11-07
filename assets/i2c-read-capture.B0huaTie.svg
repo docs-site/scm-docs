@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <svg viewBox="0 0 1080 452" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="i2c-read-capture-title i2c-read-capture-desc">
+    <title id="i2c-read-capture-title">I2C 读操作波形：写命令 + 重复起始 Sr + 读回一个字节</title>
+    <desc id="i2c-read-capture-desc">主机先发送写地址字节 0x3C 和命令字 0x31，收到应答后用重复起始 Sr 切换方向，再发送读地址字节 0x3D；从机应答后送出数据 0x68。两个地址字节对应的 7 位从机地址均为 0x1E。</desc>
+    <rect width="100%" height="100%" fill="#fbfaf8"/>
+    <rect x="320" y="96" width="26" height="152" fill="#3451b2" fill-opacity="0.06"/>
+    <rect x="554" y="96" width="26" height="152" fill="#3451b2" fill-opacity="0.06"/>
+    <rect x="814" y="96" width="234" height="152" fill="#3451b2" fill-opacity="0.06"/>
+    <line x1="112" y1="44" x2="112" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="294" y1="44" x2="294" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="320" y1="44" x2="320" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="346" y1="44" x2="346" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="554" y1="44" x2="554" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="580" y1="44" x2="580" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="606" y1="44" x2="606" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="788" y1="44" x2="788" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="814" y1="44" x2="814" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="840" y1="44" x2="840" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="1048" y1="44" x2="1048" y2="252" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <line x1="138" y1="96" x2="138" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="164" y1="96" x2="164" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="190" y1="96" x2="190" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="216" y1="96" x2="216" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="242" y1="96" x2="242" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="268" y1="96" x2="268" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="372" y1="96" x2="372" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="398" y1="96" x2="398" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="424" y1="96" x2="424" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="450" y1="96" x2="450" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="476" y1="96" x2="476" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="502" y1="96" x2="502" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="528" y1="96" x2="528" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="632" y1="96" x2="632" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="658" y1="96" x2="658" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="684" y1="96" x2="684" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="710" y1="96" x2="710" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="736" y1="96" x2="736" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="762" y1="96" x2="762" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="866" y1="96" x2="866" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="892" y1="96" x2="892" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="918" y1="96" x2="918" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="944" y1="96" x2="944" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="970" y1="96" x2="970" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="996" y1="96" x2="996" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <line x1="1022" y1="96" x2="1022" y2="130" stroke="#2d3142" stroke-width="1" stroke-dasharray="2,3" stroke-opacity="0.12"/>
+    <polyline points="76,148 105,148 105,178 118,178 118,148 131,148 131,178 144,178 144,148 157,148 157,178 170,178 170,148 183,148 183,178 196,178 196,148 209,148 209,178 222,178 222,148 235,148 235,178 248,178 248,148 261,148 261,178 274,178 274,148 287,148 287,178 300,178 300,148 313,148 313,178 326,178 326,148 339,148 339,178 352,178 352,148 365,148 365,178 378,178 378,148 391,148 391,178 404,178 404,148 417,148 417,178 430,178 430,148 443,148 443,178 456,178 456,148 469,148 469,178 482,178 482,148 495,148 495,178 508,178 508,148 521,148 521,178 534,178 534,148 547,148 547,178 560,178 560,148 573,148 573,178 586,178 586,148 599,148 599,178 612,178 612,148 625,148 625,178 638,178 638,148 651,148 651,178 664,178 664,148 677,148 677,178 690,178 690,148 703,148 703,178 716,178 716,148 729,148 729,178 742,178 742,148 755,148 755,178 768,178 768,148 781,148 781,178 794,178 794,148 807,148 807,178 820,178 820,148 833,148 833,178 846,178 846,148 859,148 859,178 872,178 872,148 885,148 885,178 898,178 898,148 911,148 911,178 924,178 924,148 937,148 937,178 950,178 950,148 963,148 963,178 976,178 976,148 989,148 989,178 1002,178 1002,148 1015,148 1015,178 1028,178 1028,148 1041,148 1041,178 1048,178" fill="none" stroke="#4f5d75" stroke-width="1.5"/>
+    <polyline points="76,210 95,210 95,240 164,240 164,210 268,210 268,240 341,240 341,212 347,212 347,240 398,240 398,210 450,210 450,240 528,240 528,210 554,210 554,240 580,240 580,210 592,210 592,240 658,240 658,210 762,210 762,240 788,240 788,210 814,210 814,240 866,240 866,210 918,210 918,240 944,240 944,210 970,210 970,240 1048,240" fill="none" stroke="#2d3142" stroke-width="1.5"/>
+    <line x1="95" y1="140" x2="95" y2="252" stroke="#bf4520" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.6"/>
+    <text x="95" y="272" fill="#bf4520" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">START 起始</text>
+    <line x1="596" y1="140" x2="596" y2="252" stroke="#bf4520" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.6"/>
+    <text x="596" y="272" fill="#bf4520" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">Sr 重复起始</text>
+    <text x="72" y="167" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="end" font-weight="600">SCL</text>
+    <text x="72" y="229" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="end" font-weight="600">SDA</text>
+    <text x="203" y="52" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="600">0x1E</text>
+    <text x="203" y="72" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">从机地址（7 位）</text>
+    <text x="307" y="52" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="600">W</text>
+    <text x="307" y="72" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">写</text>
+    <text x="333" y="52" fill="#4f5d75" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="400">ACK</text>
+    <text x="450" y="52" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="600">0x31</text>
+    <text x="450" y="72" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">命令字（'1'）</text>
+    <text x="567" y="52" fill="#4f5d75" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="400">ACK</text>
+    <text x="593" y="52" fill="#4f5d75" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="400">Sr</text>
+    <text x="697" y="52" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="600">0x1E</text>
+    <text x="697" y="72" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">从机地址（7 位）</text>
+    <text x="801" y="52" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="600">R</text>
+    <text x="801" y="72" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">读</text>
+    <text x="827" y="52" fill="#4f5d75" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="400">ACK</text>
+    <text x="944" y="52" fill="#2d3142" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle" font-weight="600">0x68</text>
+    <text x="944" y="72" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="middle">数据 · 从机发（'h'）</text>
+    <text x="125" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="151" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="177" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="203" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="229" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="255" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="281" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="307" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="333" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="359" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="385" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="411" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="437" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="463" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="489" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="515" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="541" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="567" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="593" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="619" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="645" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="671" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="697" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="723" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="749" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="775" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="801" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="827" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="853" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="879" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="905" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="931" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="957" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">1</text>
+    <text x="983" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="1009" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="1035" y="112" fill="#5a6580" font-size="12" font-family="ui-monospace, 'SFMono-Regular', Consolas, monospace" text-anchor="middle">0</text>
+    <text x="96" y="306" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">写阶段：先发从机地址（写位 0），再发命令字；这两次应答都由从机给出。</text>
+    <text x="96" y="328" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">读阶段：Sr 之后读写位变成 1，SDA 改由从机驱动，主机在第 9 个时钟回 ACK。</text>
+    <text x="96" y="350" fill="#5a6580" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">读回最后一个字节时主机应回 NACK 再发停止位 P，图中未画出。</text>
+    <line x1="40" y1="396" x2="1040" y2="396" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.12"/>
+    <text x="40" y="416" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">图例</text>
+    <line x1="92" y1="410" x2="132" y2="410" stroke="#4f5d75" stroke-width="1.5"/>
+    <text x="144" y="416" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">SCL 时钟（主机产生）</text>
+    <line x1="317" y1="410" x2="357" y2="410" stroke="#2d3142" stroke-width="1.5"/>
+    <text x="369" y="416" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">SDA 数据</text>
+    <rect x="470" y="402" width="16" height="16" rx="2" fill="#3451b2" fill-opacity="0.06" stroke="#3451b2" stroke-opacity="0.35" stroke-width="0.8"/>
+    <text x="498" y="416" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">从机驱动 SDA 的时段</text>
+    <line x1="666" y1="404" x2="666" y2="420" stroke="#4a7c59" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.85"/>
+    <text x="686" y="416" fill="#4f5d75" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">字段分界</text>
+      <circle cx="345" cy="196" r="2.5" fill="#8a94ab"/>
+    <line x1="345" y1="200" x2="345" y2="210" stroke="#8a94ab" stroke-width="1" stroke-dasharray="2,2" stroke-opacity="0.8"/>
+    <text x="96" y="378" fill="#8a94ab" font-size="12" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif" text-anchor="start">① 第 9 个时钟 ACK 结束后：从机释放 SDA → 上拉电阻短时拉高 → 主机随即拉低下一位；此窗口已放大示意</text>
+  </svg>

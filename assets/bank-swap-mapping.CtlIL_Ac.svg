@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 416" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bank-swap-mapping-title bank-swap-mapping-desc" id="bank-swap-mapping-root">
+        <title id="bank-swap-mapping-title">Bank Swap 的地址映射交换</title>
+        <desc id="bank-swap-mapping-desc">对比图：两个模式分区内各有两个固定的地址框，运行地址 0x08000000 与另一 Bank 起始的高位地址。正常模式下运行地址框里是 Bank 1 的旧固件、高位地址框里 Bank 2 空闲待写；置位 BFB2 并复位后，两个 Bank 连同颜色在框与框之间互换，Bank 2 的新固件在同一个运行地址启动，Bank 1 退居高位地址保留为备份。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap');
+      #bank-swap-mapping-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #bank-swap-mapping-root { font-family: var(--font-sans); color: var(--color-ink); }</style>
+          <marker id="bank-swap-mapping-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- 模式切换 -->
+        <line x1="624" y1="180" x2="656" y2="180" stroke="#bf4520" stroke-width="1.4" marker-end="url(#bank-swap-mapping-arrow-accent)"/>
+
+        <!-- 分区一：正常模式 -->
+        <rect x="72" y="40" width="544" height="280" rx="8" fill="#2d3142" fill-opacity="0.02" stroke="#2d3142" stroke-opacity="0.10" stroke-width="0.8"/>
+        <text x="92" y="64" fill="#5a6580" font-size="13" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">正常模式 · <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">BFB2</tspan> = 0</text>
+
+        <rect x="92" y="80" width="504" height="104" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.32" stroke-width="1"/>
+        <text x="112" y="126" fill="#2d3142" font-size="13" font-weight="500" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x08000000</text>
+        <text x="112" y="146" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">运行地址</text>
+        <rect x="240" y="104" width="336" height="56" rx="4" fill="#bf4520" fill-opacity="0.10" stroke="#bf4520" stroke-width="1"/>
+        <text x="260" y="128" fill="#bf4520" font-size="16" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Bank 1</text>
+        <text x="260" y="148" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">旧固件，正在执行</text>
+
+        <rect x="92" y="200" width="504" height="104" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.12" stroke-width="1"/>
+        <text x="112" y="246" fill="#2d3142" font-size="13" font-weight="500" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x0804xxxx</text>
+        <text x="112" y="266" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">高位地址</text>
+        <text x="112" y="284" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">另一 Bank 起始</text>
+        <rect x="240" y="224" width="336" height="56" rx="4" fill="#2e5aa8" fill-opacity="0.08" stroke="#2e5aa8" stroke-width="1"/>
+        <text x="260" y="248" fill="#2e5aa8" font-size="16" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Bank 2</text>
+        <text x="260" y="268" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">空闲，OTA 写入目标</text>
+
+        <!-- 分区二：交换模式 -->
+        <rect x="664" y="40" width="544" height="280" rx="8" fill="#2d3142" fill-opacity="0.02" stroke="#2d3142" stroke-opacity="0.10" stroke-width="0.8"/>
+        <text x="684" y="64" fill="#5a6580" font-size="13" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">交换模式 · <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">BFB2</tspan> 置位并复位后</text>
+
+        <rect x="684" y="80" width="504" height="104" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.32" stroke-width="1"/>
+        <text x="704" y="126" fill="#2d3142" font-size="13" font-weight="500" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x08000000</text>
+        <text x="704" y="146" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">运行地址</text>
+        <rect x="832" y="104" width="336" height="56" rx="4" fill="#2e5aa8" fill-opacity="0.08" stroke="#2e5aa8" stroke-width="1"/>
+        <text x="852" y="128" fill="#2e5aa8" font-size="16" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Bank 2</text>
+        <text x="852" y="148" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">新固件，正在执行</text>
+
+        <rect x="684" y="200" width="504" height="104" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.12" stroke-width="1"/>
+        <text x="704" y="246" fill="#2d3142" font-size="13" font-weight="500" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x0804xxxx</text>
+        <text x="704" y="266" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">高位地址</text>
+        <text x="704" y="284" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">另一 Bank 起始</text>
+        <rect x="832" y="224" width="336" height="56" rx="4" fill="#bf4520" fill-opacity="0.10" stroke="#bf4520" stroke-width="1"/>
+        <text x="852" y="248" fill="#bf4520" font-size="16" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Bank 1</text>
+        <text x="852" y="268" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">旧固件，原地保留可切回</text>
+
+        <!-- 脚注：不变式与型号说明 -->
+        <rect x="72" y="344" width="3" height="48" fill="#bf4520"/>
+        <text x="88" y="362" fill="#4f5d75" font-size="13" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">运行地址恒为 <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace" font-size="12">0x08000000</tspan> ⇒ 镜像只编一份，向量表无需重定位</text>
+        <text x="88" y="384" fill="#5a6580" font-size="12" font-weight="400" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">高位地址以总容量 512 KB 型号为例（Bank 2 起始 <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x08040000</tspan>）；1 MB 型号为 <tspan font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x08080000</tspan></text>
+</svg>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg id="cmd-pipeline-root" xmlns="http://www.w3.org/2000/svg" width="940" height="430" viewBox="0 0 940 430" role="img" aria-labelledby="cmd-pipeline-cmdTitle cmd-pipeline-cmdDesc">
+  <title id="cmd-pipeline-cmdTitle">命令系统的识别与执行分离</title>
+  <desc id="cmd-pipeline-cmdDesc">字节来源把字节交给命令识别，命中后只记录快照与下标，主循环侧再取走并调用处理函数。</desc>
+
+  <rect x="0" y="0" width="940" height="430" fill="#f5f5f5"/>
+  <defs>
+    <marker id="cmd-pipeline-ca" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d3142"/>
+    </marker>
+    <marker id="cmd-pipeline-cac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="36" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">COMMAND PIPELINE</text>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="40" y="76" width="180" height="80" rx="6" fill="#f5f5f5" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="130" y="106" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">字节来源</text>
+    <text x="130" y="128" text-anchor="middle" font-size="12" fill="#4f5d75">串口中断 / TCP 回调</text>
+
+    <rect x="280" y="76" width="240" height="80" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="400" y="104" text-anchor="middle" font-size="12" fill="#2d3142">usart1_cmd_feed()</text>
+    <text x="400" y="128" text-anchor="middle" font-size="12" fill="#4f5d75">拼行 + 首单词整词匹配</text>
+
+    <rect x="580" y="76" width="200" height="92" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="680" y="102" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">命中即记录</text>
+    <text x="680" y="126" text-anchor="middle" font-size="12" fill="#4f5d75">matched 快照</text>
+    <text x="680" y="146" text-anchor="middle" font-size="12" fill="#4f5d75">pending 下标</text>
+
+    <rect x="580" y="258" width="200" height="80" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="680" y="286" text-anchor="middle" font-size="12" fill="#2d3142">usart1_cmd_poll()</text>
+    <text x="680" y="310" text-anchor="middle" font-size="12" fill="#4f5d75">临界区取走 pending</text>
+
+    <rect x="280" y="258" width="240" height="80" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="400" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">handler(line)</text>
+    <text x="400" y="310" text-anchor="middle" font-size="12" fill="#4f5d75">打印 / 写 Flash / 跳转 / 复位</text>
+
+    <rect x="40" y="258" width="180" height="80" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="130" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">命令表 12 槽</text>
+    <text x="130" y="310" text-anchor="middle" font-size="12" fill="#4f5d75">注册须早于收中断</text>
+  </g>
+
+  <path d="M 220 116 L 280 116" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#cmd-pipeline-ca)"/>
+  <path d="M 520 116 L 580 116" fill="none" stroke="#bf4520" stroke-width="1.6" marker-end="url(#cmd-pipeline-cac)"/>
+  <text x="550" y="106" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#bf4520">命中</text>
+
+  <path d="M 680 168 L 680 258" fill="none" stroke="#bf4520" stroke-width="1.6" marker-end="url(#cmd-pipeline-cac)"/>
+  <text x="692" y="212" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#bf4520">中断侧到此为止</text>
+
+  <path d="M 580 298 L 520 298" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#cmd-pipeline-ca)"/>
+  <text x="550" y="288" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">调用</text>
+
+  <path d="M 130 258 L 130 190 L 250 190 L 250 148 L 280 148" fill="none" stroke="#2d3142" stroke-width="1.2" marker-end="url(#cmd-pipeline-ca)"/>
+  <text x="150" y="210" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">查表比对</text>
+
+  <text x="40" y="416" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">命令名大小写不敏感；命令名之后必须是空格或行尾，因此 go sram 命中 go，gosram 不命中。</text>
+</svg>

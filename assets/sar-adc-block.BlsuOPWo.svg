@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sar-adc-block-title sar-adc-block-desc" id="sar-adc-block-root">
+        <title id="sar-adc-block-title">逐次逼近型 ADC 结构框图</title>
+        <desc id="sar-adc-block-desc">框图：多路模拟输入经多路选择器进入采样保持电路，保持电压送比较器与内部 DAC 的输出比较；SAR 逻辑按 ADCCLK 节拍从最高位起逐位试码控制 DAC，比较结束后把结果写入数据寄存器供 CPU 或 DMA 读取。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #sar-adc-block-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #sar-adc-block-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #sar-adc-block-root .diagram-container { width: 100%; overflow-x: auto; }
+      #sar-adc-block-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="sar-adc-block-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="sar-adc-block-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- input channels -->
+        <text x="60" y="96" font-family="'Geist Mono', monospace" font-size="11" letter-spacing="1.5" fill="#4f5d75">ANALOG IN</text>
+        <rect x="60" y="110" width="110" height="44" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="115" y="137" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">通道 0</text>
+        <rect x="60" y="182" width="110" height="44" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="115" y="209" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">通道 1</text>
+        <rect x="60" y="254" width="110" height="44" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="115" y="281" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">通道 n</text>
+
+        <!-- MUX -->
+        <rect x="230" y="150" width="120" height="140" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="290" y="216" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="16" font-weight="600" fill="#2d3142">多路选择器</text>
+        <text x="290" y="238" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">MUX · n 选 1</text>
+
+        <!-- S/H -->
+        <rect x="410" y="185" width="130" height="70" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="475" y="216" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="16" font-weight="600" fill="#2d3142">采样保持</text>
+        <text x="475" y="238" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">S/H</text>
+        <text x="475" y="172" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">t_samp 内跟踪输入</text>
+
+        <!-- comparator -->
+        <rect x="600" y="185" width="120" height="70" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="660" y="216" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="16" font-weight="600" fill="#2d3142">比较器</text>
+        <text x="660" y="238" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">V_in ≷ V_dac</text>
+        <text x="660" y="172" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">每周期比一次</text>
+
+        <!-- data register -->
+        <rect x="790" y="185" width="150" height="70" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="865" y="216" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="16" font-weight="600" fill="#2d3142">数据寄存器</text>
+        <text x="865" y="238" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">D11 … D0</text>
+        <text x="865" y="172" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">转换结果</text>
+
+        <!-- DAC -->
+        <rect x="410" y="375" width="120" height="60" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="470" y="402" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="16" font-weight="600" fill="#2d3142">内部 DAC</text>
+        <text x="470" y="422" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">按位试码</text>
+        <text x="470" y="362" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">猜测电压</text>
+
+        <!-- SAR logic: focal -->
+        <rect x="600" y="360" width="170" height="80" fill="#bf4520" fill-opacity="0.06" stroke="#bf4520" stroke-width="1.4"/>
+        <text x="685" y="394" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="16" font-weight="600" fill="#2d3142">逐次逼近寄存器</text>
+        <text x="685" y="416" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#bf4520">SAR 逻辑 · 控制节拍</text>
+
+        <!-- signal path -->
+        <polyline points="170,132 200,132 200,190 230,190" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <line x1="170" y1="204" x2="230" y2="204" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <polyline points="170,276 200,276 200,250 230,250" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <line x1="350" y1="220" x2="410" y2="220" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <line x1="540" y1="220" x2="600" y2="220" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <line x1="720" y1="220" x2="790" y2="220" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <line x1="940" y1="220" x2="975" y2="220" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <text x="958" y="206" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">CPU / DMA</text>
+
+        <!-- feedback loop -->
+        <line x1="600" y1="400" x2="530" y2="400" stroke="#bf4520" stroke-width="1.3" marker-end="url(#sar-adc-block-arrow-accent)"/>
+        <polyline points="470,375 470,300 660,300 660,255" fill="none" stroke="#bf4520" stroke-width="1.3" marker-end="url(#sar-adc-block-arrow-accent)"/>
+        <line x1="700" y1="255" x2="700" y2="360" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <polyline points="770,400 865,400 865,255" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <text x="712" y="310" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">比较结果</text>
+        <text x="790" y="392" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">并行置入</text>
+
+        <!-- clock -->
+        <line x1="685" y1="478" x2="685" y2="440" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#sar-adc-block-arrow)"/>
+        <text x="685" y="494" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="13" font-weight="600" fill="#2d3142">ADCCLK</text>
+        <text x="685" y="510" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">一个周期推进一位</text>
+
+        <!-- callout -->
+        <line x1="60" y1="530" x2="940" y2="530" stroke="#bf4520" stroke-width="1"/>
+        <text x="60" y="550" font-family="'Instrument Serif', 'Noto Serif SC', serif" font-style="italic" font-size="17" fill="#2d3142">一次转换 = N 次比较：从最高位起逐位试 1，比较器回答够不够，SAR 决定这一位留不留。</text>
+      </svg>

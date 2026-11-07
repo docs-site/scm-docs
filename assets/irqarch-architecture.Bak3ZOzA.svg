@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="irqarch-title irqarch-desc" id="irqarch-architecture-root">
+      <title id="irqarch-title">STM32 中断系统硬件架构</title>
+      <desc id="irqarch-desc">分层架构图：USART、TIM、DMA、EXTI 等中断源把请求送入 NVIC，由 NVIC 裁决优先级后送内核响应，内核再从中断向量表取服务函数入口地址。</desc>
+  <defs>
+      
+  </defs>
+
+      <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+      <!-- Callout top -->
+      <text x="500" y="48" fill="#2d3142" font-size="14" text-anchor="middle"
+            font-family="'Instrument Serif', 'Noto Serif SC', serif">两级开关：PRIMASK 管全局，NVIC 使能位管单个中断</text>
+
+      <!-- Zone: interrupt sources (drawn before arrows and nodes) -->
+      <rect x="44" y="468" width="656" height="128" rx="8"
+            fill="#2d3142" stroke="#2d3142" stroke-width="0.8" fill-opacity="0.02" stroke-opacity="0.10"/>
+      <rect x="60" y="472" width="216" height="16" fill="#f5f5f5"/>
+      <text x="68" y="484" fill="#5a6580" font-size="12" font-weight="500"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">中断源（IRQn = 异常号 − 16）</text>
+
+      <!-- Arrows: sources -> NVIC (orthogonal elbows, fanned attach points) -->
+      <path d="M 138,508 V 448 H 208 Q 216,448 216,440 V 414" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <polygon points="216,400 208,414 224,414" fill="#4f5d75"/>
+      <path d="M 294,508 V 448 H 304 Q 312,448 312,440 V 414" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <polygon points="312,400 304,414 320,414" fill="#4f5d75"/>
+      <path d="M 450,508 V 448 H 416 Q 408,448 408,440 V 414" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <polygon points="408,400 400,414 416,414" fill="#4f5d75"/>
+      <path d="M 606,508 V 448 H 512 Q 504,448 504,440 V 414" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <polygon points="504,400 496,414 512,414" fill="#4f5d75"/>
+
+      <!-- Arrow label: IRQ request (beside vertical segment, 6px gap) -->
+      <rect x="300" y="452" width="88" height="16" fill="#f5f5f5"/>
+      <text x="304" y="464" fill="#5a6580" font-size="12"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">IRQ 中断请求</text>
+
+      <!-- Arrow: NVIC -> core (accent, primary flow) -->
+      <path d="M 360,288 V 214" fill="none" stroke="#bf4520" stroke-width="1.2"/>
+      <polygon points="360,200 352,214 368,214" fill="#bf4520"/>
+      <rect x="372" y="232" width="60" height="16" fill="#f5f5f5"/>
+      <text x="376" y="244" fill="#bf4520" font-size="12"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">中断响应</text>
+
+      <!-- Arrow: core -> vector table (horizontal) -->
+      <path d="M 552,144 H 626" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <polygon points="640,144 626,136 626,152" fill="#4f5d75"/>
+      <rect x="564" y="124" width="64" height="16" fill="#f5f5f5"/>
+      <text x="596" y="136" fill="#5a6580" font-size="12" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">取向量</text>
+
+      <!-- Node: Cortex-M3 core -->
+      <rect x="168" y="88" width="384" height="112" rx="6" fill="#f5f5f5"/>
+      <rect x="168" y="88" width="384" height="112" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="176" y="94" width="36" height="12" rx="2" fill="none" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.40"/>
+      <text x="194" y="103" fill="#2d3142" font-size="7" text-anchor="middle" letter-spacing="0.08em"
+            font-family="'Geist Mono', ui-monospace, monospace" fill-opacity="0.8">CORE</text>
+      <text x="360" y="138" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Cortex-M3 内核</text>
+      <text x="360" y="158" fill="#4f5d75" font-size="9" text-anchor="middle"
+            font-family="'Geist Mono', ui-monospace, monospace">auto-stack / vector fetch / run ISR</text>
+
+      <!-- Node: vector table -->
+      <rect x="640" y="88" width="288" height="112" rx="6" fill="#f5f5f5"/>
+      <rect x="640" y="88" width="288" height="112" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+      <rect x="648" y="94" width="44" height="12" rx="2" fill="none" stroke="#4f5d75" stroke-width="0.8" stroke-opacity="0.40"/>
+      <text x="670" y="103" fill="#4f5d75" font-size="7" text-anchor="middle" letter-spacing="0.08em"
+            font-family="'Geist Mono', ui-monospace, monospace" fill-opacity="0.8">FLASH</text>
+      <text x="784" y="138" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">中断向量表</text>
+      <text x="784" y="158" fill="#4f5d75" font-size="9" text-anchor="middle"
+            font-family="'Geist Mono', ui-monospace, monospace">VTOR -> __Vectors</text>
+
+      <!-- Node: NVIC (focal) -->
+      <rect x="168" y="288" width="384" height="112" rx="6" fill="#f5f5f5"/>
+      <rect x="168" y="288" width="384" height="112" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1.2" fill-opacity="0.08"/>
+      <rect x="176" y="294" width="40" height="12" rx="2" fill="none" stroke="#bf4520" stroke-width="0.8" stroke-opacity="0.40"/>
+      <text x="196" y="303" fill="#bf4520" font-size="7" text-anchor="middle" letter-spacing="0.08em"
+            font-family="'Geist Mono', ui-monospace, monospace" fill-opacity="0.8">NVIC</text>
+      <text x="360" y="332" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">NVIC 嵌套向量中断控制器</text>
+      <!-- Register chips inside NVIC -->
+      <rect x="198" y="352" width="100" height="24" rx="4" fill="#f5f5f5" stroke="#4f5d75" stroke-width="0.8"/>
+      <text x="248" y="368" fill="#2d3142" font-size="12" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"><tspan font-family="'Geist Mono', ui-monospace, monospace" font-size="9">ISER </tspan>使能</text>
+      <rect x="310" y="352" width="100" height="24" rx="4" fill="#f5f5f5" stroke="#4f5d75" stroke-width="0.8"/>
+      <text x="360" y="368" fill="#2d3142" font-size="12" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"><tspan font-family="'Geist Mono', ui-monospace, monospace" font-size="9">ISPR </tspan>悬起</text>
+      <rect x="422" y="352" width="100" height="24" rx="4" fill="#f5f5f5" stroke="#4f5d75" stroke-width="0.8"/>
+      <text x="472" y="368" fill="#2d3142" font-size="12" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"><tspan font-family="'Geist Mono', ui-monospace, monospace" font-size="9">IPR  </tspan>优先级</text>
+
+      <!-- Source nodes -->
+      <rect x="68" y="508" width="140" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="68" y="508" width="140" height="64" rx="6" fill="#4f5d75" stroke="#5a6580" stroke-width="1" fill-opacity="0.10"/>
+      <text x="138" y="536" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">USART 串口</text>
+      <text x="138" y="556" fill="#4f5d75" font-size="9" text-anchor="middle"
+            font-family="'Geist Mono', ui-monospace, monospace">IRQn 37</text>
+
+      <rect x="224" y="508" width="140" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="224" y="508" width="140" height="64" rx="6" fill="#4f5d75" stroke="#5a6580" stroke-width="1" fill-opacity="0.10"/>
+      <text x="294" y="536" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">TIM 定时器</text>
+      <text x="294" y="556" fill="#4f5d75" font-size="9" text-anchor="middle"
+            font-family="'Geist Mono', ui-monospace, monospace">IRQn 28</text>
+
+      <rect x="380" y="508" width="140" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="380" y="508" width="140" height="64" rx="6" fill="#4f5d75" stroke="#5a6580" stroke-width="1" fill-opacity="0.10"/>
+      <text x="450" y="536" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">DMA 搬运</text>
+      <text x="450" y="556" fill="#4f5d75" font-size="9" text-anchor="middle"
+            font-family="'Geist Mono', ui-monospace, monospace">IRQn 11</text>
+
+      <rect x="536" y="508" width="140" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="536" y="508" width="140" height="64" rx="6" fill="#4f5d75" stroke="#5a6580" stroke-width="1" fill-opacity="0.10"/>
+      <text x="606" y="536" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle"
+            font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">EXTI 引脚</text>
+      <text x="606" y="556" fill="#4f5d75" font-size="9" text-anchor="middle"
+            font-family="'Geist Mono', ui-monospace, monospace">IRQn 6</text>
+    </svg>
