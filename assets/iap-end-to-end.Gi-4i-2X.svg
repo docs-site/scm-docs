@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg id="iap-end-to-end-root" xmlns="http://www.w3.org/2000/svg" width="1120" height="960" viewBox="0 0 1120 960" role="img" aria-labelledby="iap-end-to-end-e2eTitle iap-end-to-end-e2eDesc">
+  <title id="iap-end-to-end-e2eTitle">IAP 升级的完整流程</title>
+  <desc id="iap-end-to-end-e2eDesc">以串口发送 app.img 为例：中断侧装帧，主循环校验；校验不通过回命令行，通过后按帧头地址分成两条分支，Flash 就地运行，SRAM 先暂存再搬运后运行。</desc>
+
+  <rect x="0" y="0" width="1120" height="960" fill="#f5f5f5"/>
+  <defs>
+    <marker id="iap-end-to-end-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d3142"/>
+    </marker>
+    <marker id="iap-end-to-end-arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+
+  <text x="100" y="30" font-family="'Geist Mono', ui-monospace, monospace" font-size="10" letter-spacing="2" fill="#4f5d75">IAP END-TO-END</text>
+  <text x="100" y="52" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">一条链路，两处分支：失败回命令行，地址决定跳法</text>
+
+  <!-- ============ 主干 ============ -->
+  <!-- 1 上电 -->
+  <rect x="400" y="72" width="320" height="52" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+  <text x="420" y="96" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">上电复位，进命令行</text>
+  <text x="420" y="114" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">iwdg_start() 之后才开始喂狗</text>
+
+  <!-- 2 发送 -->
+  <rect x="400" y="144" width="320" height="52" rx="6" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="420" y="168" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">PC 串口发送 app.img</text>
+  <text x="420" y="186" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">20 B 头 + N B 载荷 + 8 B 尾</text>
+
+  <!-- 3 中断装帧 -->
+  <rect x="400" y="214" width="320" height="70" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.2"/>
+  <text x="420" y="236" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">USART1 中断：逐字节装帧</text>
+  <text x="420" y="257" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">SCAN 魔数 → HEADER 12 B</text>
+  <text x="420" y="276" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">PAYLOAD N B → TRAILER IAPEOF02</text>
+
+  <!-- 4 判定：帧是否合法 -->
+  <polygon points="560,304 680,352 560,400 440,352" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+  <text x="560" y="347" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle">尾部匹配且</text>
+  <text x="560" y="365" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle">CRC32 通过？</text>
+
+  <!-- 失败 -->
+  <rect x="820" y="316" width="240" height="72" rx="6" fill="#ffffff" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text x="840" y="340" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#bf4520">丢弃整帧</text>
+  <text x="840" y="360" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">回 SCAN 重新对齐</text>
+  <text x="840" y="378" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">超时 3 s 也走这里</text>
+
+  <!-- 6 判定：目标地址 -->
+  <polygon points="560,420 680,468 560,516 440,468" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+  <text x="560" y="463" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle">帧头地址是</text>
+  <text x="560" y="481" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle">Flash 还是 SRAM？</text>
+
+  <!-- A 分支：Flash -->
+  <rect x="100" y="560" width="260" height="100" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+  <text x="120" y="586" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">写入 Flash APP 区</text>
+  <text x="120" y="608" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">就地运行，落盘位置即运行位置</text>
+  <text x="120" y="630" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">擦除 → 编程 → 回读 CRC</text>
+  <text x="120" y="650" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">回执 FLASH OK，等 go flash</text>
+
+  <!-- B 分支 1：暂存 -->
+  <rect x="750" y="520" width="260" height="100" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+  <text x="770" y="546" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">写入 Flash 暂存区</text>
+  <text x="770" y="568" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">运行位置不在这里，掉电不丢</text>
+  <text x="770" y="590" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">擦除 → 编程 → 回读 CRC</text>
+  <text x="770" y="610" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">回执 SRAM OK，等 go sram</text>
+
+  <!-- B 分支 2：搬运 -->
+  <rect x="750" y="668" width="260" height="100" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+  <text x="770" y="694" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">go sram：搬进内部 SRAM</text>
+  <text x="770" y="716" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">memcpy 24 KB 到运行地址</text>
+  <text x="770" y="738" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">回读 CRC 通过才允许跳</text>
+  <text x="770" y="758" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">掉电即失，需重新 go sram</text>
+
+  <!-- 汇合：跳转 -->
+  <rect x="400" y="808" width="320" height="52" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.2"/>
+  <text x="420" y="832" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">跳转并运行 APP</text>
+  <text x="420" y="850" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">只换 MSP / VTOR / PC，不是复位</text>
+
+  <!-- ============ 连线 ============ -->
+  <g fill="none" stroke="#2d3142" stroke-width="1.4">
+    <path d="M 560,124 V 144" marker-end="url(#iap-end-to-end-arrow)"/>
+    <path d="M 560,196 V 214" marker-end="url(#iap-end-to-end-arrow)"/>
+    <path d="M 560,284 V 304" marker-end="url(#iap-end-to-end-arrow)"/>
+    <path d="M 560,400 V 420" marker-end="url(#iap-end-to-end-arrow)"/>
+  </g>
+
+  <!-- 失败分支 -->
+  <path d="M 680,352 H 820" fill="none" stroke="#bf4520" stroke-width="1.2" marker-end="url(#iap-end-to-end-arrow-red)"/>
+  <path d="M 940,316 V 240 H 726" fill="none" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#iap-end-to-end-arrow-red)"/>
+
+  <!-- 两个分支 -->
+  <g fill="none" stroke="#2d3142" stroke-width="1.4">
+    <path d="M 440,468 H 230 V 560" marker-end="url(#iap-end-to-end-arrow)"/>
+    <path d="M 680,468 H 880 V 520" marker-end="url(#iap-end-to-end-arrow)"/>
+    <path d="M 880,620 V 668" marker-end="url(#iap-end-to-end-arrow)"/>
+    <path d="M 230,660 V 834 H 400" marker-end="url(#iap-end-to-end-arrow)"/>
+    <path d="M 880,768 V 834 H 720" marker-end="url(#iap-end-to-end-arrow)"/>
+  </g>
+
+  <!-- ============ 标签 ============ -->
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">
+    <rect x="742" y="336" width="24" height="16" rx="2" fill="#f5f5f5"/>
+    <text x="754" y="348" fill="#bf4520" text-anchor="middle">否</text>
+    <rect x="568" y="404" width="24" height="16" rx="2" fill="#f5f5f5"/>
+    <text x="580" y="416" text-anchor="middle">是</text>
+  </g>
+  <g font-family="'Geist Mono', ui-monospace, monospace" font-size="11" fill="#4f5d75" text-anchor="middle">
+    <text x="335" y="460">0x08020000</text>
+    <text x="780" y="460">0x20007000</text>
+  </g>
+  <text x="926" y="226" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#bf4520" text-anchor="end">重新对齐，不必重启</text>
+
+  <!-- ============ 图例与结论 ============ -->
+  <line x1="100" y1="880" x2="1020" y2="880" stroke="#2d3142" stroke-opacity="0.12" stroke-width="0.8"/>
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">
+    <rect x="100" y="894" width="28" height="16" rx="3" fill="#f7e3dc" stroke="#bf4520" stroke-width="0.8"/>
+    <text x="138" y="906">中断上下文</text>
+    <rect x="260" y="894" width="28" height="16" rx="3" fill="#ffffff" stroke="#2d3142" stroke-width="0.8"/>
+    <text x="298" y="906">主循环 / 跳转</text>
+    <rect x="450" y="894" width="28" height="16" rx="3" fill="#ffffff" stroke="#4f5d75" stroke-width="0.8" stroke-dasharray="4 2"/>
+    <text x="488" y="906">主机侧</text>
+  </g>
+
+  <text x="100" y="928" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">中断只把字节装成帧；CRC32 在主循环算，落盘也在主循环，分界是 iap_rx_poll() 上报的 FRAME_OK。</text>
+  <text x="100" y="948" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">两条分支的差别只有一件事：镜像是否就地执行——Flash 就地，SRAM 要先搬进内部 RAM。</text>
+</svg>

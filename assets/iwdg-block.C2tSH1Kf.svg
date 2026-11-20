@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="400" viewBox="0 0 940 400" role="img" aria-labelledby="blkTitle blkDesc" id="iwdg-block-root">
+  <title id="blkTitle">IWDG 的硬件结构</title>
+  <desc id="blkDesc">独立看门狗由 LSI 独立振荡器经分频后驱动 12 位递减计数器，计数到 0 产生复位；键寄存器只接受启动、重装、解锁三种命令，硬件上没有停止通路。</desc>
+
+  <rect x="0" y="0" width="940" height="400" fill="#f5f5f5"/>
+  <defs>
+    <marker id="iwdg-block-ba2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d3142"/>
+    </marker>
+    <marker id="iwdg-block-bar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="36" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">IWDG BLOCK</text>
+
+  <!-- 主链路 -->
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="60" y="96" width="140" height="76" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="130" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">LSI 40 kHz</text>
+    <text x="130" y="146" text-anchor="middle" font-size="12" fill="#4f5d75">独立 RC 振荡器</text>
+
+    <rect x="250" y="96" width="150" height="76" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="325" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">PR 分频</text>
+    <text x="325" y="146" text-anchor="middle" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">÷32</text>
+
+    <rect x="450" y="96" width="200" height="76" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="550" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">12 位递减计数器</text>
+    <text x="550" y="146" text-anchor="middle" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">RLR = 3750</text>
+
+    <rect x="700" y="96" width="180" height="76" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="790" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">计数到 0</text>
+    <text x="790" y="146" text-anchor="middle" font-size="12" fill="#bf4520">产生系统复位</text>
+  </g>
+
+  <path d="M 200 134 L 250 134" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#iwdg-block-ba2)"/>
+  <path d="M 400 134 L 450 134" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#iwdg-block-ba2)"/>
+  <path d="M 650 134 L 700 134" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#iwdg-block-ba2)"/>
+
+  <text x="130" y="192" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">与 CPU 时钟无关</text>
+  <text x="325" y="192" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">超时 = 32 × 3750 / 40 kHz = 3 s</text>
+
+  <!-- 控制入口 -->
+  <rect x="250" y="258" width="400" height="70" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+  <text x="450" y="284" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">IWDG_KR 键寄存器（唯一控制入口）</text>
+  <text x="450" y="310" text-anchor="middle" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0xCCCC 启动 · 0xAAAA 重装 · 0x5555 解锁 PR/RLR</text>
+
+  <path d="M 450 258 L 450 172" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#iwdg-block-ba2)"/>
+  <path d="M 325 258 L 325 172" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#iwdg-block-ba2)"/>
+  <text x="462" y="220" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">重装</text>
+  <text x="337" y="220" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">解锁</text>
+
+  <!-- 没有停止通路 -->
+  <rect x="700" y="258" width="180" height="70" rx="6" fill="#f5f5f5" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="790" y="284" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#bf4520">没有停止命令字</text>
+  <text x="790" y="306" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">只有复位或断电</text>
+
+  <text x="60" y="368" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">计数器由 LSI 直接驱动，跑在 VDD 域：程序跑飞、时钟配错、进低功耗，它都照常倒计时；软件能做的只有"喂"，没有"关"。</text>
+</svg>

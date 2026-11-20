@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" role="img" aria-labelledby="ia-title ia-desc">
+<title id="ia-title">IAPBIN01 帧的头部、载荷与尾部</title>
+<desc id="ia-desc">固件帧的字段划分、长度与校验，以及三条通道如何接入同一个状态机</desc>
+<rect width="1000" height="560" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">IAPBIN01 固件帧结构</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">头部 16 字节 + 载荷 N 字节 + 尾部 8 字节，与 tools/pack_iap.py 严格一致</text>
+
+<rect x="40" y="110" width="80" height="92" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="80.0" y="150" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">0</text>
+<text x="80.0" y="174" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">偏移</text>
+
+<rect x="40" y="222" width="160" height="86" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="120.0" y="256" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">魔数</text>
+<text x="120.0" y="280" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">IAPBIN01</text>
+<text x="120.0" y="300" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">8 字节</text>
+
+<rect x="208" y="222" width="160" height="86" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="288.0" y="256" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">载荷长度 N</text>
+<text x="288.0" y="280" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">小端 uint32</text>
+<text x="288.0" y="300" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">上限 128 KB</text>
+
+<rect x="376" y="222" width="160" height="86" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="456.0" y="256" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">载荷 CRC32</text>
+<text x="456.0" y="280" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">小端 uint32</text>
+<text x="456.0" y="300" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">4 字节</text>
+
+<rect x="544" y="222" width="290" height="86" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="689.0" y="256" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">载荷（原始 bin）</text>
+<text x="689.0" y="280" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">N 字节</text>
+<text x="689.0" y="300" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">缓冲放在外部 SRAM</text>
+
+<rect x="842" y="222" width="118" height="86" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="901.0" y="256" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">尾部魔数</text>
+<text x="901.0" y="280" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">IAPEOF01</text>
+<text x="901.0" y="300" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">8 字节</text>
+
+<text x="120.0" y="330" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">偏移 0</text>
+<text x="288.0" y="330" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">偏移 8</text>
+<text x="456.0" y="330" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">偏移 12</text>
+<text x="689.0" y="330" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">偏移 16</text>
+<text x="901.0" y="330" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">偏移 16 + N</text>
+
+<line x1="40" y1="362" x2="960" y2="362" stroke="#d5d9e0" stroke-width="1"/>
+
+<text x="40" y="394" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">三条通道都汇入同一个状态机</text>
+
+<rect x="40" y="412" width="240" height="56" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="160.0" y="436" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">串口 USART1</text>
+<text x="160.0" y="456" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">中断逐字节喂入</text>
+
+<rect x="300" y="412" width="240" height="56" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="420.0" y="436" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">TCP 8888</text>
+<text x="420.0" y="456" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">recv 回调遍历 pbuf</text>
+
+<rect x="560" y="412" width="240" height="56" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="680.0" y="436" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">TFTP UDP 69</text>
+<text x="680.0" y="456" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">sink 回调逐块喂入</text>
+
+<rect x="820" y="412" width="140" height="56" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="890.0" y="436" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">iap_rx_byte()</text>
+<text x="890.0" y="456" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">同一状态机</text>
+
+<line x1="284" y1="440" x2="296" y2="440" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="544" y1="440" x2="556" y2="440" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="804" y1="440" x2="816" y2="440" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<line x1="40" y1="496" x2="960" y2="496" stroke="#d5d9e0" stroke-width="1"/>
+<text x="40" y="524" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">收帧中断里只做 O(1) 搬运；CRC32 与超时判定放在主循环 iap_rx_poll()，128 KB 逐位计算要一百多毫秒</text>
+<text x="40" y="548" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">收帧中途超过 3000 ms 没有新字节就超时重对齐，避免永远停在半帧状态</text>
+</svg>

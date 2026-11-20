@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="adc-timing-title adc-timing-desc" id="adc-timing-root">
+        <title id="adc-timing-title">ADC 采样与转换时序</title>
+        <desc id="adc-timing-desc">时序图：ADCCLK 提供节拍；采样保持开关在采样阶段闭合跟踪输入，进入转换阶段后断开保持电压；SAR 在 12 个时钟内从 b11 到 b0 逐位判定；转换结束 EOC 置 1，数据寄存器中的 D11 到 D0 变为有效。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #adc-timing-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #adc-timing-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #adc-timing-root .diagram-container { width: 100%; overflow-x: auto; }
+      #adc-timing-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="adc-timing-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <pattern id="adc-timing-hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#4f5d75" stroke-width="1" stroke-opacity="0.45"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- phase bar -->
+        <rect x="170" y="56" width="200" height="30" fill="#2d3142" fill-opacity="0.06" stroke="#2d3142" stroke-width="1"/>
+        <text x="270" y="76" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">采样阶段</text>
+        <rect x="370" y="56" width="480" height="30" fill="#bf4520" fill-opacity="0.07" stroke="#bf4520" stroke-width="1.2"/>
+        <text x="610" y="76" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#bf4520">转换阶段（逐位逼近）</text>
+        <rect x="850" y="56" width="110" height="30" fill="#2d3142" fill-opacity="0.06" stroke="#2d3142" stroke-width="1"/>
+        <text x="905" y="76" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">读取</text>
+
+        <!-- phase guides -->
+        <line x1="370" y1="86" x2="370" y2="452" stroke="#4f5d75" stroke-width="1" stroke-dasharray="3 3" stroke-opacity="0.6"/>
+        <line x1="850" y1="86" x2="850" y2="452" stroke="#4f5d75" stroke-width="1" stroke-dasharray="3 3" stroke-opacity="0.6"/>
+
+        <!-- row 1: ADCCLK -->
+        <text x="20" y="140" font-family="'Geist Mono', monospace" font-size="14" font-weight="600" fill="#2d3142">ADCCLK</text>
+        <path d="M170,150 H190 V118 H210 V150 H230 V118 H250 V150 H270 V118 H290 V150 H310 V118 H330 V150 H350 V118 H370 V150 H390 V118 H410 V150 H430 V118 H450 V150 H470 V118 H490 V150 H510 V118 H530 V150 H550 V118 H570 V150 H590 V118 H610 V150 H630 V118 H650 V150 H670 V118 H690 V150 H710 V118 H730 V150 H750 V118 H770 V150 H790 V118 H810 V150 H830 V118 H850 V150 H870 V118 H890 V150 H960" fill="none" stroke="#2d3142" stroke-width="1.4"/>
+
+        <!-- row 2: S/H switch -->
+        <text x="20" y="210" font-family="'Geist Mono', monospace" font-size="14" font-weight="600" fill="#2d3142">采样保持开关</text>
+        <path d="M170,192 H370 V228 H960" fill="none" stroke="#2d3142" stroke-width="1.4"/>
+        <text x="270" y="184" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">闭合 · 跟踪输入</text>
+        <text x="610" y="244" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">断开 · 保持电容电压不变</text>
+
+        <!-- row 3: SAR bit trials -->
+        <text x="20" y="292" font-family="'Geist Mono', monospace" font-size="14" font-weight="600" fill="#2d3142">SAR 位判定</text>
+        <rect x="170" y="262" width="200" height="44" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="3 3" stroke-opacity="0.6"/>
+        <text x="270" y="289" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">不比较</text>
+        <g font-family="'Geist Mono', monospace" font-size="11" fill="#2d3142" text-anchor="middle">
+          <rect x="370" y="262" width="40" height="44" fill="#bf4520" fill-opacity="0.10" stroke="#bf4520" stroke-width="1"/><text x="390" y="289">b11</text>
+          <rect x="410" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="430" y="289">b10</text>
+          <rect x="450" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="470" y="289">b9</text>
+          <rect x="490" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="510" y="289">b8</text>
+          <rect x="530" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="550" y="289">b7</text>
+          <rect x="570" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="590" y="289">b6</text>
+          <rect x="610" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="630" y="289">b5</text>
+          <rect x="650" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="670" y="289">b4</text>
+          <rect x="690" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="710" y="289">b3</text>
+          <rect x="730" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="750" y="289">b2</text>
+          <rect x="770" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="790" y="289">b1</text>
+          <rect x="810" y="262" width="40" height="44" fill="#ffffff" stroke="#4f5d75" stroke-width="1"/><text x="830" y="289">b0</text>
+        </g>
+        <text x="390" y="254" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#bf4520">MSB 先试</text>
+        <text x="830" y="322" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">LSB 收尾</text>
+
+        <!-- row 4: EOC -->
+        <text x="20" y="372" font-family="'Geist Mono', monospace" font-size="14" font-weight="600" fill="#2d3142">EOC 转换结束</text>
+        <path d="M170,388 H850 V352 H960" fill="none" stroke="#2d3142" stroke-width="1.4"/>
+        <text x="610" y="404" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">0 · 转换进行中</text>
+        <text x="905" y="344" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">置 1</text>
+
+        <!-- row 5: data register -->
+        <text x="20" y="440" font-family="'Geist Mono', monospace" font-size="14" font-weight="600" fill="#2d3142">数据寄存器</text>
+        <rect x="170" y="418" width="680" height="34" fill="url(#adc-timing-hatch)" stroke="#4f5d75" stroke-width="1"/>
+        <text x="510" y="439" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">无效 · 上一次结果或不定值</text>
+        <rect x="850" y="418" width="110" height="34" fill="#ffffff" stroke="#2d3142" stroke-width="1.4"/>
+        <text x="905" y="439" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" font-weight="600" fill="#2d3142">D11…D0</text>
+
+        <!-- duration brackets -->
+        <path d="M170,478 V486 H370 V478" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <text x="270" y="502" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#2d3142">t_samp = N 个 ADCCLK</text>
+        <text x="270" y="516" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">采样周期数可编程</text>
+        <path d="M370,478 V486 H850 V478" fill="none" stroke="#bf4520" stroke-width="1"/>
+        <text x="610" y="502" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#bf4520">t_conv = 12.5 个 ADCCLK（12 位）</text>
+        <text x="610" y="516" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" fill="#4f5d75">12 次比较 + 0.5 周期收尾</text>
+        <text x="560" y="546" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="14" font-weight="600" fill="#2d3142">t_total = t_samp + t_conv</text>
+        <text x="560" y="564" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#4f5d75">最高采样率 f = 1 / t_total</text>
+
+        <!-- callout -->
+        <line x1="60" y1="592" x2="940" y2="592" stroke="#bf4520" stroke-width="1"/>
+        <text x="60" y="614" font-family="'Instrument Serif', 'Noto Serif SC', serif" font-style="italic" font-size="17" fill="#2d3142">采样时间必须让保持电容充电到误差小于 1/2 LSB，否则转换过程再准，采进来的电压本身已经错了。</text>
+      </svg>

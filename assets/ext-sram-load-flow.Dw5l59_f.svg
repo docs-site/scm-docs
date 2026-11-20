@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="760" viewBox="0 0 1020 760" role="img" aria-labelledby="extsramFlowTitle extsramFlowDesc" id="ext-sram-load-flow-root">
+  <title id="extsramFlowTitle">外部 SRAM-APP 的装载与启动流程</title>
+  <desc id="extsramFlowDesc">Bootloader 初始化 FSMC 后依次完成收帧落盘、按帧头长度搬运、校验与交权；APP 在外部 SRAM 中执行启动序列，任何复位都会回到 Bootloader 重新装载。</desc>
+
+  <rect x="0" y="0" width="1020" height="760" fill="#f5f5f5"/>
+  <defs>
+    <marker id="ext-sram-load-flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4f5d75"/>
+    </marker>
+    <marker id="ext-sram-load-flow-arrow-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="36" font-family="'Geist Mono','Consolas',monospace" font-size="12" letter-spacing="2" fill="#4f5d75">LV065 · EXT-SRAM APP · LOAD FLOW</text>
+  <text x="40" y="66" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="16" font-weight="600" fill="#2d3142">外部 SRAM-APP 的装载与启动流程</text>
+
+  <!-- 阶段底板 -->
+  <rect x="40" y="92" width="940" height="436" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.15" stroke-width="1.2"/>
+  <text x="64" y="116" font-family="'Geist Mono','Consolas',monospace" font-size="12" letter-spacing="1" fill="#4f5d75">BOOTLOADER · 运行于内部 FLASH</text>
+  <rect x="40" y="552" width="940" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.15" stroke-width="1.2"/>
+  <text x="64" y="576" font-family="'Geist Mono','Consolas',monospace" font-size="12" letter-spacing="1" fill="#bf4520">APP · 运行于外部 SRAM，每条指令经 FSMC 取指</text>
+
+  <!-- 连接线层 -->
+  <g fill="none" stroke="#4f5d75" stroke-width="1.4">
+    <path d="M 100 159 L 100 201" marker-end="url(#ext-sram-load-flow-arrow)"/>
+    <path d="M 100 223 L 100 265" marker-end="url(#ext-sram-load-flow-arrow)"/>
+    <path d="M 100 287 L 100 329" marker-end="url(#ext-sram-load-flow-arrow)"/>
+    <path d="M 100 351 L 100 393" marker-end="url(#ext-sram-load-flow-arrow)"/>
+    <path d="M 100 415 L 100 457" marker-end="url(#ext-sram-load-flow-arrow)"/>
+    <path d="M 100 623 L 100 665" marker-end="url(#ext-sram-load-flow-arrow)"/>
+  </g>
+  <path d="M 100 482 L 100 581" fill="none" stroke="#bf4520" stroke-width="1.8" marker-end="url(#ext-sram-load-flow-arrow-accent)"/>
+  <rect x="110" y="524" width="84" height="20" fill="#f5f5f5"/>
+  <text x="114" y="538" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520">交权 · 硬跳</text>
+  <path d="M 598 422 L 636 422 L 636 324 L 656 324" fill="none" stroke="#bf4520" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ext-sram-load-flow-arrow-accent)"/>
+
+  <!-- 步骤层 -->
+  <g font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">
+    <circle cx="100" cy="148" r="11" fill="#2d3142"/>
+    <text x="100" y="152" text-anchor="middle" font-size="12" fill="#ffffff">1</text>
+    <text x="128" y="144" font-size="13" font-weight="600" fill="#2d3142">上电 / 复位，从内部 FLASH 启动</text>
+    <text x="128" y="166" font-size="12" fill="#4f5d75">BOOT 映射只有内部 FLASH / 内部 SRAM / 系统存储器，外部 SRAM 不在启动映射内</text>
+
+    <circle cx="100" cy="212" r="11" fill="#bf4520"/>
+    <text x="100" y="216" text-anchor="middle" font-size="12" fill="#ffffff">2</text>
+    <text x="128" y="208" font-size="13" font-weight="600" fill="#2d3142">初始化 FSMC</text>
+    <text x="128" y="230" font-size="12" fill="#4f5d75">GPIO 复用 + BTR 时序按 72 MHz HCLK 配置；每次装载前必做，禁止『已初始化则跳过』</text>
+
+    <circle cx="100" cy="276" r="11" fill="#2d3142"/>
+    <text x="100" y="280" text-anchor="middle" font-size="12" fill="#ffffff">3</text>
+    <text x="128" y="272" font-size="13" font-weight="600" fill="#2d3142">收 app.img，写入内部 FLASH 暂存区</text>
+    <text x="128" y="294" font-size="12" fill="#4f5d75">0x08040000 起，帧头 CRC32 + 回读 CRC32 双校验；镜像大小受暂存区 256KB 约束</text>
+
+    <circle cx="100" cy="340" r="11" fill="#2d3142"/>
+    <text x="100" y="344" text-anchor="middle" font-size="12" fill="#ffffff">4</text>
+    <text x="128" y="336" font-size="13" font-weight="600" fill="#2d3142">go sram：按帧头长度搬运到 0x68000000</text>
+    <text x="128" y="358" font-size="12" fill="#4f5d75">区别于 LV035 的整容器固定搬运；搬运完成后对目的区回读 CRC32</text>
+
+    <circle cx="100" cy="404" r="11" fill="#2d3142"/>
+    <text x="100" y="408" text-anchor="middle" font-size="12" fill="#ffffff">5</text>
+    <text x="128" y="400" font-size="13" font-weight="600" fill="#2d3142">向量表判据 + 停中断</text>
+    <text x="128" y="422" font-size="12" fill="#4f5d75">栈顶必须落在内部 SRAM；复位向量必须落在容器内且最低位为 1；停 SysTick 与串口中断</text>
+
+    <circle cx="100" cy="468" r="11" fill="#bf4520"/>
+    <text x="100" y="472" text-anchor="middle" font-size="12" fill="#ffffff">6</text>
+    <text x="128" y="464" font-size="13" font-weight="600" fill="#2d3142">交权：VTOR → MSP → 跳 Reset_Handler</text>
+    <text x="128" y="486" font-size="12" fill="#4f5d75">SCB-&gt;VTOR = 0x68000000，__set_MSP(镜像栈顶) 后硬跳——FSMC 寄存器原样移交</text>
+
+    <circle cx="100" cy="612" r="11" fill="#2d3142"/>
+    <text x="100" y="616" text-anchor="middle" font-size="12" fill="#ffffff">7</text>
+    <text x="128" y="608" font-size="13" font-weight="600" fill="#2d3142">Reset_Handler → SystemInit → __main</text>
+    <text x="128" y="630" font-size="12" fill="#4f5d75">不改系统时钟（时序契约）；scatterload 把 .data 初值拷入内部 SRAM、.bss 清零</text>
+
+    <circle cx="100" cy="676" r="11" fill="#2d3142"/>
+    <text x="100" y="680" text-anchor="middle" font-size="12" fill="#ffffff">8</text>
+    <text x="128" y="672" font-size="13" font-weight="600" fill="#2d3142">main()：VTOR 再定位 + 防御性 FSMC_Init</text>
+    <text x="128" y="694" font-size="12" fill="#4f5d75">VTOR 指向 0x68000000 且早于 HAL_Init；可按相同参数重配 FSMC，禁止改时序</text>
+  </g>
+
+  <!-- 失败提示 -->
+  <rect x="660" y="244" width="320" height="140" rx="6" fill="#ffffff" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="682" y="272" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520">任一校验失败 → 留在 Bootloader</text>
+  <text x="682" y="296" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" fill="#4f5d75">步骤（3）（4）（5）失败即打印原因，</text>
+  <text x="682" y="316" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" fill="#4f5d75">不交权、不跳转，等待重发。</text>
+  <text x="682" y="344" font-family="'Geist Mono','Consolas',monospace" font-size="12" fill="#4f5d75">no ext-sram image / crc mismatch</text>
+
+  <!-- 复位回退提示 -->
+  <rect x="760" y="576" width="204" height="72" rx="6" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="776" y="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" fill="#4f5d75">任何复位 / 掉电后</text>
+  <text x="776" y="620" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" fill="#4f5d75">FSMCEN=0，外存失效</text>
+  <text x="776" y="640" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" fill="#4f5d75">回步骤（1）重新装载</text>
+
+  <!-- 图例 -->
+  <g font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="12" fill="#4f5d75">
+    <circle cx="48" cy="736" r="7" fill="#2d3142"/>
+    <text x="64" y="741">判定与动作</text>
+    <circle cx="170" cy="736" r="7" fill="#bf4520"/>
+    <text x="186" y="741">关键契约 / 交权</text>
+    <line x1="310" y1="736" x2="342" y2="736" stroke="#bf4520" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <text x="350" y="741">失败 / 回退路径</text>
+  </g>
+</svg>

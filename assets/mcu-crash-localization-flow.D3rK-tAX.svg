@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mcu-crash-localization-flow-title mcu-crash-localization-flow-desc" id="mcu-crash-localization-flow-root">
+        <title id="mcu-crash-localization-flow-title">单片机死机后的故障定位流程</title>
+        <desc id="mcu-crash-localization-flow-desc">决策流程图：设备停摆后先判断是否发生过复位，据此选择用调试器 attach 读现场或解析 NOINIT 段里保存的记录，再按 fault 类型分派到访存异常或执行异常，最终用 addr2line 反查到具体函数。</desc>
+        <defs>
+      <style>#mcu-crash-localization-flow-root { --color-paper:   #f5f5f5;   
+      --color-ink:     #2d3142;   
+      --color-muted:   #4f5d75;   
+      --color-accent:  #bf4520;   
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif SC', 'Source Han Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #mcu-crash-localization-flow-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #mcu-crash-localization-flow-root .diagram-container { width: 100%; overflow-x: auto; }
+      #mcu-crash-localization-flow-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="mcu-crash-localization-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="mcu-crash-localization-flow-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="mcu-crash-localization-flow-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- ============ Connectors (drawn before nodes) ============ -->
+        <!-- N1 现象 → N2 是否复位 -->
+        <path d="M480,80 V104" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- N2 左出 → N3 调试器 attach（未复位） -->
+        <path d="M360,136 H208 Q200,136 200,144 V188" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- N2 右出 → N4 NOINIT 现场（已复位） -->
+        <path d="M600,136 H752 Q760,136 760,144 V188" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- N3 / N4 → D1 合并点 -->
+        <path d="M200,236 V248 Q200,256 208,256 H476" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <path d="M760,236 V248 Q760,256 752,256 H484" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- D1 → N5 fault 类型 -->
+        <path d="M480,260 V284" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- N5 左出 → N6 访存类 -->
+        <path d="M360,316 H208 Q200,316 200,324 V376" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- N5 右出 → N7 执行类 -->
+        <path d="M600,316 H752 Q760,316 760,324 V376" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- N6 / N7 → D2 合并点 -->
+        <path d="M200,424 V436 Q200,444 208,444 H476" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <path d="M760,424 V436 Q760,444 752,444 H484" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+        <!-- D2 → N8 addr2line -->
+        <path d="M480,448 V468" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-crash-localization-flow-arrow)"/>
+
+        <!-- ============ Arrow labels ============ -->
+        <!-- 未复位：A2 水平段 y=136，mask 底 128 → 8px gap -->
+        <rect x="266" y="116" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="284" y="125" fill="#4f5d75" font-size="8" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.06em">未复位</text>
+        <!-- 已复位：A3 水平段 y=136 -->
+        <rect x="666" y="116" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="684" y="125" fill="#4f5d75" font-size="8" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.06em">已复位</text>
+        <!-- 访存类：A7 水平段 y=316 -->
+        <rect x="266" y="296" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="284" y="305" fill="#4f5d75" font-size="8" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.06em">访存类</text>
+        <!-- 执行类：A8 水平段 y=316 -->
+        <rect x="666" y="296" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="684" y="305" fill="#4f5d75" font-size="8" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.06em">执行类</text>
+
+        <!-- ============ Nodes ============ -->
+        <!-- N1 起点：现象 -->
+        <rect x="380" y="32" width="200" height="48" rx="20" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="480" y="60" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">现象：设备停摆</text>
+
+        <!-- N2 焦点判定：是否发生过复位（唯一 coral 元素） -->
+        <polygon points="480,104 600,136 480,168 360,136" fill="#f5f5f5"/>
+        <polygon points="480,104 600,136 480,168 360,136" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="480" y="132" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">是否发生过复位？</text>
+        <text x="480" y="152" fill="#4f5d75" font-size="9" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">读 RCC-&gt;CSR</text>
+
+        <!-- N3 动作：调试器 attach -->
+        <rect x="100" y="188" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="200" y="208" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">调试器 attach</text>
+        <text x="200" y="226" fill="#4f5d75" font-size="9" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">读 PC 与 CFSR</text>
+
+        <!-- N4 动作：NOINIT 现场 -->
+        <rect x="660" y="188" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="760" y="208" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">读 NOINIT 段现场</text>
+        <text x="760" y="226" fill="#4f5d75" font-size="9" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">复位前保存的栈帧</text>
+
+        <!-- D1 合并点 -->
+        <circle cx="480" cy="256" r="4" fill="#2d3142"/>
+
+        <!-- N5 判定：fault 类型 -->
+        <polygon points="480,284 600,316 480,348 360,316" fill="#f5f5f5"/>
+        <polygon points="480,284 600,316 480,348 360,316" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="480" y="312" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">fault 类型？</text>
+        <text x="480" y="332" fill="#4f5d75" font-size="9" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">HFSR / CFSR</text>
+
+        <!-- N6 动作：访存类分支 -->
+        <rect x="100" y="376" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="200" y="396" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">读 MMFAR / BFAR</text>
+        <text x="200" y="414" fill="#4f5d75" font-size="9" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">取出事地址</text>
+
+        <!-- N7 动作：执行类分支 -->
+        <rect x="660" y="376" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="760" y="396" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">取栈帧 PC / LR</text>
+        <text x="760" y="414" fill="#4f5d75" font-size="9" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">反查调用链</text>
+
+        <!-- D2 合并点 -->
+        <circle cx="480" cy="444" r="4" fill="#2d3142"/>
+
+        <!-- N8 终点：符号化 -->
+        <rect x="380" y="468" width="200" height="48" rx="20" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="480" y="488" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">反查到具体函数</text>
+        <text x="480" y="506" fill="#4f5d75" font-size="9" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">addr2line</text>
+
+        <!-- ============ Legend strip (bottom 60px) ============ -->
+        <line x1="40" y1="540" x2="920" y2="540" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+        <text x="40" y="556" fill="#4f5d75" font-size="8" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">LEGEND · 形状承载类型</text>
+
+        <rect x="40" y="572" width="24" height="12" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="72" y="582" fill="#4f5d75" font-size="8.5" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">起点 / 终点</text>
+
+        <rect x="180" y="572" width="24" height="12" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="212" y="582" fill="#4f5d75" font-size="8.5" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">动作步骤</text>
+
+        <polygon points="342,578 354,572 366,578 354,584" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="378" y="582" fill="#4f5d75" font-size="8.5" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">判定分支</text>
+
+        <circle cx="508" cy="578" r="4" fill="#2d3142"/>
+        <text x="524" y="582" fill="#4f5d75" font-size="8.5" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">合并点</text>
+
+        <rect x="640" y="572" width="24" height="12" rx="2" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="672" y="582" fill="#4f5d75" font-size="8.5" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">焦点判定</text>
+      </svg>

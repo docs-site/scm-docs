@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="400" viewBox="0 0 940 400" role="img" aria-labelledby="iwdgTitle iwdgDesc" id="iwdg-timeline-root">
+  <title id="iwdgTitle">看门狗使能时机对比</title>
+  <desc id="iwdgDesc">上排为在初始化开始即使能看门狗的做法，网线未插时 PHY 自协商最长 10 秒，3 秒处即被复位；下排为初始化完成后才使能的做法，之后由主循环周期喂狗。</desc>
+
+  <rect x="0" y="0" width="940" height="400" fill="#f5f5f5"/>
+
+  <text x="60" y="36" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">IWDG TIMING</text>
+
+  <!-- 时间轴 -->
+  <line x1="170" y1="64" x2="790" y2="64" stroke="#4f5d75" stroke-width="1.2"/>
+  <g font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">
+    <text x="170" y="56" text-anchor="middle">0 s</text>
+    <text x="350" y="56" text-anchor="middle">3 s</text>
+    <text x="530" y="56" text-anchor="middle">6 s</text>
+    <text x="710" y="56" text-anchor="middle">9 s</text>
+  </g>
+  <g stroke="#4f5d75" stroke-width="1">
+    <line x1="170" y1="60" x2="170" y2="68"/>
+    <line x1="350" y1="60" x2="350" y2="68"/>
+    <line x1="530" y1="60" x2="530" y2="68"/>
+    <line x1="710" y1="60" x2="710" y2="68"/>
+    <line x1="770" y1="60" x2="770" y2="68"/>
+  </g>
+  <text x="790" y="56" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">10 s</text>
+
+  <!-- 做法 A -->
+  <text x="60" y="104" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">做法 A：初始化一开始即使能（已废除）</text>
+  <rect x="170" y="116" width="600" height="44" fill="#e7e7e7" stroke="#4f5d75" stroke-width="1"/>
+  <rect x="530" y="116" width="240" height="44" fill="#f7e3dc" stroke="#bf4520" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="650" y="143" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#bf4520">PHY 自协商最多 10 s</text>
+
+  <line x1="170" y1="108" x2="170" y2="170" stroke="#2d3142" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="178" y="184" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">t = 0 使能，3 s 窗口开始计时</text>
+
+  <line x1="350" y1="108" x2="350" y2="176" stroke="#bf4520" stroke-width="2"/>
+  <circle cx="350" cy="138" r="7" fill="#bf4520"/>
+  <text x="358" y="106" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#bf4520">3 s 处被复位，日志停在初始化中途</text>
+
+  <!-- 做法 B -->
+  <text x="60" y="232" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2d3142">做法 B：初始化完成后才使能（现方案）</text>
+  <rect x="170" y="244" width="480" height="44" fill="#e7e7e7" stroke="#4f5d75" stroke-width="1"/>
+  <text x="410" y="271" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">外设、串口、外部 SRAM、lwIP 逐个初始化</text>
+
+  <rect x="650" y="244" width="120" height="44" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+  <text x="710" y="271" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2d3142">主循环喂狗</text>
+
+  <line x1="650" y1="236" x2="650" y2="300" stroke="#bf4520" stroke-width="2"/>
+  <text x="642" y="228" text-anchor="end" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#bf4520">初始化末尾调用 iwdg_start()</text>
+
+  <g stroke="#bf4520" stroke-width="1.4">
+    <line x1="680" y1="288" x2="680" y2="296"/>
+    <line x1="700" y1="288" x2="700" y2="296"/>
+    <line x1="720" y1="288" x2="720" y2="296"/>
+    <line x1="740" y1="288" x2="740" y2="296"/>
+  </g>
+  <text x="710" y="316" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">100 ms / 500 ms 一次</text>
+
+  <!-- 结论 -->
+  <text x="60" y="352" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">3 秒窗口 = 32 分频 × 3750 / 40 kHz LSI；PHY 自协商 = 100 次轮询 × 100 ms，两者叠加就是启动复位循环。</text>
+  <text x="60" y="376" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">把使能点移到初始化之后，初始化耗时再长也不会被咬；进入主循环后第一步就是喂狗。</text>
+</svg>

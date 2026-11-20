@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="1000" height="660" role="img" aria-labelledby="dm-title dm-desc">
+<title id="dm-title">DM9000 驱动的初始化、发送与接收路径</title>
+<desc id="dm-desc">DM9000 驱动的三个主要流程及其关键步骤</desc>
+<rect width="1000" height="660" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">DM9000 驱动：初始化、发送与接收</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">三条流程共用同一个"索引 + 数据口"访问模型，靠 PRIMASK 临界区互斥</text>
+
+<text x="40" y="112" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">一、初始化 DM9000_Init()</text>
+<text x="360" y="112" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">二、发送 DM9000_SendPacket()</text>
+<text x="680" y="112" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">三、接收路径</text>
+
+<rect x="40" y="128" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="159" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">用芯片 UID 生成 MAC 地址</text>
+
+<rect x="40" y="196" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="227" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">硬复位（RST 引脚）+ 软复位</text>
+
+<rect x="40" y="264" width="280" height="52" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="60" y="295" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">读 ID 校验：0x90000A46</text>
+
+<rect x="40" y="332" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="363" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">配 PHY 自协商与控制寄存器</text>
+
+<rect x="40" y="400" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="431" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">写 PAR / MAR，开接收 RCR_RXEN</text>
+
+<rect x="40" y="468" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="499" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">最后才打开中断 IMR</text>
+
+<line x1="180" y1="182" x2="180" y2="194" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="180" y1="250" x2="180" y2="262" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="180" y1="318" x2="180" y2="330" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="180" y1="386" x2="180" y2="398" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="180" y1="454" x2="180" y2="466" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="360" y="128" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="380" y="159" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">关网卡中断 IMR = IMR_PAR</text>
+
+<rect x="360" y="196" width="280" height="52" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="380" y="227" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">进临界区，写 MWCMD 保持索引</text>
+
+<rect x="360" y="264" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="380" y="295" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">pbuf 链逐字节拼 16 位字写入</text>
+
+<rect x="360" y="332" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="380" y="363" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">写长度 TXPLL / TXPLH</text>
+
+<rect x="360" y="400" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="380" y="431" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">置 TCR 触发发送</text>
+
+<rect x="360" y="468" width="280" height="52" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="380" y="499" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">带超时轮询 ISR_PTS，写 1 清标志</text>
+
+<line x1="500" y1="182" x2="500" y2="194" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="500" y1="250" x2="500" y2="262" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="500" y1="318" x2="500" y2="330" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="500" y1="386" x2="500" y2="398" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="500" y1="454" x2="500" y2="466" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="680" y="128" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="700" y="159" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">PG6 下降沿进 EXTI9_5 中断</text>
+
+<rect x="680" y="196" width="280" height="52" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="700" y="227" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">回调读 ISR 并写 1 清中断源</text>
+
+<rect x="680" y="264" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="700" y="295" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">主循环 DM9000_TakeRxFlag()</text>
+
+<rect x="680" y="332" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="700" y="363" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">读 MRCMDX 预取首字节握手</text>
+
+<rect x="680" y="400" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="700" y="431" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">MRCMD 弹包，校验状态与长度</text>
+
+<rect x="680" y="468" width="280" height="52" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="700" y="499" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">pbuf 交给 ethernetif_input()</text>
+
+<line x1="820" y1="182" x2="820" y2="194" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="820" y1="250" x2="820" y2="262" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="820" y1="318" x2="820" y2="330" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="820" y1="386" x2="820" y2="398" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="820" y1="454" x2="820" y2="466" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<line x1="40" y1="552" x2="960" y2="552" stroke="#d5d9e0" stroke-width="1"/>
+<text x="40" y="582" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">"写索引 + 读写数据"两步之间不能被插入别的访问，否则会静默读到另一个寄存器的值</text>
+<text x="40" y="606" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">中断是电平保持型：不写 1 清 ISR，下降沿只出现一次，之后所有包都会漏掉</text>
+<text x="40" y="630" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">发送等待发送完成位必须带超时，否则对端异常时主循环会死等</text>
+</svg>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 760 470" role="img" aria-labelledby="dm-title dm-desc" xmlns="http://www.w3.org/2000/svg" id="dwt-map-root">
+  <title id="dm-title">DWT 能力地图</title>
+  <desc id="dm-desc">DWT 寄存器到能力到应用场景的对应关系，灰色虚线的 trace 触发在 F103 上不可用</desc>
+
+  <defs>
+      <style>#dwt-map-root .title { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; font-size: 20px; font-weight: 600; fill: #2d3142; }
+      #dwt-map-root .sub { font-family: "Microsoft YaHei", sans-serif; font-size: 11.5px; fill: #78828f; }
+      #dwt-map-root .reg { fill: #ffffff; stroke: #ccd2da; stroke-width: 1.2; }
+      #dwt-map-root .scene { fill: #f7f8fa; stroke: #dde2e8; stroke-width: 1.1; }
+      #dwt-map-root .cap { font-family: "Microsoft YaHei", sans-serif; font-size: 13.5px; font-weight: 600; fill: #bf4520; }
+      #dwt-map-root .item { font-family: "Microsoft YaHei", sans-serif; font-size: 13px; fill: #3a4052; }
+      #dwt-map-root .mono { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; fill: #2d3142; }
+      #dwt-map-root .dim { fill: #c3c9d2; stroke: #c3c9d2; }
+      #dwt-map-root .dimt { font-family: "Microsoft YaHei", sans-serif; font-size: 13px; fill: #a9b0bb; }
+      #dwt-map-root .note { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 12.5px; fill: #4f5d75; }</style>
+    <marker id="dwt-map-ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="#9aa4b2"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="24" y="34">DWT 能力地图</text>
+  <text class="sub" x="736" y="34" text-anchor="end">寄存器 → 能力 → 场景；灰色虚线为 F103 不可用</text>
+
+  <!-- 行 1：CYCCNT -->
+  <rect class="reg" x="24" y="56" width="230" height="54" rx="6"/>
+  <text class="mono" x="38" y="78">DWT_CYCCNT</text>
+  <text class="sub" x="38" y="96">32 位，每 CPU 时钟 +1，59.65 s 回绕</text>
+  <line class="ar" x1="254" y1="83" x2="286" y2="83" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <text class="cap" x="290" y="78">精确计时</text>
+  <text class="sub" x="290" y="96">13.9 ns @72 MHz</text>
+  <line class="ar" x1="470" y1="83" x2="502" y2="83" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <rect class="scene" x="506" y="56" width="230" height="54" rx="6"/>
+  <text class="item" x="520" y="78">函数 / 临界区耗时</text>
+  <text class="sub" x="520" y="96">延时标定、中断响应延迟</text>
+
+  <!-- 行 2：COMP + MASK -->
+  <rect class="reg" x="24" y="120" width="230" height="54" rx="6"/>
+  <text class="mono" x="38" y="142">DWT_COMP0~3 + MASK</text>
+  <text class="sub" x="38" y="160">4 个比较器，区域监视 2^n 字节</text>
+  <line class="ar" x1="254" y1="147" x2="286" y2="147" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <text class="cap" x="290" y="142">数据观察点</text>
+  <text class="sub" x="290" y="160">读/写命中即停</text>
+  <line class="ar" x1="470" y1="147" x2="502" y2="147" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <rect class="scene" x="506" y="120" width="230" height="54" rx="6"/>
+  <text class="item" x="520" y="142">谁改了这个变量</text>
+  <text class="sub" x="520" y="160">越界写、缓冲区踩踏</text>
+
+  <!-- 行 3：PCSR -->
+  <rect class="reg" x="24" y="184" width="230" height="54" rx="6"/>
+  <text class="mono" x="38" y="206">DWT_PCSR + POSTCNT</text>
+  <text class="sub" x="38" y="224">按周期自动采样当前 PC</text>
+  <line class="ar" x1="254" y1="211" x2="286" y2="211" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <text class="cap" x="290" y="206">热点采样</text>
+  <text class="sub" x="290" y="224">零侵入</text>
+  <line class="ar" x1="470" y1="211" x2="502" y2="211" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <rect class="scene" x="506" y="184" width="230" height="54" rx="6"/>
+  <text class="item" x="520" y="206">程序时间花在哪</text>
+  <text class="sub" x="520" y="224">优化前找瓶颈</text>
+
+  <!-- 行 4：性能计数器 -->
+  <rect class="reg" x="24" y="248" width="230" height="54" rx="6"/>
+  <text class="mono" x="38" y="270">CPICNT / EXCCNT / SLEEPCNT</text>
+  <text class="sub" x="38" y="288">LSUCNT / FOLDCNT，均为 8 位</text>
+  <line class="ar" x1="254" y1="275" x2="286" y2="275" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <text class="cap" x="290" y="270">开销量化</text>
+  <text class="sub" x="290" y="288">数量级评估</text>
+  <line class="ar" x1="470" y1="275" x2="502" y2="275" stroke="#9aa4b2" stroke-width="1.2" marker-end="url(#dwt-map-ar)"/>
+  <rect class="scene" x="506" y="248" width="230" height="54" rx="6"/>
+  <text class="item" x="520" y="270">中断开销、空转占比</text>
+  <text class="sub" x="520" y="288">低功耗与访存效率</text>
+
+  <!-- 行 5：trace 触发（不可用） -->
+  <rect x="24" y="312" width="230" height="54" rx="6" fill="#fbfbfc" stroke="#e3e7ec" stroke-width="1.1" stroke-dasharray="5 4"/>
+  <text x="38" y="334" font-family="Consolas, monospace" font-size="12.5" fill="#a9b0bb">COMP 命中 → ETM 触发</text>
+  <text x="38" y="352" class="sub">依赖 ETM，F103 未集成</text>
+  <line x1="254" y1="339" x2="286" y2="339" stroke="#c3c9d2" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text class="dimt" x="290" y="334">Trace 触发</text>
+  <text x="290" y="352" class="sub">F103 不可用</text>
+  <line x1="470" y1="339" x2="502" y2="339" stroke="#c3c9d2" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <rect x="506" y="312" width="230" height="54" rx="6" fill="#fbfbfc" stroke="#e3e7ec" stroke-width="1.1" stroke-dasharray="5 4"/>
+  <text class="dimt" x="520" y="334">指令流跟踪</text>
+  <text x="520" y="352" class="sub">需 ETM（F4/F7/H7）</text>
+
+  <!-- 底部：使能条件 -->
+  <line x1="24" y1="396" x2="736" y2="396" stroke="#dde2e8" stroke-width="1"/>
+  <text class="note" x="24" y="424">使用前提：DEMCR.TRCENA = 1 → DWT_CTRL.CYCCNTENA = 1 → 读寄存器（代码或调试器）</text>
+  <text class="note" x="24" y="448">三个易漏点：不开 TRCENA 计数不转；睡眠/停机期间 CYCCNT 停走；复位后需重新使能</text>
+</svg>

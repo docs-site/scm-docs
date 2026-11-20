@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="linux-boot-chain-ab-title linux-boot-chain-ab-desc" id="linux-boot-chain-ab-root">
+        <title id="linux-boot-chain-ab-title">Linux 启动链与 A/B 回滚联动</title>
+        <desc id="linux-boot-chain-ab-desc">架构图：从 BootROM、SPL、U-Boot 到内核与 rootfs 的启动链逐级加载，U-Boot 读取环境变量中的 bootcount 与 boot_slot 选择槽位，用户空间自检通过后用 fw_setenv 清除标志完成确认，超限则由 U-Boot 切回旧槽。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #linux-boot-chain-ab-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #linux-boot-chain-ab-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #linux-boot-chain-ab-root .diagram-container { width: 100%; overflow-x: auto; }
+      #linux-boot-chain-ab-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="linux-boot-chain-ab-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="linux-boot-chain-ab-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="linux-boot-chain-ab-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Boot chain arrows -->
+        <line x1="400" y1="144" x2="400" y2="176" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-boot-chain-ab-arrow)"/>
+        <line x1="400" y1="244" x2="400" y2="276" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-boot-chain-ab-arrow)"/>
+        <line x1="400" y1="344" x2="400" y2="376" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-boot-chain-ab-arrow)"/>
+        <line x1="400" y1="444" x2="400" y2="476" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-boot-chain-ab-arrow)"/>
+
+        <rect x="412" y="152" width="88" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="456" y="164" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">加载</text>
+
+        <rect x="412" y="252" width="88" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="456" y="264" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">加载</text>
+
+        <rect x="412" y="352" width="88" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="456" y="364" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">按槽引导</text>
+
+        <rect x="412" y="452" width="136" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="480" y="464" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">挂载 rootfs_a / b</text>
+
+        <!-- env and confirmation arrows -->
+        <line x1="816" y1="312" x2="624" y2="312" stroke="#bf4520" stroke-width="1.4" marker-end="url(#linux-boot-chain-ab-arrow-accent)"/>
+        <rect x="646" y="286" width="152" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="722" y="298" fill="#bf4520" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">读取 bootcount / boot_slot</text>
+
+        <line x1="1010" y1="480" x2="1010" y2="348" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-boot-chain-ab-arrow)"/>
+        <rect x="1020" y="390" width="88" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="1064" y="402" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">标记成功</text>
+
+        <line x1="624" y1="512" x2="816" y2="512" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#linux-boot-chain-ab-arrow)"/>
+        <rect x="652" y="486" width="88" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="696" y="498" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">自检通过</text>
+
+        <!-- Node: BootROM -->
+        <rect x="180" y="80" width="440" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="180" y="80" width="440" height="64" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <text x="400" y="106" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">BootROM · 芯片固化</text>
+        <text x="400" y="126" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">从 eMMC/SD 的 boot 分区加载 SPL</text>
+
+        <!-- Node: SPL -->
+        <rect x="180" y="180" width="440" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="180" y="180" width="440" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="400" y="206" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">SPL / TPL</text>
+        <text x="400" y="226" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">初始化 DRAM，加载 U-Boot 正式版</text>
+
+        <!-- Node: U-Boot -->
+        <rect x="180" y="280" width="440" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="180" y="280" width="440" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="400" y="306" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">U-Boot</text>
+        <text x="400" y="326" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">读环境变量，决定引导哪个槽并自增 bootcount</text>
+
+        <!-- Node: Kernel + DTB -->
+        <rect x="180" y="380" width="440" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="180" y="380" width="440" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="400" y="406" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Kernel + DTB</text>
+        <text x="400" y="426" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">boot_a / boot_b 分区</text>
+
+        <!-- Node: Rootfs -->
+        <rect x="180" y="480" width="440" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="180" y="480" width="440" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="400" y="506" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Rootfs</text>
+        <text x="400" y="526" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">rootfs_a / rootfs_b · dm-verity</text>
+
+        <!-- Node: U-Boot 环境变量 (focal) -->
+        <rect x="820" y="280" width="380" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="820" y="280" width="380" height="64" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="1010" y="306" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">U-Boot 环境变量</text>
+        <text x="1010" y="326" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">bootcount · bootlimit · boot_slot</text>
+
+        <!-- Node: 用户空间确认 -->
+        <rect x="820" y="480" width="380" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="820" y="480" width="380" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="1010" y="506" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">用户空间确认</text>
+        <text x="1010" y="526" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">fw_setenv upgrade_available 0</text>
+      </svg>

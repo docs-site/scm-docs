@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" role="img" aria-labelledby="subnetmask-title subnetmask-desc">
+<title id="subnetmask-title">子网掩码与是否同网段的判定</title>
+<desc id="subnetmask-desc">子网掩码与是否同网段的判定</desc>
+<rect width="1000" height="600" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">子网掩码与「是否同网段」的判定</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">把 IP 与掩码逐位做与运算，得到网络地址；网络地址相同才算同网段</text>
+<rect x="40" y="104" width="600" height="180" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="54" y="139.9432" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">板子  192.168.16.30   &amp;   255.255.255.0   =   192.168.16.0</text>
+<text x="54" y="163.26319999999998" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">PC    192.168.16.100  &amp;   255.255.255.0   =   192.168.16.0</text>
+<text x="54" y="186.58319999999998" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">PC 侧二进制    11000000.10101000.00010000.01100100</text>
+<text x="54" y="209.90319999999997" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">掩码二进制    11111111.11111111.11111111.00000000</text>
+<text x="54" y="233.22319999999996" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">--------------------------------------------------</text>
+<text x="54" y="256.54319999999996" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">结果          11000000.10101000.00010000.00000000  →  192.168.16.0</text>
+<rect x="670" y="104" width="290" height="180" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="815.0" y="186.9368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">同一网段</text>
+<text x="815.0" y="210.5832" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">网络地址相同 ⇒ 直接通信，不经过网关</text>
+<rect x="40" y="314" width="600" height="180" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="54" y="349.94319999999993" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">板子  192.168.16.30   &amp;   255.255.255.0   =   192.168.16.0</text>
+<text x="54" y="373.2631999999999" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">PC    192.168.17.100  &amp;   255.255.255.0   =   192.168.17.0</text>
+<text x="54" y="396.5831999999999" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">PC 侧二进制    11000000.10101000.00010001.01100100</text>
+<text x="54" y="419.9031999999999" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">掩码二进制    11111111.11111111.11111111.00000000</text>
+<text x="54" y="443.2231999999999" font-family="'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">--------------------------------------------------</text>
+<text x="54" y="466.5431999999999" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#2d3142" text-anchor="start" xml:space="preserve">结果          11000000.10101000.00010001.00000000  →  192.168.17.0</text>
+<rect x="670" y="314" width="290" height="180" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="815.0" y="396.9368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">不同网段</text>
+<text x="815.0" y="420.5832" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">网络地址不同 ⇒ 必须经路由器转发</text>
+<rect x="40" y="524" width="920" height="64" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="500.0" y="560.2432000000001" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#4f5d75" text-anchor="middle" xml:space="preserve">掩码是 /24 时可以直接看前三段是否相同；不是 /24（例如 /26）就必须回到按位与计算</text>
+</svg>

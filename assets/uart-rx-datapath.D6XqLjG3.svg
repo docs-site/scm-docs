@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg id="uart-rx-datapath-root" xmlns="http://www.w3.org/2000/svg" width="940" height="380" viewBox="0 0 940 380" role="img" aria-labelledby="uart-rx-datapath-dpTitle uart-rx-datapath-dpDesc">
+  <title id="uart-rx-datapath-dpTitle">一个字节从引脚到缓冲区的路径</title>
+  <desc id="uart-rx-datapath-dpDesc">字节先经移位寄存器拼装进入数据寄存器，RXNE 置位后触发 NVIC 中断，中断里取走字节并重新武装，最终写入行缓冲或交给字节流消费者。</desc>
+
+  <rect x="0" y="0" width="940" height="380" fill="#f5f5f5"/>
+  <defs>
+    <marker id="uart-rx-datapath-dpa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d3142"/>
+    </marker>
+    <marker id="uart-rx-datapath-dpac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="36" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">RX DATA PATH</text>
+
+  <!-- 硬件侧 -->
+  <text x="60" y="70" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#4f5d75">硬件：由 USART1 自动完成</text>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="60" y="84" width="130" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="125" y="112" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">RX 引脚</text>
+    <text x="125" y="134" text-anchor="middle" font-size="12" fill="#4f5d75">PA10</text>
+
+    <rect x="220" y="84" width="160" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="300" y="112" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">接收移位寄存器</text>
+    <text x="300" y="134" text-anchor="middle" font-size="12" fill="#4f5d75">逐位拼成 1 字节</text>
+
+    <rect x="410" y="84" width="140" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="480" y="112" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">USART1-&gt;DR</text>
+    <text x="480" y="134" text-anchor="middle" font-size="12" fill="#4f5d75">字节暂存</text>
+
+    <rect x="580" y="84" width="140" height="72" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="650" y="112" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">RXNE 置位</text>
+    <text x="650" y="134" text-anchor="middle" font-size="12" fill="#4f5d75">数据寄存器非空</text>
+
+    <rect x="750" y="84" width="130" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="815" y="112" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">NVIC</text>
+    <text x="815" y="134" text-anchor="middle" font-size="12" fill="#4f5d75">抢占 3 / 子 2</text>
+  </g>
+
+  <path d="M 190 120 L 220 120" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpa)"/>
+  <path d="M 380 120 L 410 120" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpa)"/>
+  <path d="M 550 120 L 580 120" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpa)"/>
+  <path d="M 720 120 L 750 120" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpa)"/>
+
+  <path d="M 815 156 L 815 206 L 222 206 L 222 244" fill="none" stroke="#bf4520" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpac)"/>
+  <text x="480" y="198" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#bf4520">每 86.8 µs 最多触发一次</text>
+
+  <!-- 软件侧 -->
+  <text x="60" y="232" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#4f5d75">软件：中断里只做三件事</text>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="60" y="244" width="180" height="76" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="150" y="272" text-anchor="middle" font-size="12" fill="#2d3142">USART1_IRQHandler</text>
+    <text x="150" y="294" text-anchor="middle" font-size="12" fill="#4f5d75">HAL_UART_IRQHandler</text>
+
+    <rect x="280" y="244" width="200" height="76" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="380" y="272" text-anchor="middle" font-size="12" fill="#2d3142">HAL_UART_RxCpltCallback</text>
+    <text x="380" y="294" text-anchor="middle" font-size="12" fill="#4f5d75">取字节 + 重新武装</text>
+
+    <rect x="520" y="244" width="200" height="76" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="620" y="272" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">分发</text>
+    <text x="620" y="294" text-anchor="middle" font-size="12" fill="#4f5d75">行缓冲 / 字节流消费者</text>
+
+    <rect x="760" y="244" width="120" height="76" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+    <text x="820" y="272" text-anchor="middle" font-size="13" font-weight="600" fill="#2d3142">主循环</text>
+    <text x="820" y="294" text-anchor="middle" font-size="12" fill="#4f5d75">取行 / 取事件</text>
+  </g>
+
+  <path d="M 240 282 L 280 282" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpa)"/>
+  <path d="M 480 282 L 520 282" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpa)"/>
+  <path d="M 720 282 L 760 282" fill="none" stroke="#2d3142" stroke-width="1.4" marker-end="url(#uart-rx-datapath-dpa)"/>
+
+  <text x="60" y="356" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#4f5d75">中断里不做发送、不算 CRC、不写 Flash：这些动作的耗时都远超一个字节的间隔（86.8 µs）。</text>
+</svg>

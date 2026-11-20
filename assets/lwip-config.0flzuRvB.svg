@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="1000" height="620" role="img" aria-labelledby="lc-title lc-desc">
+<title id="lc-title">lwipopts.h 的三类配置</title>
+<desc id="lc-desc">运行模式、内存与协议开关三类配置及关键取值</desc>
+<rect width="1000" height="620" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">lwipopts.h 的三类配置</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">裁剪依据只有两条：内存够用、协议够用</text>
+
+<text x="40" y="112" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">一、运行模式</text>
+
+<rect x="40" y="128" width="290" height="140" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="156" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">NO_SYS = 1</text>
+<text x="60" y="180" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">裸机，协议栈靠主循环推</text>
+<text x="60" y="208" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">SYS_LIGHTWEIGHT_PROT = 1</text>
+<text x="60" y="232" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">用 PRIMASK 临界区保护共享数据</text>
+<text x="60" y="258" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">NETCONN / SOCKET = 0</text>
+
+<text x="370" y="112" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">二、内存</text>
+
+<rect x="370" y="128" width="290" height="140" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="390" y="156" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">MEM_SIZE = 8 KB</text>
+<text x="390" y="180" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">堆，按需分配</text>
+<text x="390" y="208" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">PBUF_POOL_SIZE = 8</text>
+<text x="390" y="232" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">接收 pbuf 池，用光就丢包</text>
+<text x="390" y="258" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">TCP_PCB = 5，TCP_SEG = 32</text>
+
+<text x="700" y="112" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">三、协议开关</text>
+
+<rect x="700" y="128" width="260" height="140" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="720" y="156" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">打开</text>
+<text x="720" y="180" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">TCP / UDP / ICMP / ARP</text>
+<text x="720" y="208" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">关闭</text>
+<text x="720" y="232" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">DHCP / DNS / IGMP / AUTOIP</text>
+<text x="720" y="258" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">IP_REASSEMBLY / IP_FRAG = 0</text>
+
+<line x1="40" y1="300" x2="960" y2="300" stroke="#d5d9e0" stroke-width="1"/>
+
+<text x="40" y="332" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">四、未定义项走 lwIP 默认值</text>
+
+<rect x="40" y="348" width="440" height="112" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="376" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">TCP_MSS = 536（默认，非 1460）</text>
+<text x="60" y="400" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">TCP_SND_BUF = 2 x TCP_MSS</text>
+<text x="60" y="424" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">TCP_WND = 4 x TCP_MSS</text>
+<text x="60" y="448" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">代价：分段更碎，吞吐换内存</text>
+
+<rect x="500" y="348" width="460" height="112" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="520" y="376" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">关掉 NETCONN / SOCKET 意味着只能用回调式 RAW API</text>
+<text x="520" y="400" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">关掉 DHCP / DNS 意味着必须静态配地址、只能用 IP 访问</text>
+<text x="520" y="424" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">关掉分片意味着收到分片包直接丢，大包不通要先怀疑这里</text>
+
+<line x1="40" y1="492" x2="960" y2="492" stroke="#d5d9e0" stroke-width="1"/>
+
+<text x="40" y="524" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">五、初始化顺序 lwip_comm_init()</text>
+
+<rect x="40" y="540" width="176" height="56" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="128.0" y="564" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">DM9000_Init()</text>
+<text x="128.0" y="584" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">先认卡</text>
+
+<rect x="240" y="540" width="176" height="56" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="328.0" y="564" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">lwip_init()</text>
+<text x="328.0" y="584" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">再起协议栈</text>
+
+<rect x="440" y="540" width="176" height="56" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="528.0" y="564" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">netif_add()</text>
+<text x="528.0" y="584" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">登记接口</text>
+
+<rect x="640" y="540" width="176" height="56" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="728.0" y="564" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">set_default / set_up</text>
+<text x="728.0" y="584" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">启用接口</text>
+
+<rect x="840" y="540" width="120" height="56" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="900.0" y="564" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">poll 轮询</text>
+<text x="900.0" y="584" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">每 1 ms</text>
+
+<line x1="220" y1="568" x2="236" y2="568" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="420" y1="568" x2="436" y2="568" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="620" y1="568" x2="636" y2="568" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="820" y1="568" x2="836" y2="568" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

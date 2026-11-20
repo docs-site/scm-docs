@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dwt-timing-title dwt-timing-desc" id="dwt-timing-root">
+        <title id="dwt-timing-title">CYCCNT 计时原理：两次快照，一个差值</title>
+        <desc id="dwt-timing-desc">时间轴上 CYCCNT 随 CPU 时钟持续累加，代码在 t0 与 t1 各读一次快照，无符号相减得到 0x200 个周期，跨过 32 位回绕仍然正确，除以 72 MHz 后约为 7.1 微秒。</desc>
+        <defs>
+      <style>#dwt-timing-root { --color-paper:   #f5f5f5;   
+      --color-ink:     #2d3142;   
+      --color-muted:   #4f5d75;   
+      --color-soft:    #5a6580;
+      --color-accent:  #bf4520;   
+      --font-sans:     'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace; }
+      #dwt-timing-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #dwt-timing-root .diagram-container { width: 100%; overflow-x: auto; }
+      @media print {
+#dwt-timing-root .diagram-container { overflow-x: visible; }
+}</style>
+          <marker id="dwt-timing-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="dwt-timing-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="dwt-timing-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Editorial lead-in -->
+        <text x="96" y="60" fill="#4f5d75" font-size="13"
+              font-family="'Instrument Serif', 'Noto Serif SC', 'Songti SC', 'SimSun', serif"
+              font-style="italic">计数器自由运行，代码只能取快照；两次读数相减，就是这段代码跑过的周期数。</text>
+
+        <!-- Time axis -->
+        <line x1="96" y1="216" x2="864" y2="216" stroke="#4f5d75" stroke-width="1" marker-end="url(#dwt-timing-arrow)"/>
+        <text x="96" y="202" fill="#5a6580" font-size="12"
+              font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">CYCCNT 每周期 +1</text>
+        <text x="864" y="202" fill="#5a6580" font-size="12" text-anchor="end"
+              font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">时间 →</text>
+
+        <!-- Measured interval bracket, hung under the axis -->
+        <line x1="200" y1="216" x2="200" y2="252" stroke="#bf4520" stroke-width="1" stroke-opacity="0.55"/>
+        <line x1="760" y1="216" x2="760" y2="252" stroke="#bf4520" stroke-width="1" stroke-opacity="0.55"/>
+        <line x1="200" y1="240" x2="760" y2="240" stroke="#bf4520" stroke-width="6" stroke-linecap="round" stroke-opacity="0.25"/>
+        <text x="480" y="276" fill="#2d3142" font-size="12" font-weight="500" text-anchor="middle"
+              font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">do_something() 执行区间 · 期间 CYCCNT 继续累加</text>
+
+        <!-- Drop lines and event dots (before the snapshot boxes) -->
+        <line x1="200" y1="156" x2="200" y2="212" stroke="#4f5d75" stroke-width="1"/>
+        <line x1="760" y1="156" x2="760" y2="212" stroke="#4f5d75" stroke-width="1"/>
+        <line x1="520" y1="180" x2="520" y2="212" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <circle cx="200" cy="216" r="4" fill="#2d3142"/>
+        <circle cx="760" cy="216" r="4" fill="#2d3142"/>
+        <circle cx="520" cy="216" r="4" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2"/>
+
+        <!-- Wrap marker -->
+        <text x="520" y="172" fill="#5a6580" font-size="12" font-weight="500" text-anchor="middle"
+              font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">回绕 · 模 2^32</text>
+
+        <!-- Snapshot t0 -->
+        <rect x="120" y="100" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="200" y="124" fill="#4f5d75" font-size="12" font-weight="500" text-anchor="middle"
+              font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">t0 · 读 CYCCNT</text>
+        <text x="200" y="145" fill="#2d3142" font-size="13" text-anchor="middle"
+              font-family="'Geist Mono', ui-monospace, monospace">0xFFFFFF00</text>
+
+        <!-- Snapshot t1 -->
+        <rect x="680" y="100" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="760" y="124" fill="#4f5d75" font-size="12" font-weight="500" text-anchor="middle"
+              font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">t1 · 读 CYCCNT</text>
+        <text x="760" y="145" fill="#2d3142" font-size="13" text-anchor="middle"
+              font-family="'Geist Mono', ui-monospace, monospace">0x00000100</text>
+
+        <!-- Arithmetic and conversion -->
+        <rect x="96" y="300" width="768" height="80" rx="6"
+              fill="#2d3142" stroke="#2d3142" stroke-width="0.8" fill-opacity="0.02" stroke-opacity="0.10"/>
+        <line x1="600" y1="312" x2="600" y2="368" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+
+        <text x="120" y="332" fill="#2d3142" font-size="13"
+              font-family="'Geist Mono', ui-monospace, monospace">0x00000100 − 0xFFFFFF00 = <tspan fill="#bf4520">0x00000200</tspan></text>
+        <text x="120" y="358" fill="#5a6580" font-size="12"
+              font-family="'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无符号减法按模 2^32 计算，跨回绕直接得到正确差值</text>
+
+        <text x="640" y="332" fill="#bf4520" font-size="13"
+              font-family="'Geist Mono', ui-monospace, monospace">≈ 7.1 µs</text>
+        <text x="640" y="358" fill="#5a6580" font-size="12"
+              font-family="'Geist Mono', ui-monospace, monospace">0x200 ÷ 72 MHz</text>
+      </svg>

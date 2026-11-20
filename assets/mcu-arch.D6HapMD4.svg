@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mcu-arch-title mcu-arch-desc" id="mcu-arch-root">
+        <title id="mcu-arch-title">通用单片机（MCU）架构框图</title>
+        <desc id="mcu-arch-desc">单片机内部的通用结构：CPU 内核与内核外设经高速总线 AHB 连接 FLASH、SRAM 和时钟复位系统，电源管理等低速支撑电路挂在 APB 一侧，外设总线 APB 经总线桥挂接片上外设，外部晶振与传感器执行器跨芯片边界接入。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #mcu-arch-root { --color-paper:   #f5f5f5;   
+      --color-ink:     #2d3142;   
+      --color-muted:   #4f5d75;   
+      --color-soft:    #5a6580;
+      --color-accent:  #bf4520;   
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace; }
+      #mcu-arch-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #mcu-arch-root .diagram-container { width: 100%; overflow-x: auto; }
+      #mcu-arch-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="mcu-arch-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="mcu-arch-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="mcu-arch-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+          <marker id="mcu-arch-arrow-start" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto-start-reverse"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- ============ zones（先画区域） ============ -->
+        <!-- 芯片边界（虚线） -->
+        <rect x="320" y="56" width="640" height="560" rx="8" fill="#2d3142" stroke="#2d3142" stroke-width="1" stroke-dasharray="6,4" fill-opacity="0.02" stroke-opacity="0.35"/>
+        <rect x="590" y="46" width="100" height="21" rx="2" fill="#f5f5f5"/>
+        <text x="640" y="61" fill="#5a6580" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">MCU 芯片</text>
+        <!-- 内核分区 -->
+        <rect x="344" y="96" width="592" height="136" rx="8" fill="#2d3142" stroke="#2d3142" stroke-width="0.8" fill-opacity="0.02" stroke-opacity="0.10"/>
+        <rect x="352" y="86" width="52" height="21" rx="2" fill="#f5f5f5"/>
+        <text x="378" y="101" fill="#5a6580" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">内核</text>
+
+        <!-- ============ arrows（先箭头后节点） ============ -->
+        <!-- CPU 内核 ↔ AHB -->
+        <line x1="460" y1="208" x2="460" y2="280" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#mcu-arch-arrow-start)" marker-end="url(#mcu-arch-arrow)"/>
+        <!-- AHB ↔ FLASH / SRAM / 时钟复位 -->
+        <line x1="440" y1="320" x2="440" y2="368" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#mcu-arch-arrow-start)" marker-end="url(#mcu-arch-arrow)"/>
+        <line x1="624" y1="320" x2="624" y2="368" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#mcu-arch-arrow-start)" marker-end="url(#mcu-arch-arrow)"/>
+        <line x1="832" y1="320" x2="832" y2="368" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#mcu-arch-arrow-start)" marker-end="url(#mcu-arch-arrow)"/>
+        <!-- 电源管理 ↔ APB -->
+        <line x1="832" y1="432" x2="832" y2="456" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#mcu-arch-arrow-start)" marker-end="url(#mcu-arch-arrow)"/>
+        <!-- 总线桥：AHB ↔ APB -->
+        <line x1="532" y1="320" x2="532" y2="456" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#mcu-arch-arrow-start)" marker-end="url(#mcu-arch-arrow)"/>
+        <!-- APB ↔ 片上外设 -->
+        <line x1="640" y1="492" x2="640" y2="540" stroke="#4f5d75" stroke-width="1.2" marker-start="url(#mcu-arch-arrow-start)" marker-end="url(#mcu-arch-arrow)"/>
+        <!-- 外部晶振 → 时钟复位系统 -->
+        <line x1="992" y1="400" x2="936" y2="400" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-arch-arrow)"/>
+        <!-- 传感器 / 执行器 → 片上外设 -->
+        <line x1="256" y1="568" x2="344" y2="568" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#mcu-arch-arrow)"/>
+
+        <!-- ============ arrow labels ============ -->
+        <rect x="540" y="432" width="60" height="21" rx="2" fill="#f5f5f5"/>
+        <text x="570" y="447" fill="#5a6580" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">总线桥</text>
+
+        <!-- ============ nodes ============ -->
+        <!-- CPU 内核（焦点节点） -->
+        <rect x="360" y="144" width="200" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="360" y="144" width="200" height="64" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="460" y="171" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">CPU 内核</text>
+        <text x="460" y="191" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">REGS · ALU · CU</text>
+
+        <!-- 调试接口 -->
+        <rect x="584" y="144" width="136" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="584" y="144" width="136" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="652" y="171" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">调试接口</text>
+        <text x="652" y="191" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">SWD / JTAG</text>
+
+        <!-- 内核外设 -->
+        <rect x="744" y="144" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="744" y="144" width="176" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="832" y="171" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">内核外设</text>
+        <text x="832" y="191" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">NVIC · SYSTICK</text>
+
+        <!-- 高速总线 AHB -->
+        <rect x="344" y="280" width="592" height="40" rx="6" fill="#f5f5f5"/>
+        <rect x="344" y="280" width="592" height="40" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="640" y="297" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">高速总线 AHB</text>
+        <text x="640" y="313" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">ADDR · DATA · CTRL</text>
+
+        <!-- FLASH -->
+        <rect x="360" y="368" width="160" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="360" y="368" width="160" height="64" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <text x="440" y="396" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">FLASH</text>
+        <text x="440" y="417" fill="#4f5d75" font-size="15" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">程序存储器</text>
+
+        <!-- SRAM -->
+        <rect x="544" y="368" width="160" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="544" y="368" width="160" height="64" rx="6" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <text x="624" y="396" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">SRAM</text>
+        <text x="624" y="417" fill="#4f5d75" font-size="15" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">数据存储器</text>
+
+        <!-- 时钟 · 复位 · 电源 -->
+        <rect x="728" y="368" width="208" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="728" y="368" width="208" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="832" y="405" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">时钟 · 复位 · 电源</text>
+
+        <!-- 外设总线 APB -->
+        <rect x="344" y="456" width="592" height="36" rx="6" fill="#f5f5f5"/>
+        <rect x="344" y="456" width="592" height="36" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="640" y="479" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">外设总线 APB</text>
+
+        <!-- 片上外设 -->
+        <rect x="344" y="540" width="592" height="56" rx="6" fill="#f5f5f5"/>
+        <rect x="344" y="540" width="592" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="640" y="562" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">片上外设</text>
+        <text x="640" y="584" fill="#4f5d75" font-size="13" font-family="'Geist Mono',ui-monospace,monospace" text-anchor="middle" letter-spacing="0.02em">GPIO · TIM · UART · I2C · SPI · ADC · DMA</text>
+
+        <!-- 外部晶振（外部设备处理） -->
+        <rect x="992" y="368" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="992" y="368" width="176" height="64" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="1080" y="405" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">外部晶振</text>
+
+        <!-- 传感器 / 执行器（外部设备处理） -->
+        <rect x="80" y="540" width="176" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="80" y="540" width="176" height="64" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="168" y="577" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">传感器 / 执行器</text>
+
+        <!-- ============ legend（底部横条） ============ -->
+        <line x1="80" y1="652" x2="1200" y2="652" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+        <rect x="80" y="663" width="16" height="14" rx="2" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="104" y="675" fill="#4f5d75" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif">核心部件</text>
+        <rect x="224" y="663" width="16" height="14" rx="2" fill="#2d3142" stroke="#4f5d75" stroke-width="1" fill-opacity="0.05"/>
+        <text x="248" y="675" fill="#4f5d75" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif">存储器</text>
+        <rect x="368" y="663" width="16" height="14" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="392" y="675" fill="#4f5d75" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif">数字逻辑</text>
+        <rect x="512" y="663" width="16" height="14" rx="2" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="536" y="675" fill="#4f5d75" font-size="16" font-weight="500" font-family="'Geist','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif">芯片外设备</text>
+      </svg>

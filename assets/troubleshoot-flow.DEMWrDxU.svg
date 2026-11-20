@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 580" role="img" aria-labelledby="tf-title tf-desc" xmlns="http://www.w3.org/2000/svg" id="troubleshoot-flow-root">
+  <title id="tf-title">连不上时怎么排查</title>
+  <desc id="tf-desc">按发生概率依次排除：VTref 供电、PA13/PA14 复用、线缆与速率，最后整片擦除</desc>
+
+  <defs>
+      <style>#troubleshoot-flow-root .title { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; font-size: 20px; font-weight: 600; fill: #2d3142; }
+      #troubleshoot-flow-root .sub { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; fill: #78828f; }
+      #troubleshoot-flow-root .node { fill: #f7f8fa; stroke: #ccd2da; stroke-width: 1.2; }
+      #troubleshoot-flow-root .ans { fill: #ffffff; stroke: #ccd2da; stroke-width: 1.2; }
+      #troubleshoot-flow-root .end { fill: #fdf1ec; stroke: #bf4520; stroke-width: 1.4; }
+      #troubleshoot-flow-root .name { font-family: "Microsoft YaHei", sans-serif; font-size: 13px; font-weight: 600; fill: #2d3142; }
+      #troubleshoot-flow-root .mono { font-family: Consolas, "Courier New", monospace; font-size: 12px; fill: #4f5d75; }
+      #troubleshoot-flow-root .lbl { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; fill: #4f5d75; }
+      #troubleshoot-flow-root .note { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 12.5px; fill: #4f5d75; }</style>
+    <marker id="troubleshoot-flow-tf-ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="#9aa4b2"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="24" y="38">连不上时怎么排查</text>
+  <text class="sub" x="876" y="38" text-anchor="end">按顺序排除，越靠前越常见</text>
+
+  <!-- 起点 -->
+  <rect class="node" x="60" y="56" width="180" height="44" rx="22"/>
+  <text class="name" x="150" y="84" text-anchor="middle">连接失败</text>
+
+  <line x1="165" y1="100" x2="165" y2="130" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#troubleshoot-flow-tf-ar)"/>
+
+  <!-- 判断 1 -->
+  <rect class="node" x="60" y="136" width="210" height="60" rx="6"/>
+  <text class="name" x="165" y="171" text-anchor="middle">VTref 读数为 0？</text>
+
+  <line x1="270" y1="166" x2="548" y2="166" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#troubleshoot-flow-tf-ar)"/>
+  <rect x="326" y="148" width="20" height="16" fill="#fafafa"/>
+  <text class="lbl" x="336" y="161" text-anchor="middle">是</text>
+
+  <line x1="165" y1="196" x2="165" y2="240" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#troubleshoot-flow-tf-ar)"/>
+  <rect x="170" y="210" width="20" height="16" fill="#fafafa"/>
+  <text class="lbl" x="180" y="223" text-anchor="middle">否</text>
+
+  <!-- 判断 2 -->
+  <rect class="node" x="60" y="246" width="210" height="60" rx="6"/>
+  <text class="name" x="165" y="281" text-anchor="middle">复位后立刻失联？</text>
+
+  <line x1="270" y1="276" x2="548" y2="276" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#troubleshoot-flow-tf-ar)"/>
+  <rect x="326" y="258" width="20" height="16" fill="#fafafa"/>
+  <text class="lbl" x="336" y="271" text-anchor="middle">是</text>
+
+  <line x1="165" y1="306" x2="165" y2="350" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#troubleshoot-flow-tf-ar)"/>
+  <rect x="170" y="320" width="20" height="16" fill="#fafafa"/>
+  <text class="lbl" x="180" y="333" text-anchor="middle">否</text>
+
+  <!-- 判断 3 -->
+  <rect class="node" x="60" y="356" width="210" height="60" rx="6"/>
+  <text class="name" x="165" y="391" text-anchor="middle">降到 1 MHz 能连上？</text>
+
+  <line x1="270" y1="386" x2="548" y2="386" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#troubleshoot-flow-tf-ar)"/>
+  <rect x="326" y="368" width="20" height="16" fill="#fafafa"/>
+  <text class="lbl" x="336" y="381" text-anchor="middle">是</text>
+
+  <line x1="165" y1="416" x2="165" y2="460" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#troubleshoot-flow-tf-ar)"/>
+  <rect x="170" y="430" width="20" height="16" fill="#fafafa"/>
+  <text class="lbl" x="180" y="443" text-anchor="middle">否</text>
+
+  <!-- 终点 -->
+  <rect class="end" x="60" y="466" width="210" height="76" rx="6"/>
+  <text class="name" x="165" y="492" text-anchor="middle">整片擦除后重试</text>
+  <text class="sub" x="165" y="514" text-anchor="middle">仍失败：先量 3.3 V 与 NRST</text>
+
+  <!-- 右侧处置 -->
+  <rect class="ans" x="554" y="134" width="300" height="64" rx="6"/>
+  <text class="name" x="572" y="160">目标没上电 / VTref 未接</text>
+  <text class="sub" x="572" y="182">先给板子上电，再发起连接</text>
+
+  <rect class="ans" x="554" y="244" width="300" height="64" rx="6"/>
+  <text class="name" x="572" y="270">PA13/PA14 被复用</text>
+  <text class="sub" x="572" y="292">connect under reset，CubeMX 改回 Serial Wire</text>
+
+  <rect class="ans" x="554" y="354" width="300" height="64" rx="6"/>
+  <text class="name" x="572" y="380">线缆或速率问题</text>
+  <text class="sub" x="572" y="402">缩短线缆、补地线，稳定后再逐步提速</text>
+
+  <line x1="24" y1="544" x2="876" y2="544" stroke="#dde2e8" stroke-width="1"/>
+  <text class="note" x="24" y="568">三种情况都排除后仍失败，多为板子本身没跑起来：先确认 3.3 V 与复位电平，再怀疑调试器。</text>
+</svg>

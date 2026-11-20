@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ota-channels-title ota-channels-desc" id="ota-channels-root">
+        <title id="ota-channels-title">OTA 升级通道全景</title>
+        <desc id="ota-channels-desc">架构图：近场通道（UART、USB、CAN、BLE）与网络通道（Wi-Fi、4G 模组）都把升级包字节流汇聚到设备端的 OTA 代理，由其完成校验、写槽并交给 Bootloader。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #ota-channels-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #ota-channels-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #ota-channels-root .diagram-container { width: 100%; overflow-x: auto; }
+      #ota-channels-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="ota-channels-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="ota-channels-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="ota-channels-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- Zones -->
+        <rect x="40" y="140" width="420" height="420" rx="8" fill="#2d3142" stroke="#2d3142" stroke-width="0.8" fill-opacity="0.02" stroke-opacity="0.10"/>
+        <rect x="68" y="144" width="144" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="140" y="156" fill="#5a6580" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">近场通道 · 本地升级</text>
+
+        <!-- Arrows: left channels -> center -->
+        <path d="M 420,232 H 480 Q 488,232 488,240 V 316 Q 488,324 496,324 H 556" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ota-channels-arrow)"/>
+        <path d="M 420,322 H 468 Q 476,322 476,330 V 328 Q 476,336 484,336 H 556" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ota-channels-arrow)"/>
+        <path d="M 420,412 H 468 Q 476,412 476,404 V 356 Q 476,348 484,348 H 556" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ota-channels-arrow)"/>
+        <path d="M 420,502 H 480 Q 488,502 488,494 V 368 Q 488,360 496,360 H 556" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ota-channels-arrow)"/>
+
+        <!-- Arrows: right side -->
+        <line x1="1140" y1="264" x2="1140" y2="306" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#ota-channels-arrow-link)"/>
+        <rect x="1148" y="272" width="72" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="1184" y="284" fill="#2e5aa8" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">HTTPS</text>
+
+        <line x1="1036" y1="342" x2="928" y2="342" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#ota-channels-arrow)"/>
+        <rect x="954" y="316" width="64" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="986" y="328" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">透传</text>
+
+        <!-- Node: UART -->
+        <rect x="80" y="200" width="340" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="80" y="200" width="340" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="250" y="226" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">UART</text>
+        <text x="250" y="246" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">YMODEM / 私有分块协议</text>
+
+        <!-- Node: USB -->
+        <rect x="80" y="290" width="340" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="80" y="290" width="340" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="250" y="316" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">USB</text>
+        <text x="250" y="336" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">DFU · 免驱动协议</text>
+
+        <!-- Node: CAN -->
+        <rect x="80" y="380" width="340" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="80" y="380" width="340" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="250" y="406" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">CAN / CAN FD</text>
+        <text x="250" y="426" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">UDS 0x34 / 0x36 / 0x37</text>
+
+        <!-- Node: BLE -->
+        <rect x="80" y="470" width="340" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="80" y="470" width="340" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="250" y="496" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">BLE</text>
+        <text x="250" y="516" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">nRF DFU · 分块断点续传</text>
+
+        <!-- Node: MCU (focal) -->
+        <rect x="560" y="310" width="360" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="560" y="310" width="360" height="64" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="740" y="336" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">MCU · App + OTA 代理</text>
+        <text x="740" y="356" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">校验 · 写非活动槽 · 置标志</text>
+
+        <!-- Node: 服务器 -->
+        <rect x="1040" y="200" width="200" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="1040" y="200" width="200" height="64" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="1140" y="226" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">OTA 服务器</text>
+        <text x="1140" y="246" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">版本与包托管</text>
+
+        <!-- Node: 网络模组 -->
+        <rect x="1040" y="310" width="200" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="1040" y="310" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="1140" y="336" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Wi-Fi / 4G 模组</text>
+        <text x="1140" y="356" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" text-anchor="middle">AT 指令 · 断点续传</text>
+      </svg>

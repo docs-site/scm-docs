@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mcu-vs-linux-isolation-title mcu-vs-linux-isolation-desc" id="mcu-vs-linux-isolation-root">
+        <title id="mcu-vs-linux-isolation-title">Linux 分层隔离与单片机裸机崩溃对比</title>
+        <desc id="mcu-vs-linux-isolation-desc">对比两个层级栈：Linux 依靠 MMU、内核故障处理与用户进程之间的隔离边界，把一次崩溃限制在单个进程内；单片机没有 MMU 也没有内核边界，裸机应用独占整个系统，一次 HardFault 就让整机陷入 while(1) 死循环。</desc>
+        <defs>
+      <style>#mcu-vs-linux-isolation-root { --color-paper:   #f5f5f5;   
+      --color-ink:     #2d3142;   
+      --color-muted:   #4f5d75;   
+      --color-accent:  #bf4520;   
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif SC', 'Source Han Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #mcu-vs-linux-isolation-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #mcu-vs-linux-isolation-root .diagram-container { width: 100%; overflow-x: auto; }
+      #mcu-vs-linux-isolation-root .diagram-container { overflow-x: visible; }</style>
+          <marker id="mcu-vs-linux-isolation-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="mcu-vs-linux-isolation-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="mcu-vs-linux-isolation-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- No connectors in this diagram: layer-stack grammar carries the
+             meaning through band order and the boundary rule, so none of the
+             six connector rules are engaged. -->
+
+        <!-- ============ Stack titles ============ -->
+        <text x="64" y="80" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Linux</text>
+        <text x="624" y="80" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">单片机</text>
+
+        <!-- ============ Left stack: Linux (4 layers, 96..384) ============ -->
+        <!-- Band fills (alternating paper / paper-2; focal layer accent-tint) -->
+        <rect x="64" y="96" width="496" height="72" fill="#ececec"/>
+        <rect x="64" y="168" width="496" height="72" fill="#f5f5f5"/>
+        <rect x="64" y="240" width="496" height="72" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <rect x="64" y="312" width="496" height="72" fill="#ececec"/>
+
+        <!-- Hairline dividers between layers -->
+        <line x1="64" y1="168" x2="560" y2="168" stroke="#2d3142" stroke-width="1" stroke-opacity="0.12"/>
+        <line x1="64" y1="312" x2="560" y2="312" stroke="#2d3142" stroke-width="1" stroke-opacity="0.12"/>
+
+        <!-- Outer silhouette -->
+        <rect x="64" y="96" width="496" height="288" fill="none" stroke="#4f5d75" stroke-width="1"/>
+
+        <!-- Fault-isolation boundary: strong rule replacing the hairline
+             between 内核 and the user processes -->
+        <line x1="64" y1="240" x2="560" y2="240" stroke="#2d3142" stroke-width="2"/>
+        <!-- Boundary label: opaque mask, 8px gap above the rule -->
+        <rect x="268" y="212" width="88" height="20" fill="#f5f5f5"/>
+        <text x="312" y="227" fill="#2d3142" font-size="12" font-weight="500" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">故障隔离边界</text>
+
+        <!-- L4 用户进程 B -->
+        <text x="84" y="136" fill="#4f5d75" font-size="8" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">L4</text>
+        <text x="120" y="138" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">用户进程 B</text>
+        <text x="544" y="138" fill="#4f5d75" font-size="12" text-anchor="end" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">不受影响继续运行</text>
+
+        <!-- L3 用户进程 A -->
+        <text x="84" y="208" fill="#4f5d75" font-size="8" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">L3</text>
+        <text x="120" y="210" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">用户进程 A</text>
+        <text x="544" y="210" fill="#4f5d75" font-size="12" text-anchor="end" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">崩溃被单独终结</text>
+
+        <!-- L2 内核 (focal: catches the fault) -->
+        <text x="84" y="280" fill="#bf4520" font-size="8" font-weight="600" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">L2</text>
+        <text x="120" y="282" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">内核</text>
+        <text x="544" y="282" fill="#4f5d75" font-size="12" text-anchor="end" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">fault handler 与信号投递</text>
+
+        <!-- L1 硬件 + MMU -->
+        <text x="84" y="352" fill="#4f5d75" font-size="8" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">L1</text>
+        <text x="120" y="354" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">硬件 + MMU</text>
+        <text x="544" y="354" fill="#4f5d75" font-size="12" text-anchor="end" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">地址翻译与越界拦截</text>
+
+        <!-- ============ Right stack: 单片机 (2 layers, 96..384) ============ -->
+        <!-- M2 裸机应用 (focal): one layer owns everything Linux splits
+             across 内核 + 边界 + 两个进程 — no isolation boundary exists -->
+        <rect x="624" y="96" width="272" height="216" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <!-- M1 硬件（无 MMU） -->
+        <rect x="624" y="312" width="272" height="72" fill="#ececec"/>
+
+        <!-- Hairline divider + outer silhouette -->
+        <line x1="624" y1="312" x2="896" y2="312" stroke="#2d3142" stroke-width="1" stroke-opacity="0.12"/>
+        <rect x="624" y="96" width="272" height="288" fill="none" stroke="#4f5d75" stroke-width="1"/>
+
+        <!-- M2 content (vertically centered in the tall band) -->
+        <text x="644" y="196" fill="#bf4520" font-size="8" font-weight="600" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">M2</text>
+        <text x="680" y="198" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">裸机应用</text>
+        <text x="680" y="224" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">应用即系统，</text>
+        <text x="680" y="244" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">HardFault 进 while(1)</text>
+
+        <!-- M1 content -->
+        <text x="644" y="352" fill="#4f5d75" font-size="8" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">M1</text>
+        <text x="680" y="346" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">硬件（无 MMU）</text>
+        <text x="680" y="368" fill="#4f5d75" font-size="12" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace">物理地址直达外设寄存器</text>
+
+        <!-- ============ Caption (single editorial aside) ============ -->
+        <text x="64" y="452" fill="#4f5d75" font-size="14" font-style="italic" font-family="'Instrument Serif', 'Noto Serif', 'Noto Serif SC', 'Source Han Serif SC', serif">同一个野指针：Linux 把它变成进程 A 的 SIGSEGV，单片机让它变成整机的 while(1)。</text>
+
+        <!-- ============ Legend strip (bottom 60px) ============ -->
+        <line x1="40" y1="540" x2="920" y2="540" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+        <text x="40" y="562" fill="#4f5d75" font-size="8" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', monospace" letter-spacing="0.14em">LEGEND</text>
+        <!-- 焦点层 -->
+        <rect x="120" y="552" width="16" height="12" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="144" y="562" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">焦点层</text>
+        <!-- 故障隔离边界 -->
+        <line x1="280" y1="558" x2="304" y2="558" stroke="#2d3142" stroke-width="2"/>
+        <text x="312" y="562" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">故障隔离边界</text>
+        <!-- 抽象层 -->
+        <rect x="448" y="552" width="16" height="12" fill="#ececec" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.30"/>
+        <text x="472" y="562" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">抽象层</text>
+      </svg>

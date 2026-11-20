@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="440" viewBox="0 0 940 440" role="img" aria-labelledby="lerTitle lerDesc" id="load-exec-region-root">
+  <title id="lerTitle">Load Region 与 Execution Region 的关系</title>
+  <desc id="lerDesc">一个 Load Region 装进 Flash，其中代码与常量就地执行，而 .data 的初值要在启动时拷进 RAM 的 RW_IRAM1 执行区。外部 SRAM 的绝对定位段 Load Size 为 0，带 UNINIT 标记，既不在镜像里也不被清零。</desc>
+
+  <rect x="0" y="0" width="940" height="440" fill="#f5f5f5"/>
+  <defs>
+    <marker id="load-exec-region-ea" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf4520"/>
+    </marker>
+    <marker id="load-exec-region-em" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4f5d75"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="34" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="10" letter-spacing="2" fill="#4f5d75">LOAD REGION · EXECUTION REGION</text>
+
+  <!-- 左：镜像 -->
+  <text x="40" y="66" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#4f5d75">镜像：连续的一串字节</text>
+  <rect x="40" y="80" width="340" height="280" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="64" y="104" width="292" height="72" rx="6" fill="#f5f5f5" stroke="#2d3142" stroke-width="1"/>
+    <text x="80" y="128" font-size="13" font-weight="600" fill="#2d3142">代码与只读常量</text>
+    <text x="80" y="148" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">Exec base = Load base</text>
+    <text x="80" y="166" font-size="12" fill="#4f5d75">就地执行，搬不动也不必搬</text>
+
+    <rect x="64" y="192" width="292" height="64" rx="6" fill="#f7e3dc" stroke="#bf4520" stroke-width="1.4"/>
+    <text x="80" y="216" font-size="13" font-weight="600" fill="#2d3142">.data 的初值</text>
+    <text x="80" y="236" font-size="12" fill="#4f5d75">只是"备份"，真正要用的是 RAM 里那份</text>
+
+    <text x="64" y="288" font-size="12" fill="#4f5d75">LR_IROM1.Size = 两段之和</text>
+    <text x="64" y="312" font-size="12" fill="#4f5d75">判断"有没有超过上限"看这个数</text>
+    <text x="64" y="336" font-size="12" fill="#4f5d75">比执行区多的那一小段，就是 .data 初值</text>
+  </g>
+
+  <!-- 右：两个执行区 -->
+  <text x="560" y="66" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#4f5d75">运行时：两个执行区域</text>
+  <rect x="560" y="80" width="340" height="280" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+
+  <g font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+    <rect x="584" y="104" width="292" height="72" rx="6" fill="#f5f5f5" stroke="#2d3142" stroke-width="1"/>
+    <text x="600" y="128" font-size="13" font-weight="600" fill="#2d3142">ER_IROM1 · Flash</text>
+    <text x="600" y="148" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x08020000</text>
+    <text x="600" y="166" font-size="12" fill="#4f5d75">Size 比装载段略小</text>
+
+    <rect x="584" y="232" width="292" height="88" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+    <text x="600" y="256" font-size="13" font-weight="600" fill="#2d3142">ER_RW_IRAM1 · 内部 RAM</text>
+    <text x="600" y="276" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="11" fill="#4f5d75">0x20000000</text>
+    <text x="600" y="296" font-size="12" fill="#4f5d75">.data 副本 + 全部片上 ZI</text>
+    <text x="600" y="312" font-size="12" fill="#4f5d75">它的 Size 才是真正吃掉的 RAM</text>
+  </g>
+
+  <!-- 箭头：同一份字节 -->
+  <path d="M 380 140 L 560 140" fill="none" stroke="#4f5d75" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#load-exec-region-em)"/>
+  <rect x="424" y="118" width="92" height="22" fill="#f5f5f5"/>
+  <text x="470" y="134" text-anchor="middle" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#4f5d75">同一份字节</text>
+
+  <!-- 箭头：拷贝 -->
+  <path d="M 380 224 L 470 224 L 470 276 L 584 276" fill="none" stroke="#bf4520" stroke-width="1.8" marker-end="url(#load-exec-region-ea)"/>
+  <rect x="430" y="238" width="32" height="22" fill="#f5f5f5"/>
+  <text x="460" y="254" text-anchor="end" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#bf4520">拷贝</text>
+
+  <!-- 底部注解 -->
+  <rect x="40" y="388" width="860" height="36" rx="6" fill="#ffffff" stroke="#bf4520" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="60" y="411" font-family="'Geist', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#bf4520">外部 SRAM 的绝对定位段：Load Region 的 Size 是 0，执行区带 UNINIT，既不占镜像，也不会被启动代码清零。</text>
+</svg>

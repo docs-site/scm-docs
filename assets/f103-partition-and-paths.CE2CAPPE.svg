@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="f103-partition-and-paths-root" viewBox="0 0 1080 448" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="f103-partition-and-paths-title f103-partition-and-paths-desc">
+        <title id="f103-partition-and-paths-title">STM32F103 双槽分区与升级写入路径</title>
+        <desc id="f103-partition-and-paths-desc">架构图：512 KB 内部 Flash 划分为 Bootloader、Slot A、Slot B 与参数存储区（双副本参数、断点记录与预留）；运行中的 App 把新固件写入非活动槽，Bootloader 读写启动标志并按标志校验跳转到目标槽。</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap');
+      #f103-partition-and-paths-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --font-sans:     'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace; }
+      #f103-partition-and-paths-root { font-family: var(--font-sans); color: var(--color-ink); }</style>
+
+          <marker id="f103-partition-and-paths-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="f103-partition-and-paths-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- 分区板 -->
+        <rect x="64" y="48" width="436" height="352" rx="8" fill="#2d3142" fill-opacity="0.02" stroke="#2d3142" stroke-opacity="0.10" stroke-width="0.8"/>
+        <rect x="88" y="40" width="224" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="200" y="52" fill="#5a6580" font-size="12" font-weight="500" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">内部 Flash 512 KB</text>
+
+        <!-- 三条通路 -->
+        <line x1="620" y1="274" x2="468" y2="274" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#f103-partition-and-paths-arrow)"/>
+        <line x1="620" y1="354" x2="468" y2="354" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#f103-partition-and-paths-arrow)"/>
+        <path d="M980 336 H1000 Q1008 336 1008 328 V108 Q1008 100 1000 100 H560 Q552 100 552 108 V186 Q552 194 544 194 H468" fill="none" stroke="#bf4520" stroke-width="1.4" marker-end="url(#f103-partition-and-paths-arrow-accent)"/>
+
+        <!-- 通路标签 -->
+        <rect x="520" y="250" width="88" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="564" y="262" fill="#4f5d75" font-size="12" font-weight="500" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">写入新固件</text>
+
+        <rect x="512" y="330" width="104" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="564" y="342" fill="#4f5d75" font-size="12" font-weight="500" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">读写启动标志</text>
+
+        <rect x="708" y="82" width="104" height="16" rx="2" fill="#f5f5f5"/>
+        <text x="760" y="94" fill="#bf4520" font-size="12" font-weight="500" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">校验并跳转</text>
+
+        <!-- 分区：Bootloader -->
+        <rect x="96" y="80" width="372" height="68" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="282" y="110" fill="#2d3142" font-size="14" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Bootloader 区</text>
+        <text x="282" y="132" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x08000000 · 16 KB</text>
+
+        <!-- 分区：Slot A -->
+        <rect x="96" y="160" width="372" height="68" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="282" y="190" fill="#2d3142" font-size="14" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Slot A · 应用固件</text>
+        <text x="282" y="212" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x08004000 · 240 KB</text>
+
+        <!-- 分区：Slot B（升级槽） -->
+        <rect x="96" y="240" width="372" height="68" rx="6" fill="#bf4520" fill-opacity="0.08" stroke="#bf4520" stroke-width="1"/>
+        <text x="282" y="270" fill="#2d3142" font-size="14" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Slot B · 升级槽</text>
+        <text x="282" y="292" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x08040000 · 240 KB</text>
+
+        <!-- 分区：参数区 -->
+        <rect x="96" y="320" width="372" height="68" rx="6" fill="#2d3142" fill-opacity="0.05" stroke="#4f5d75" stroke-opacity="0.5" stroke-width="1"/>
+        <text x="282" y="350" fill="#2d3142" font-size="14" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">启动参数与记录区</text>
+        <text x="282" y="372" fill="#4f5d75" font-size="12" text-anchor="middle" font-family="'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace">0x0807C000 · 双副本 4 KB · 断点页 2 KB · 预留 10 KB</text>
+
+        <text x="64" y="424" fill="#5a6580" font-size="12" font-weight="400" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">分区高度非等比例：Bootloader 16 KB、两个槽各 240 KB、参数与记录区 16 KB</text>
+
+        <!-- 节点：App -->
+        <rect x="620" y="240" width="360" height="68" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="800" y="270" fill="#2d3142" font-size="14" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">App（旧固件运行中）</text>
+        <text x="800" y="292" fill="#4f5d75" font-size="12" font-weight="500" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">下载 · 校验 · 写非活动槽</text>
+
+        <!-- 节点：Bootloader -->
+        <rect x="620" y="320" width="360" height="68" rx="6" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.28" stroke-width="1"/>
+        <text x="800" y="350" fill="#2d3142" font-size="14" font-weight="600" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">Bootloader</text>
+        <text x="800" y="372" fill="#4f5d75" font-size="12" font-weight="500" text-anchor="middle" font-family="'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif">选槽 · 校验 · 引导 · 回滚</text>
+      </svg>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 580" role="img" aria-labelledby="sw-title sw-desc" xmlns="http://www.w3.org/2000/svg" id="swd-wiring-root">
+  <title id="sw-title">SWD 接线：探针与目标之间的四根必需线</title>
+  <desc id="sw-desc">上层是 PC、调试探针、目标芯片的分工，下层是探针与 STM32F103ZE 之间的连线，VTref、GND、SWDIO、SWCLK 必需，nRESET 与 SWO 可选</desc>
+
+  <defs>
+      <style>#swd-wiring-root .title { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; font-size: 20px; font-weight: 600; fill: #2d3142; }
+      #swd-wiring-root .sub { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; fill: #78828f; }
+      #swd-wiring-root .box { fill: #ffffff; stroke: #ccd2da; stroke-width: 1.2; }
+      #swd-wiring-root .pill { fill: #f7f8fa; stroke: #ccd2da; stroke-width: 1.2; }
+      #swd-wiring-root .name { font-family: "Microsoft YaHei", sans-serif; font-size: 13px; font-weight: 600; fill: #2d3142; }
+      #swd-wiring-root .mono { font-family: Consolas, "Courier New", monospace; font-size: 12px; fill: #4f5d75; }
+      #swd-wiring-root .pin { fill: #ffffff; stroke: #9aa4b2; stroke-width: 1.1; }
+      #swd-wiring-root .note { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 12.5px; fill: #4f5d75; }</style>
+    <marker id="swd-wiring-sw-ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="#9aa4b2"/>
+    </marker>
+    <marker id="swd-wiring-sw-al" viewBox="0 0 8 8" refX="1" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M8 0 L0 4 L8 8 z" fill="#9aa4b2"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="24" y="38">SWD 接线：探针与目标之间的四根必需线</text>
+  <text class="sub" x="876" y="38" text-anchor="end">20 针引脚定义来自 ARM 标准，与探针品牌无关</text>
+
+  <!-- 上层：谁跟谁说话 -->
+  <rect class="pill" x="80" y="66" width="150" height="40" rx="20"/>
+  <text class="mono" x="155" y="91" text-anchor="middle">PC / MDK</text>
+
+  <line x1="230" y1="86" x2="314" y2="86" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#swd-wiring-sw-ar)"/>
+  <rect x="250" y="68" width="44" height="16" fill="#fafafa"/>
+  <text class="mono" x="272" y="81" text-anchor="middle">USB</text>
+
+  <rect class="pill" x="320" y="66" width="170" height="40" rx="20"/>
+  <text class="name" x="405" y="91" text-anchor="middle">调试探针 J-Link</text>
+
+  <line x1="490" y1="86" x2="579" y2="86" stroke="#9aa4b2" stroke-width="1.3" marker-end="url(#swd-wiring-sw-ar)"/>
+  <rect x="500" y="68" width="74" height="16" fill="#fafafa"/>
+  <text class="mono" x="537" y="81" text-anchor="middle">SWD 两线</text>
+
+  <rect class="pill" x="585" y="66" width="210" height="40" rx="20"/>
+  <text class="name" x="690" y="91" text-anchor="middle">目标芯片</text>
+
+  <!-- 探针 -->
+  <rect class="box" x="40" y="146" width="240" height="306" rx="6"/>
+  <text class="name" x="60" y="176">调试探针</text>
+  <text class="mono" x="60" y="196">20 针排线，以 J-Link 为例</text>
+
+  <rect class="pin" x="270" y="215" width="10" height="10"/>
+  <text class="mono" x="258" y="225" text-anchor="end">VTref</text>
+  <text class="mono" x="60" y="225">Pin 1</text>
+
+  <rect class="pin" x="270" y="257" width="10" height="10"/>
+  <text class="mono" x="258" y="267" text-anchor="end">GND</text>
+  <text class="mono" x="60" y="267">Pin 4/6/8</text>
+
+  <rect class="pin" x="270" y="299" width="10" height="10"/>
+  <text class="mono" x="258" y="309" text-anchor="end">SWDIO</text>
+  <text class="mono" x="60" y="309">Pin 7</text>
+
+  <rect class="pin" x="270" y="341" width="10" height="10"/>
+  <text class="mono" x="258" y="351" text-anchor="end">SWCLK</text>
+  <text class="mono" x="60" y="351">Pin 9</text>
+
+  <rect class="pin" x="270" y="383" width="10" height="10"/>
+  <text class="mono" x="258" y="393" text-anchor="end">nRESET</text>
+  <text class="mono" x="60" y="393">Pin 15</text>
+
+  <rect class="pin" x="270" y="425" width="10" height="10"/>
+  <text class="mono" x="258" y="435" text-anchor="end">SWO</text>
+  <text class="mono" x="60" y="435">Pin 13</text>
+
+  <!-- 目标 -->
+  <rect class="box" x="620" y="146" width="240" height="306" rx="6"/>
+  <text class="name" x="640" y="176">目标 STM32F103ZE</text>
+  <text class="mono" x="640" y="196">Cortex-M3 / 3.3 V</text>
+
+  <rect class="pin" x="620" y="215" width="10" height="10"/>
+  <text class="mono" x="644" y="225">VDD</text>
+
+  <rect class="pin" x="620" y="257" width="10" height="10"/>
+  <text class="mono" x="644" y="267">GND</text>
+
+  <rect class="pin" x="620" y="299" width="10" height="10"/>
+  <text class="mono" x="644" y="309">PA13 / SWDIO</text>
+
+  <rect class="pin" x="620" y="341" width="10" height="10"/>
+  <text class="mono" x="644" y="351">PA14 / SWCLK</text>
+
+  <rect class="pin" x="620" y="383" width="10" height="10"/>
+  <text class="mono" x="644" y="393">NRST</text>
+
+  <rect class="pin" x="620" y="425" width="10" height="10"/>
+  <text class="mono" x="644" y="435">PB3 / TRACESWO</text>
+
+  <!-- 必需四线 -->
+  <line x1="280" y1="220" x2="620" y2="220" stroke="#9aa4b2" stroke-width="1.4"/>
+  <rect x="404" y="203" width="92" height="17" fill="#fafafa"/>
+  <text class="mono" x="450" y="216" text-anchor="middle">电平参考</text>
+  <text class="sub" x="450" y="236" text-anchor="middle">不是给目标供电</text>
+
+  <line x1="280" y1="262" x2="620" y2="262" stroke="#9aa4b2" stroke-width="1.4"/>
+  <rect x="410" y="245" width="80" height="17" fill="#fafafa"/>
+  <text class="mono" x="450" y="258" text-anchor="middle">共地</text>
+  <text class="sub" x="450" y="278" text-anchor="middle">至少两根</text>
+
+  <line x1="280" y1="304" x2="620" y2="304" stroke="#9aa4b2" stroke-width="1.4" marker-start="url(#swd-wiring-sw-al)" marker-end="url(#swd-wiring-sw-ar)"/>
+  <rect x="410" y="287" width="80" height="17" fill="#fafafa"/>
+  <text class="mono" x="450" y="300" text-anchor="middle">双向</text>
+  <text class="sub" x="450" y="320" text-anchor="middle">目标内部上拉</text>
+
+  <line x1="280" y1="346" x2="620" y2="346" stroke="#9aa4b2" stroke-width="1.4" marker-end="url(#swd-wiring-sw-ar)"/>
+  <rect x="410" y="329" width="80" height="17" fill="#fafafa"/>
+  <text class="mono" x="450" y="342" text-anchor="middle">单向</text>
+  <text class="sub" x="450" y="362" text-anchor="middle">主机输出，目标内部下拉</text>
+
+  <!-- 可选两线 -->
+  <line x1="280" y1="388" x2="620" y2="388" stroke="#9aa4b2" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#swd-wiring-sw-ar)"/>
+  <rect x="404" y="371" width="92" height="17" fill="#fafafa"/>
+  <text class="mono" x="450" y="384" text-anchor="middle">可选</text>
+  <text class="sub" x="450" y="404" text-anchor="middle">接上才能 connect under reset</text>
+
+  <line x1="280" y1="430" x2="620" y2="430" stroke="#9aa4b2" stroke-width="1.4" stroke-dasharray="5 4" marker-start="url(#swd-wiring-sw-al)"/>
+  <rect x="404" y="413" width="92" height="17" fill="#fafafa"/>
+  <text class="mono" x="450" y="426" text-anchor="middle">可选</text>
+  <text class="sub" x="450" y="446" text-anchor="middle">ITM / SWO 跟踪输出</text>
+
+  <!-- 编者按 -->
+  <line x1="24" y1="470" x2="876" y2="470" stroke="#dde2e8" stroke-width="1"/>
+  <text class="note" x="24" y="494">PC 只负责发命令，真正把 USB 请求翻译成 SWD 时序的是探针；换 ST-Link 时只有上面那一格换名字，下面的连线一根不动。</text>
+  <text class="note" x="24" y="516">PA13/PA14 一旦被配成普通 GPIO 或其他复用，上电就抓不到芯片，只能改用 connect under reset。</text>
+  <text class="note" x="24" y="538">SWDIO 已有内部上拉、SWCLK 已有内部下拉，外部再加 10 kΩ 强上拉反而拖慢边沿，通常不需要。</text>
+  <text class="note" x="24" y="560">线越长、时钟越高越容易出错：4 MHz 配 20 cm 排线是稳妥组合，杜邦线飞到 10 MHz 基本必挂。</text>
+</svg>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 430" role="img" aria-labelledby="sf-title sf-desc" xmlns="http://www.w3.org/2000/svg" id="swd-frame-root">
+  <title id="sf-title">SWD 一次传输的时间轴：8 拍请求 + 3 拍应答 + 33 拍数据</title>
+  <desc id="sf-desc">按时钟拍展开 SWD 传输：请求包 8 拍由主机驱动，两次各 1 拍的转向，应答 3 拍由目标驱动，数据 33 拍按读写方向决定驱动方</desc>
+  <defs>
+      <style>#swd-frame-root .title { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; font-size: 20px; font-weight: 600; fill: #2d3142; }
+      #swd-frame-root .sub { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; fill: #78828f; }
+      #swd-frame-root .name { font-family: "Microsoft YaHei", sans-serif; font-size: 13px; font-weight: 600; fill: #2d3142; }
+      #swd-frame-root .mono { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; fill: #4f5d75; }
+      #swd-frame-root .mono-s { font-family: Consolas, "Courier New", monospace; font-size: 11.5px; fill: #78828f; }
+      #swd-frame-root .lane { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; fill: #78828f; }
+      #swd-frame-root .host { fill: #ffffff; stroke: #ccd2da; stroke-width: 1.2; }
+      #swd-frame-root .tgt { fill: #f7f8fa; stroke: #ccd2da; stroke-width: 1.2; }
+      #swd-frame-root .turn { fill: #fbfbfc; stroke: #dde2e8; stroke-width: 1; }
+      #swd-frame-root .data { fill: #fdf1ec; stroke: #bf4520; stroke-width: 1.4; }
+      #swd-frame-root .note { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 12.5px; fill: #4f5d75; }</style>
+  </defs>
+
+  <text class="title" x="24" y="38">SWD 一次传输的时间轴</text>
+  <text class="sub" x="936" y="38" text-anchor="end">横轴为 SWCLK 拍数，一场 32 位传输共 46 拍</text>
+
+  <!-- 泳道标签 -->
+  <text class="lane" x="150" y="122" text-anchor="end">驱动方</text>
+  <text class="lane" x="150" y="200" text-anchor="end">SWDIO</text>
+  <text class="lane" x="150" y="292" text-anchor="end">拍数</text>
+
+  <!-- 转向标注（画在泳道上方） -->
+  <line x1="290" y1="88" x2="290" y2="100" stroke="#c3c9d2" stroke-width="1"/>
+  <text class="sub" x="290" y="80" text-anchor="middle">转向</text>
+  <line x1="350" y1="88" x2="350" y2="100" stroke="#c3c9d2" stroke-width="1"/>
+  <text class="sub" x="350" y="80" text-anchor="middle">转向</text>
+
+  <!-- 驱动方泳道：170→290 主机，290→305 转向，305→350 目标，350→365 转向，365→860 双向 -->
+  <rect class="host" x="170" y="100" width="120" height="44" rx="4"/>
+  <text class="name" x="230" y="128" text-anchor="middle">主机驱动</text>
+
+  <rect class="turn" x="290" y="100" width="15" height="44"/>
+  <rect class="tgt" x="305" y="100" width="45" height="44" rx="4"/>
+  <text class="name" x="327" y="128" text-anchor="middle">目标</text>
+
+  <rect class="turn" x="350" y="100" width="15" height="44"/>
+  <rect class="host" x="365" y="100" width="495" height="44" rx="4"/>
+  <text class="name" x="612" y="120" text-anchor="middle">主机写 / 目标读</text>
+  <text class="sub" x="612" y="138" text-anchor="middle">数据方向由 RnW 决定</text>
+
+  <!-- SWDIO 内容泳道 -->
+  <rect class="host" x="170" y="166" width="120" height="60" rx="4"/>
+  <text class="name" x="230" y="192" text-anchor="middle">请求包</text>
+  <text class="mono" x="230" y="212" text-anchor="middle">8 拍</text>
+
+  <rect class="turn" x="290" y="166" width="15" height="60"/>
+
+  <rect class="tgt" x="305" y="166" width="45" height="60" rx="4"/>
+  <text class="name" x="327" y="192" text-anchor="middle">ACK</text>
+  <text class="mono" x="327" y="212" text-anchor="middle">3 拍</text>
+
+  <rect class="turn" x="350" y="166" width="15" height="60"/>
+
+  <rect class="data" x="365" y="166" width="495" height="60" rx="4"/>
+  <text class="name" x="612" y="192" text-anchor="middle">数据包</text>
+  <text class="mono" x="612" y="212" text-anchor="middle">32 位数据 + 1 位奇偶 = 33 拍</text>
+
+  <!-- 拍数标尺 -->
+  <line x1="170" y1="262" x2="860" y2="262" stroke="#ccd2da" stroke-width="1.2"/>
+  <line x1="170" y1="256" x2="170" y2="268" stroke="#9aa4b2" stroke-width="1.2"/>
+  <text class="mono-s" x="170" y="284" text-anchor="middle">0</text>
+  <line x1="290" y1="256" x2="290" y2="268" stroke="#9aa4b2" stroke-width="1.2"/>
+  <text class="mono-s" x="290" y="284" text-anchor="middle">8</text>
+  <line x1="305" y1="256" x2="305" y2="268" stroke="#9aa4b2" stroke-width="1.2"/>
+  <text class="mono-s" x="305" y="284" text-anchor="middle">9</text>
+  <line x1="350" y1="256" x2="350" y2="268" stroke="#9aa4b2" stroke-width="1.2"/>
+  <text class="mono-s" x="350" y="284" text-anchor="middle">12</text>
+  <line x1="365" y1="256" x2="365" y2="268" stroke="#9aa4b2" stroke-width="1.2"/>
+  <text class="mono-s" x="365" y="284" text-anchor="middle">13</text>
+  <line x1="860" y1="256" x2="860" y2="268" stroke="#9aa4b2" stroke-width="1.2"/>
+  <text class="mono-s" x="860" y="284" text-anchor="middle">46</text>
+
+  <!-- 编者按 -->
+  <line x1="24" y1="316" x2="936" y2="316" stroke="#dde2e8" stroke-width="1"/>
+  <text class="note" x="24" y="340">请求包字段顺序：Start(1) → APnDP → RnW → A[3:2] → Parity → Stop → Park，全部由主机驱动。</text>
+  <text class="note" x="24" y="362">两次转向各占 1 拍，用于交换 SWDIO 的驱动权；转向期间总线无有效数据。</text>
+  <text class="note" x="24" y="384">4 MHz 下 46 拍约 11.5 µs；读要等目标把数据推上来，写则主机立即接上数据段。</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="1000" height="580" role="img" aria-labelledby="gw-title gw-desc">
+<title id="gw-title">跨网段转发时 MAC 逐跳重写</title>
+<desc id="gw-desc">PC 与板子跨网段通信时，以太网头逐跳重写而 IP 头全程不变</desc>
+<rect width="1000" height="580" fill="#f5f5f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f5d75"/></marker>
+<marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#bf4520"/></marker>
+</defs>
+<text x="40" y="46" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">跨网段转发：MAC 逐跳重写，IP 全程不变</text>
+<text x="40" y="70" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">PC 与板子不在同一个网段，中间的每一跳都要重新填一次链路层地址</text>
+
+<rect x="40" y="110" width="220" height="96" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="150.0" y="142" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">PC</text>
+<text x="150.0" y="166" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">192.168.1.100/24</text>
+<text x="150.0" y="188" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">网关 192.168.1.1</text>
+
+<rect x="380" y="96" width="240" height="124" rx="6" fill="#fdf3ef" stroke="#bf4520" stroke-width="1"/>
+<text x="500.0" y="128" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#bf4520" text-anchor="middle" xml:space="preserve">路由器</text>
+<text x="500.0" y="154" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">接口 B = 192.168.1.1</text>
+<text x="500.0" y="176" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">接口 A = 192.168.16.1</text>
+<text x="500.0" y="200" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#bf4520" text-anchor="middle" xml:space="preserve">查路由表 + 重写帧头 + TTL 减 1</text>
+
+<rect x="740" y="110" width="220" height="96" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="850.0" y="142" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="middle" xml:space="preserve">板子</text>
+<text x="850.0" y="166" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">192.168.16.30/24</text>
+<text x="850.0" y="188" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="middle" xml:space="preserve">网关 192.168.16.1</text>
+
+<line x1="264" y1="158" x2="376" y2="158" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="624" y1="158" x2="736" y2="158" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<text x="40" y="272" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">第一跳：PC 到路由器</text>
+
+<rect x="40" y="292" width="440" height="112" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="60" y="320" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">目的 MAC = 路由器的接口 B</text>
+<text x="60" y="344" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">源 MAC = PC</text>
+<text x="60" y="368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">源 IP = 192.168.1.100</text>
+<text x="60" y="392" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">目的 IP = 192.168.16.30</text>
+
+<text x="520" y="272" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">第二跳：路由器到板子</text>
+
+<rect x="520" y="292" width="440" height="112" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="1"/>
+<text x="540" y="320" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">目的 MAC = 板子</text>
+<text x="540" y="344" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">源 MAC = 路由器的接口 A</text>
+<text x="540" y="368" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">源 IP = 192.168.1.100</text>
+<text x="540" y="392" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#2d3142" text-anchor="start" xml:space="preserve">目的 IP = 192.168.16.30</text>
+
+<line x1="40" y1="440" x2="960" y2="440" stroke="#d5d9e0" stroke-width="1"/>
+
+<text x="40" y="470" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" font-weight="600" fill="#bf4520" text-anchor="start" xml:space="preserve">结论</text>
+<text x="40" y="498" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">以太网头每一跳都被整个换掉（因为它只在一条链路内有效）</text>
+<text x="40" y="522" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">IP 头里的源地址与目的地址全程不变，变的只有 TTL</text>
+<text x="40" y="546" font-family="'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#4f5d75" text-anchor="start" xml:space="preserve">所以跨网段通信要求双方都能找到网关，否则能收到请求却发不出应答</text>
+</svg>

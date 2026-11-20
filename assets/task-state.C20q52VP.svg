@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 720 380" role="img" aria-labelledby="st-title st-desc" xmlns="http://www.w3.org/2000/svg" id="task-state-root">
+  <title id="st-title">任务的四种状态与迁移</title>
+  <desc id="st-desc">任务在就绪、运行、阻塞、挂起四态之间迁移，触发条件分别是调度、抢占、等待事件与显式挂起。</desc>
+
+  <defs>
+      <style>#task-state-root text { font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif; }
+      #task-state-root .label { font-size: 13px; font-weight: 600; fill: #2d3142; }
+      #task-state-root .sub { font-size: 12px; font-weight: 500; fill: #4f5d75; }
+      #task-state-root .mono { font-family: Consolas, 'Courier New', monospace; font-size: 11px; fill: #4f5d75; }
+      #task-state-root .box { fill: #ffffff; stroke: #2d3142; stroke-width: 1.1; }
+      #task-state-root .lead { stroke: #4f5d75; stroke-width: 1.2; fill: none; }
+      #task-state-root .mask { fill: #f5f5f5; }</style>
+    <marker id="task-state-st-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#4f5d75"/>
+    </marker>
+  </defs>
+
+  <text class="label" x="40" y="30">四种状态与迁移条件</text>
+  <text class="sub" x="40" y="52">任一时刻只有一个任务处于运行态</text>
+
+  <!-- 状态框 -->
+  <rect class="box" x="60" y="104" width="150" height="54" rx="6"/>
+  <text class="label" x="135" y="128" text-anchor="middle">就绪</text>
+  <text class="mono" x="135" y="148" text-anchor="middle">Ready</text>
+
+  <rect x="300" y="104" width="150" height="54" rx="6" fill="#eddad2" stroke="#bf4520" stroke-width="1.4"/>
+  <text class="label" x="375" y="128" text-anchor="middle">运行</text>
+  <text class="mono" x="375" y="148" text-anchor="middle">Running</text>
+
+  <rect class="box" x="540" y="104" width="140" height="54" rx="6"/>
+  <text class="label" x="610" y="128" text-anchor="middle">阻塞</text>
+  <text class="mono" x="610" y="148" text-anchor="middle">Blocked</text>
+
+  <rect class="box" x="60" y="250" width="150" height="54" rx="6"/>
+  <text class="label" x="135" y="274" text-anchor="middle">挂起</text>
+  <text class="mono" x="135" y="294" text-anchor="middle">Suspended</text>
+
+  <!-- 就绪 <-> 运行 -->
+  <line class="lead" x1="212" y1="122" x2="296" y2="122" marker-end="url(#task-state-st-arrow)"/>
+  <rect class="mask" x="222" y="102" width="64" height="16"/>
+  <text class="sub" x="254" y="114" text-anchor="middle">被调度</text>
+
+  <line class="lead" x1="296" y1="142" x2="212" y2="142" marker-end="url(#task-state-st-arrow)"/>
+  <rect class="mask" x="222" y="148" width="64" height="16"/>
+  <text class="sub" x="254" y="160" text-anchor="middle">被抢占</text>
+
+  <!-- 运行 -> 阻塞 -->
+  <line class="lead" x1="452" y1="122" x2="536" y2="122" marker-end="url(#task-state-st-arrow)"/>
+  <rect class="mask" x="466" y="102" width="58" height="16"/>
+  <text class="sub" x="495" y="114" text-anchor="middle">等事件</text>
+
+  <!-- 阻塞 -> 就绪：绕上方通道 -->
+  <path class="lead" d="M610 102 V74 H135 V104" marker-end="url(#task-state-st-arrow)"/>
+  <rect class="mask" x="333" y="52" width="96" height="16"/>
+  <text class="sub" x="381" y="66" text-anchor="middle">超时或事件到达</text>
+
+  <!-- 就绪 -> 挂起：两条并排直线，不再交叉 -->
+  <line class="lead" x1="110" y1="158" x2="110" y2="250" marker-end="url(#task-state-st-arrow)"/>
+  <text class="sub" x="96" y="204" text-anchor="end">挂起</text>
+
+  <line class="lead" x1="160" y1="250" x2="160" y2="158" marker-end="url(#task-state-st-arrow)"/>
+  <text class="sub" x="174" y="204">恢复</text>
+
+  <text class="sub" x="540" y="180">阻塞后不会直接进入运行</text>
+  <text class="sub" x="540" y="200">需先在就绪队列排队</text>
+
+  <text class="sub" x="40" y="336">阻塞是任务自己让出 CPU，挂起是被别人停下；两者都不占 CPU</text>
+  <text class="sub" x="40" y="358">删除（vTaskDelete）不在图中：它从所在链表摘除并释放内存</text>
+</svg>

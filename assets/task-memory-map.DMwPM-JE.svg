@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 720 800" role="img" aria-labelledby="tm-title tm-desc" xmlns="http://www.w3.org/2000/svg" id="task-memory-map-root">
+  <title id="tm-title">一块 RAM 里的任务内存</title>
+  <desc id="tm-desc">把整片 RAM 按地址从低到高连续切分：静态任务住在 .bss，动态任务从 ucHeap 切出，主栈是中断专用、任务不占。</desc>
+  <defs>
+      <style>#task-memory-map-root text { font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif; }
+      #task-memory-map-root .label { font-size: 13px; font-weight: 600; fill: #2d3142; }
+      #task-memory-map-root .sub { font-size: 12px; font-weight: 500; fill: #4f5d75; }
+      #task-memory-map-root .mono { font-family: Consolas, 'Courier New', monospace; font-size: 11px; fill: #4f5d75; }
+      #task-memory-map-root .name { font-family: Consolas, 'Courier New', monospace; font-size: 11px; fill: #2d3142; }
+      #task-memory-map-root .zh { font-size: 12px; fill: #4f5d75; }
+      #task-memory-map-root .note { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 13px; fill: #4f5d75; }
+      #task-memory-map-root .chip { fill: #ebe8e3; stroke: #2d3142; stroke-width: 1; }
+      #task-memory-map-root .chipfree { fill: #ebe8e3; stroke: #4f5d75; stroke-width: 1; stroke-dasharray: 3 3; }</style>
+  </defs>
+
+  <text class="label" x="40" y="28">一块 RAM 里的任务内存</text>
+  <text class="sub" x="40" y="50">低地址在上，按真实地址连续切分 · 数据取自 .map 与堆块解析，均为本工程实测</text>
+
+  <!-- 左侧地址刻度 -->
+  <text class="mono" x="172" y="74" text-anchor="end">0x20000000</text>
+  <line x1="176" y1="70" x2="180" y2="70" stroke="#4f5d75" stroke-width="1"/>
+  <text class="mono" x="172" y="126" text-anchor="end">0x20000C00</text>
+  <line x1="176" y1="122" x2="180" y2="122" stroke="#4f5d75" stroke-width="1"/>
+  <text class="mono" x="172" y="314" text-anchor="end">0x200012C0</text>
+  <line x1="176" y1="310" x2="180" y2="310" stroke="#4f5d75" stroke-width="1"/>
+  <text class="mono" x="172" y="594" text-anchor="end">0x200032C0</text>
+  <line x1="176" y1="590" x2="180" y2="590" stroke="#4f5d75" stroke-width="1"/>
+  <text class="mono" x="172" y="622" text-anchor="end">0x20003520</text>
+  <line x1="176" y1="618" x2="180" y2="618" stroke="#4f5d75" stroke-width="1"/>
+  <text class="mono" x="172" y="718" text-anchor="end">0x20003920</text>
+  <line x1="176" y1="714" x2="180" y2="714" stroke="#4f5d75" stroke-width="1"/>
+
+  <!-- 地址条：五个区连续堆叠 -->
+  <rect x="180" y="70" width="300" height="52" fill="#ebe8e3"/>
+  <rect x="180" y="122" width="300" height="188" fill="#ffffff"/>
+  <rect x="180" y="310" width="300" height="280" fill="#eddad2"/>
+  <rect x="180" y="590" width="300" height="28" fill="#ebe8e3"/>
+  <rect x="180" y="618" width="300" height="96" fill="#ffffff" stroke="#4f5d75" stroke-width="1.1" stroke-dasharray="6 4"/>
+  <line x1="180" y1="122" x2="480" y2="122" stroke="#2d3142" stroke-width="1"/>
+  <line x1="180" y1="310" x2="480" y2="310" stroke="#2d3142" stroke-width="1"/>
+  <line x1="180" y1="590" x2="480" y2="590" stroke="#2d3142" stroke-width="1"/>
+  <rect x="180" y="70" width="300" height="644" fill="none" stroke="#2d3142" stroke-width="1.2"/>
+
+  <!-- 区 1：其它变量 -->
+  <text class="label" x="196" y="92">其它变量 .data + .bss</text>
+  <text class="mono" x="196" y="110">0x20000000 – 0x20000C00 · 3 KB</text>
+
+  <!-- 区 2：静态任务区 -->
+  <text class="label" x="196" y="144">静态任务区（.bss）</text>
+  <text class="mono" x="196" y="162">0x20000C00 – 0x200012C0 · 1728 B</text>
+  <text class="sub" x="196" y="179">编译期占位，永不释放</text>
+  <rect class="chip" x="196" y="190" width="268" height="22" rx="3"/>
+  <text x="208" y="206"><tspan class="name">Idle_TCB</tspan><tspan class="mono"> 96 B · 0x20000C00</tspan></text>
+  <rect class="chip" x="196" y="216" width="268" height="22" rx="3"/>
+  <text x="208" y="232"><tspan class="name">Idle_Stack</tspan><tspan class="mono"> 512 B · 0x20000C60</tspan></text>
+  <rect class="chip" x="196" y="242" width="268" height="22" rx="3"/>
+  <text x="208" y="258"><tspan class="name">Timer_TCB</tspan><tspan class="mono"> 96 B · 0x20000E60</tspan></text>
+  <rect class="chip" x="196" y="268" width="268" height="22" rx="3"/>
+  <text x="208" y="284"><tspan class="name">Timer_Stack</tspan><tspan class="mono"> 1 KB · 0x20000EC0</tspan></text>
+
+  <!-- 区 3：FreeRTOS 堆 -->
+  <text class="label" x="196" y="332">FreeRTOS 堆 ucHeap</text>
+  <text class="mono" x="196" y="350">0x200012C0 – 0x200032C0 · 8192 B</text>
+  <text class="sub" x="196" y="367">运行期切块，删除后归还</text>
+  <rect class="chip" x="196" y="378" width="268" height="22" rx="3"/>
+  <text x="208" y="394"><tspan class="zh">队列</tspan><tspan class="mono"> 96 B · 0x200012C0</tspan></text>
+  <rect class="chip" x="196" y="404" width="268" height="22" rx="3"/>
+  <text x="208" y="420"><tspan class="name">defaultTask</tspan><tspan class="zh"> 栈 </tspan><tspan class="mono">1032 B · 0x20001320</tspan></text>
+  <rect class="chip" x="196" y="430" width="268" height="22" rx="3"/>
+  <text x="208" y="446"><tspan class="name">defaultTask</tspan><tspan class="mono"> TCB </tspan><tspan class="mono">104 B · 0x20001728</tspan></text>
+  <rect class="chip" x="196" y="456" width="268" height="22" rx="3"/>
+  <text x="208" y="472"><tspan class="name">heartbeatTask</tspan><tspan class="zh"> 栈 </tspan><tspan class="mono">1032 B · 0x20001790</tspan></text>
+  <rect class="chip" x="196" y="482" width="268" height="22" rx="3"/>
+  <text x="208" y="498"><tspan class="name">heartbeatTask</tspan><tspan class="mono"> TCB </tspan><tspan class="mono">104 B · 0x20001B98</tspan></text>
+  <rect class="chip" x="196" y="508" width="268" height="22" rx="3"/>
+  <text x="208" y="524"><tspan class="name">shellTask</tspan><tspan class="zh"> 栈 </tspan><tspan class="mono">1544 B · 0x20001C00</tspan></text>
+  <rect class="chip" x="196" y="534" width="268" height="22" rx="3"/>
+  <text x="208" y="550"><tspan class="name">shellTask</tspan><tspan class="mono"> TCB </tspan><tspan class="mono">104 B · 0x20002208</tspan></text>
+  <rect class="chipfree" x="196" y="560" width="268" height="22" rx="3"/>
+  <text x="208" y="576"><tspan class="zh">空闲块</tspan><tspan class="mono"> 4168 B · 0x20002270</tspan></text>
+
+  <!-- 区 4：对齐间隙 -->
+  <text class="mono" x="330" y="608" text-anchor="middle">0x200032C0 – 0x20003520 · 608 B · 对齐间隙</text>
+
+  <!-- 区 5：主栈 -->
+  <text class="label" x="196" y="642">主栈 Stack_Mem</text>
+  <text class="mono" x="196" y="660">0x20003520 – 0x20003920 · 1024 B</text>
+  <text class="sub" x="196" y="679">MSP 专用：中断与启动代码</text>
+
+  <!-- 右侧对位说明 -->
+  <line x1="484" y1="216" x2="512" y2="216" stroke="#4f5d75" stroke-width="1"/>
+  <text class="label" x="522" y="212">静态任务住这里</text>
+  <text class="sub" x="522" y="231">IDLE 与 Tmr Svc 的栈和 TCB</text>
+  <text class="sub" x="522" y="249">数组在链接期定死，永不释放</text>
+
+  <line x1="484" y1="450" x2="512" y2="450" stroke="#4f5d75" stroke-width="1"/>
+  <text class="label" x="522" y="446">动态任务住这里</text>
+  <text class="sub" x="522" y="465">三个应用任务从堆里切出</text>
+  <text class="sub" x="522" y="483">先创建先占低地址，删除归还</text>
+
+  <line x1="484" y1="666" x2="512" y2="666" stroke="#4f5d75" stroke-width="1"/>
+  <text class="label" x="522" y="662">任务不占这里</text>
+  <text class="sub" x="522" y="681">MSP 是中断与启动专用</text>
+
+  <!-- 底部结论 -->
+  <text class="sub" x="40" y="744">静态的地址在链接期固定，动态的地址随创建顺序与堆状态变化</text>
+  <text class="sub" x="40" y="766">两者的栈指针都记录在各自的 TCB 里，调度器不关心它落在哪一段</text>
+  <text class="note" x="40" y="788">※ 区块高度为示意，未按字节数等比</text>
+</svg>

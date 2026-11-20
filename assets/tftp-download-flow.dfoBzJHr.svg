@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1460 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tftp-download-flow-title tftp-download-flow-desc" id="tftp-download-flow-root">
+        <title id="tftp-download-flow-title">WiFi TFTP 下载链路</title>
+        <desc id="tftp-download-flow-desc">app.img 从 Windows Tftpd64 服务器经 ESP8266 UDP 透传、UART 单缓冲帧逐块写入外部 SRAM，末块（不足 512 B）判定结束后做整帧校验，通过则写入 SPI Flash 暂存区，否则报错退出。</desc>
+        <defs>
+      <style>#tftp-download-flow-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-accent:  #bf4520;
+      --font-sans:     'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace; }
+      #tftp-download-flow-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #tftp-download-flow-root .diagram-container { width: 100%; overflow-x: auto; }
+      @media print {
+#tftp-download-flow-root .diagram-container { overflow-x: visible; }
+}</style>
+          <pattern id="tftp-download-flow-dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="#2d3142" fill-opacity="0.10"/>
+          </pattern>
+          <marker id="tftp-download-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="tftp-download-flow-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <rect width="100%" height="100%" fill="url(#tftp-download-flow-dots)" opacity="0.55"/>
+
+        <!-- Arrows (drawn first, behind nodes) -->
+        <line x1="174" y1="170" x2="206" y2="170" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#tftp-download-flow-arrow)"/>
+        <line x1="362" y1="170" x2="394" y2="170" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#tftp-download-flow-arrow)"/>
+        <line x1="550" y1="170" x2="582" y2="170" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#tftp-download-flow-arrow)"/>
+        <line x1="738" y1="170" x2="770" y2="170" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#tftp-download-flow-arrow)"/>
+        <!-- 末块？是 → 整帧校验 -->
+        <line x1="958" y1="170" x2="994" y2="170" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#tftp-download-flow-arrow)"/>
+        <!-- 末块？否 → 续收下一块（回环，虚线） -->
+        <path d="M 866 224 L 866 244 Q 866 252 858 252 L 482 252 Q 474 252 474 244 L 474 204" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#tftp-download-flow-arrow)"/>
+        <!-- 校验通过 → SPI Flash（主链路，accent） -->
+        <line x1="1182" y1="170" x2="1230" y2="170" stroke="#bf4520" stroke-width="1.4" marker-end="url(#tftp-download-flow-arrow-accent)"/>
+        <!-- 校验不通过 → 报错退出 -->
+        <line x1="1090" y1="220" x2="1090" y2="276" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#tftp-download-flow-arrow)"/>
+
+        <!-- Arrow labels -->
+        <rect x="964" y="146" width="16" height="15" rx="2" fill="#f5f5f5"/>
+        <text x="972" y="157" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">是</text>
+
+        <rect x="876" y="228" width="16" height="15" rx="2" fill="#f5f5f5"/>
+        <text x="884" y="239" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">否</text>
+
+        <rect x="1190" y="146" width="32" height="15" rx="2" fill="#f5f5f5"/>
+        <text x="1206" y="157" fill="#bf4520" font-size="12" font-weight="500" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">通过</text>
+
+        <rect x="1104" y="240" width="48" height="15" rx="2" fill="#f5f5f5"/>
+        <text x="1128" y="251" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">不通过</text>
+
+        <!-- N1: Tftpd64（起点） -->
+        <rect x="24" y="142" width="150" height="56" rx="20" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="99" y="167" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">Tftpd64 服务器</text>
+        <text x="99" y="185" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">UDP:69 · app.img</text>
+
+        <!-- N2: ESP8266 透传 -->
+        <rect x="210" y="140" width="152" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="286" y="166" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">ESP8266 透传</text>
+        <text x="286" y="184" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">AT+CIPSTART UDP</text>
+
+        <!-- N3: UART 单缓冲帧 -->
+        <rect x="398" y="140" width="152" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="474" y="166" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">UART 单缓冲帧</text>
+        <text x="474" y="184" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">+IPD,&lt;id&gt;,&lt;len&gt;:</text>
+
+        <!-- N4: 外部 SRAM 缓存 -->
+        <rect x="586" y="140" width="152" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="662" y="166" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">外部 SRAM 缓存</text>
+        <text x="662" y="184" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">0x68000000 · 512B</text>
+
+        <!-- N5a: 末块判定（菱形） -->
+        <polygon points="866,120 958,170 866,220 774,170" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="866" y="167" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">末块？</text>
+        <text x="866" y="185" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">dlen &lt; 512B</text>
+
+        <!-- N5b: 整帧校验（菱形） -->
+        <polygon points="1090,120 1182,170 1090,220 998,170" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="1090" y="167" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">整帧校验</text>
+        <text x="1090" y="185" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">CRC32</text>
+
+        <!-- N6: SPI Flash 暂存（终点，accent 焦点） -->
+        <rect x="1234" y="138" width="182" height="64" rx="6" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="1325" y="166" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">SPI Flash 暂存</text>
+        <text x="1325" y="184" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">0x002000 · sector 2</text>
+
+        <!-- Fail: 报错退出 -->
+        <rect x="1010" y="280" width="160" height="56" rx="20" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="1090" y="305" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle">报错退出</text>
+        <text x="1090" y="323" fill="#4f5d75" font-size="11" font-family="'Geist Mono',monospace" text-anchor="middle">NET_ERR_*</text>
+
+        <!-- 编者按 -->
+        <text x="24" y="316" fill="#4f5d75" font-size="13" font-style="italic" font-family="'Instrument Serif','Noto Serif SC',serif">注：TFTP 服务器的回包改用临时端口发送，UDP 链路须以 mode=1（变对端）建立才能收到。</text>
+
+        <!-- Legend -->
+        <line x1="24" y1="392" x2="1436" y2="392" stroke="#2d3142" stroke-width="0.8" stroke-opacity="0.10"/>
+        <text x="24" y="410" fill="#4f5d75" font-size="10" font-family="'Geist Mono',monospace" letter-spacing="0.18em">LEGEND · SHAPE CARRIES TYPE</text>
+
+        <rect x="24" y="428" width="24" height="12" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1" fill-opacity="0.03" stroke-opacity="0.30"/>
+        <text x="56" y="438" fill="#4f5d75" font-size="12" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">起点 / 终点</text>
+
+        <rect x="150" y="428" width="24" height="12" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="182" y="438" fill="#4f5d75" font-size="12" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">处理步骤</text>
+
+        <polygon points="328,434 340,428 352,434 340,440" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="360" y="438" fill="#4f5d75" font-size="12" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">校验判定</text>
+
+        <rect x="446" y="428" width="24" height="12" rx="2" fill="#bf4520" stroke="#bf4520" stroke-width="1" fill-opacity="0.08"/>
+        <text x="478" y="438" fill="#4f5d75" font-size="12" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">最终落点</text>
+
+        <line x1="570" y1="434" x2="598" y2="434" stroke="#bf4520" stroke-width="1.4" marker-end="url(#tftp-download-flow-arrow-accent)"/>
+        <text x="606" y="438" fill="#4f5d75" font-size="12" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">主链路</text>
+
+        <line x1="680" y1="434" x2="708" y2="434" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#tftp-download-flow-arrow)"/>
+        <text x="716" y="438" fill="#4f5d75" font-size="12" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">数据流 / 失败分支</text>
+
+        <line x1="880" y1="434" x2="908" y2="434" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#tftp-download-flow-arrow)"/>
+        <text x="916" y="438" fill="#4f5d75" font-size="12" font-family="'Geist','Noto Sans SC','Microsoft YaHei',sans-serif">续收回环</text>
+      </svg>
